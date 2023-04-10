@@ -18,7 +18,7 @@
  * @brief List of uuid. Can be use to store all users registered to a team or a list of team registered by an user.
  */
 typedef struct uuid_list_s {
-    /// @brief Copy of an uuid of a user
+    /// @brief Copy of an uuid of a user or a team etc.
     uuid_t uuid;
     LIST_ENTRY(user_registry_s) next_uuid;
 } uuid_list_t;
