@@ -15,7 +15,8 @@
 #define MAX_BODY_LENGTH 512
 
 /**
- * @brief List of uuid. Can be use to store all users registered to a team or a list of team registered by an user.
+ * @brief List of uuid. Can be use to store all users registered to a team or a
+ *  list of team registered by an user.
  */
 typedef struct uuid_list_s {
     /// @brief Copy of an uuid of a user or a team etc.
@@ -75,4 +76,3 @@ typedef struct comment_s {
     char body[MAX_BODY_LENGTH];
     LIST_ENTRY(comment_s) next_comment;
 } comment_t;
-

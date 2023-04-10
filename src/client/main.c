@@ -5,8 +5,6 @@
 ** main
 */
 
-#include "data_core.h"
-
 int main(int ac, char **av)
 {
     (void)ac;
