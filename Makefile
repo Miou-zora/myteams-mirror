@@ -5,56 +5,35 @@
 ## Makefile
 ##
 
-SRC			=
+SERVER_FOLDER	=	src/server
 
-OBJ			=	$(SRC:.c=.o)
+CLIENT_FOLDER	=	src/client
 
-TESTS		=	tests/test.c
+MAKE			=	make
 
-TESTS_OBJ	=	$(TESTS:.c=.o)
+all:
+		$(MAKE) -C $(SERVER_FOLDER)
+		$(MAKE) -C $(CLIENT_FOLDER)
 
-MAIN		=	main.c
+debug:
+		$(MAKE) -C $(SERVER_FOLDER) debug
+		$(MAKE) -C $(CLIENT_FOLDER) debug
 
-NAME		=	myteams
-
-INCLUDE		=	-I./include
-
-CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
-
-TEST_FLAGS	=	-lcriterion --coverage
-
-TEST_BINARY	=	unit_tests
-
-CC			=	gcc
-
-all:	$(NAME)
-
-$(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS)
-
-debug:	CFLAGS += -g
-debug:	re
-
-tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS)
-		./$(TEST_BINARY)
-		gcovr -e tests
-		gcovr -e tests -bu
+tests_run:
+		$(MAKE) -C $(SERVER_FOLDER) tests_run
+		$(MAKE) -C $(CLIENT_FOLDER) tests_run
 
 clean:
-		$(RM) $(OBJ)
-		$(RM) $(TESTS_OBJ)
+		$(MAKE) -C $(SERVER_FOLDER) clean
+		$(MAKE) -C $(CLIENT_FOLDER) clean
 
-fclean:	clean
-		$(RM) $(NAME)
-		$(RM) $(TEST_BINARY)
+fclean:
+		$(MAKE) -C $(SERVER_FOLDER) fclean
+		$(MAKE) -C $(CLIENT_FOLDER) fclean
 
 tclean:
-		$(RM) tests/*.gcno
-		$(RM) tests/*.gcda
-		$(RM) *.gcno
-		$(RM) *.gcda
-		$(RM) $(TEST_BINARY)
+		$(MAKE) -C $(SERVER_FOLDER) tclean
+		$(MAKE) -C $(CLIENT_FOLDER) tclean
 
 re:	fclean all
 
