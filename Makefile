@@ -5,28 +5,56 @@
 ## Makefile
 ##
 
-SRC		=
+SRC			=
 
-OBJ		=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.c=.o)
 
-MAIN	=	main.c
+TESTS		=	tests/test.c
 
-NAME	=	myteams
+TESTS_OBJ	=	$(TESTS:.c=.o)
 
-INCLUDE	=	-I./include
+MAIN		=	main.c
 
-CFLAGS	=	-Wall -Wextra -Werror $(INCLUDE)
+NAME		=	myteams
+
+INCLUDE		=	-I./include
+
+CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
+
+TEST_FLAGS	=	-lcriterion --coverage
+
+TEST_BINARY	=	unit_tests
+
+CC			=	gcc
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-		gcc -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS)
+
+debug:	CFLAGS += -g
+debug:	re
+
+tests_run:	$(TESTS_OBJ)
+		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS)
+		./$(TEST_BINARY)
+		gcovr -e tests
+		gcovr -e tests -bu
 
 clean:
 		$(RM) $(OBJ)
+		$(RM) $(TESTS_OBJ)
 
 fclean:	clean
 		$(RM) $(NAME)
+		$(RM) $(TEST_BINARY)
+
+tclean:
+		$(RM) tests/*.gcno
+		$(RM) tests/*.gcda
+		$(RM) *.gcno
+		$(RM) *.gcda
+		$(RM) $(TEST_BINARY)
 
 re:	fclean all
 

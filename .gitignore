@@ -1,2 +1,6 @@
 .bash_history
 *.o
+unit_tests
+myteams_server
+myteams_cli
+.vscode
