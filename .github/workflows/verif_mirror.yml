@@ -75,7 +75,7 @@ jobs:
   check_program_compilation:
     name: Checks if the program compiles correctly and executables files got created
     runs-on: ubuntu-latest
-    needs: [check_repository_cleanliness]
+    needs: [check_coding_style]
     container: epitechcontent/epitest-docker:latest
     steps:
       - name: Checkout repository
