@@ -37,7 +37,7 @@ NAME		=	../../myteams_server
 
 INCLUDE		=	-I./include
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
 TEST_FLAGS	=	-lcriterion --coverage
 

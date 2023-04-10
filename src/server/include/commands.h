@@ -46,7 +46,7 @@ typedef struct command {
     void (*func)(char **args);
 } command_t;
 
-const command_t ptr_on_commands[] = {
+const command_t COMMANDS_LIST[] = {
     {COMMAND_HELP, help},
     {COMMAND_LOGIN, login},
     {COMMAND_LOGOUT, logout},
