@@ -7,7 +7,6 @@
 
 #include <criterion/criterion.h>
 
-Test(test_sample, nothing)
-{
+Test(test_sample, nothing) {
     cr_assert(true);
 }
