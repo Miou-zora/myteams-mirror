@@ -4,3 +4,4 @@ unit_tests
 myteams_server
 myteams_cli
 .vscode
+coding-style-reports.log
