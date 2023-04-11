@@ -35,6 +35,8 @@ fclean:
 tclean:
 		$(MAKE) -C $(SERVER_FOLDER) tclean
 		$(MAKE) -C $(CLIENT_FOLDER) tclean
+		$(RM) tests/*.gcno
+		$(RM) tests/*.gcda
 
 docu:
 		doxygen Doxyfile

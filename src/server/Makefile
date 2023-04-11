@@ -46,6 +46,8 @@ TEST_BINARY	=	unit_tests
 
 CC			=	gcc
 
+MV			=	mv -f
+
 %.o:	%.c
 		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
@@ -58,10 +60,13 @@ debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS)
+		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
+		$(INCLUDE)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
+		$(MV) *.gcno ../../tests/
+		$(MV) *.gcda ../../tests/
 
 clean:
 		$(RM) $(OBJ)

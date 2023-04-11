@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC			=
+SRC			=	src/client.c
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -29,6 +29,8 @@ CC			=	gcc
 
 RM			=	rm -f
 
+MV			=	mv -f
+
 %.o:	%.c
 		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
@@ -45,6 +47,8 @@ tests_run:	$(TESTS_OBJ)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
+		$(MV) *.gcno ../../tests/
+		$(MV) *.gcda ../../tests/
 
 clean:
 		$(RM) $(OBJ)
