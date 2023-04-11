@@ -20,7 +20,8 @@ COMMANDS 		=	help.c			\
 					create.c		\
 					list.c			\
 					info.c			\
-					quit.c
+					quit.c			\
+					commands.c
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
 SRC			=	$(COMMANDS)

@@ -46,21 +46,4 @@ typedef struct command {
     void (*func)(char **args);
 } command_t;
 
-const command_t COMMANDS_LIST[] = {
-    {COMMAND_HELP, help},
-    {COMMAND_LOGIN, login},
-    {COMMAND_LOGOUT, logout},
-    {COMMAND_USERS, users},
-    {COMMAND_USER, user},
-    {COMMAND_SEND, send},
-    {COMMAND_MESSAGES, messages},
-    {COMMAND_SUBSCRIBE, subscribe},
-    {COMMAND_SUBSCRIBED, subscribed},
-    {COMMAND_UNSUBSCRIBE, unsubscribe},
-    {COMMAND_USE, use},
-    {COMMAND_CREATE, create},
-    {COMMAND_LIST, list},
-    {COMMAND_INFO, info},
-    {COMMAND_QUIT, quit},
-    {NULL, NULL}
-};
+extern const command_t COMMANDS_LIST[];
