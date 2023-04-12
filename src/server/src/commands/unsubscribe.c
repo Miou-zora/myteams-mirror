@@ -7,7 +7,7 @@
 
 #include "commands.h"
 
-void unsubscribe(/* TODO: Server, Client */ char **args)
+void unsubscribe(char **args)
 {
     (void)args;
 }

@@ -27,21 +27,23 @@ clean:
 		$(MAKE) -C $(SERVER_FOLDER) clean
 		$(MAKE) -C $(CLIENT_FOLDER) clean
 
-fclean:
+fclean: dclean
 		$(MAKE) -C $(SERVER_FOLDER) fclean
 		$(MAKE) -C $(CLIENT_FOLDER) fclean
-		$(RM) -rf doc/*
 
 tclean:
 		$(MAKE) -C $(SERVER_FOLDER) tclean
 		$(MAKE) -C $(CLIENT_FOLDER) tclean
-		$(RM) tests/*.gcno
-		$(RM) tests/*.gcda
+		@find tests -type f -name '*.gcda' -exec $(RM) {} \;
+		@find tests -type f -name '*.gcno' -exec $(RM) {} \;
 
 docu:
 		doxygen Doxyfile
 		make -C doc/latex
 
+dclean:
+		$(RM) -rf doc/html
+		$(RM) -rf doc/latex
 
 re:	fclean all
 

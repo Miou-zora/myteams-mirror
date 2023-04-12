@@ -7,7 +7,7 @@
 
 #include "commands.h"
 
-void subscribe(/* TODO: Server, Client */ char **args)
+void subscribe(char **args)
 {
     (void)args;
 }
