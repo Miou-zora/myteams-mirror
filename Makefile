@@ -30,6 +30,7 @@ clean:
 fclean: dclean
 		$(MAKE) -C $(SERVER_FOLDER) fclean
 		$(MAKE) -C $(CLIENT_FOLDER) fclean
+		$(RM) -rf doc/*
 
 tclean:
 		$(MAKE) -C $(SERVER_FOLDER) tclean
