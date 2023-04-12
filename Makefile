@@ -30,10 +30,18 @@ clean:
 fclean:
 		$(MAKE) -C $(SERVER_FOLDER) fclean
 		$(MAKE) -C $(CLIENT_FOLDER) fclean
+		$(RM) -rf doc/*
 
 tclean:
 		$(MAKE) -C $(SERVER_FOLDER) tclean
 		$(MAKE) -C $(CLIENT_FOLDER) tclean
+		$(RM) tests/*.gcno
+		$(RM) tests/*.gcda
+
+docu:
+		doxygen Doxyfile
+		make -C doc/latex
+
 
 re:	fclean all
 

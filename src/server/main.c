@@ -6,6 +6,7 @@
 */
 
 #include "data_core.h"
+#include "commands.h"
 
 int main(int ac, char **av)
 {

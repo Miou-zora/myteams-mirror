@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "uuid.h": "c"
+        "uuid.h": "c",
+        "data_core.h": "c"
     }
 }
