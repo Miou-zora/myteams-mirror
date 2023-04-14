@@ -16,5 +16,6 @@ int main(int ac, char **av)
         help();
         return (84);
     }
+    client(av[1], av[2]);
     return (0);
 }

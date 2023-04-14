@@ -8,3 +8,4 @@
 #pragma once
 
 int help(void);
+int client(char *ip, char *port);

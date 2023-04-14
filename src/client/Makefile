@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC			=	src/help.c
+SRC			=	src/help.c	\
+				src/client.c
 
 OBJ			=	$(SRC:.c=.o)
 
