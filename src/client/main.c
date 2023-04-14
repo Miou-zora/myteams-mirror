@@ -10,7 +10,7 @@
 
 int main(int ac, char **av)
 {
-    if (ac == 2 && strcmp(av[1], "--help") == 0) {
+    if (ac == 2 && strcmp(av[1], "-help") == 0) {
         return (help());
     }
     return (0);
