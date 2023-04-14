@@ -20,6 +20,7 @@
 
 //! define list
 #define MAX_CLIENTS 10
+#define EPI_FAILURE 84
 
 //! struct list
 /**
@@ -36,10 +37,9 @@ typedef struct client_s {
 typedef struct server_s {
     int port;
     int master_socket;
-    fd_set readfds;
-    int max_sd;
-    client_t *clients[MAX_CLIENTS];
     bool is_running;
+
+    client_t *clients[MAX_CLIENTS];
 } server_t;
 
 
@@ -59,4 +59,3 @@ server_t *server_init(char *port);
  * @return socket fd
  */
 int create_socket(in_addr_t adress, int port);
-

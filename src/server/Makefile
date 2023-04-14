@@ -80,6 +80,7 @@ tests_run:	$(TESTS_OBJ)
 clean:
 		$(RM) $(OBJ)
 		$(RM) $(TESTS_OBJ)
+		$(RM) $(OBJ_MAIN)
 
 fclean:	clean
 		$(RM) $(NAME)

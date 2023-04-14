@@ -16,16 +16,16 @@ int create_socket(in_addr_t adress, int port)
     addr.sin_addr.s_addr = adress;
     addr.sin_port = htons(port);
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
-        perror("socket failed\n");
-        exit(EXIT_FAILURE);
+        perror("socket failed");
+        return (EPI_FAILURE);
     }
     if (bind(sock, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
-        perror("bind failed: ");
-        exit(EXIT_FAILURE);
+        perror("bind failed");
+        return (EPI_FAILURE);
     }
     if (listen(sock, 1) < 0) {
-        perror("listen failed\n");
-        exit(EXIT_FAILURE);
+        perror("listen failed");
+        return (EPI_FAILURE);
     } else
         printf("Listening on port %d\n", port);
     return (sock);
