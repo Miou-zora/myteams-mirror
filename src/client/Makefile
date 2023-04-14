@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-SRC			=	src/client.c
+SRC			=	src/help.c
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -17,7 +17,7 @@ MAIN		=	main.c
 
 NAME		=	../../myteams_cli
 
-INCLUDE		=	-I.include
+INCLUDE		=	-I./include
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
 
