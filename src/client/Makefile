@@ -5,8 +5,15 @@
 ## Makefile
 ##
 
-SRC			=	src/help.c	\
-				src/client.c
+SRC			=	src/help.c				\
+				src/client.c			\
+				src/create_addr.c		\
+				src/bind_fd_addr.c		\
+				src/connect_fd_addr.c	\
+				src/init_client.c		\
+				src/get_output_server.c	\
+				src/get_input_client.c	\
+				src/select_cycle.c
 
 OBJ			=	$(SRC:.c=.o)
 
