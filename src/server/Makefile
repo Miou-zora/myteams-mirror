@@ -24,7 +24,14 @@ COMMANDS 		=	help.c			\
 					commands.c
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
+CORE_FOLDER 	=	src/core
+CORE 			=	server_init.c 	\
+					create_socket.c \
+
+CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
+
 SRC			=	$(COMMANDS)
+SRC 		+=	$(CORE)
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -33,6 +40,8 @@ TESTS		=	tests/test.c
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
 MAIN		=	main.c
+
+OBJ_MAIN	=	$(MAIN:.c=.o)
 
 NAME		=	../../myteams_server
 
@@ -53,8 +62,8 @@ MV			=	mv -f
 
 all:	$(NAME)
 
-$(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS) $(INCLUDE)
+$(NAME):	$(OBJ) $(OBJ_MAIN)
+		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) $(INCLUDE)
 
 debug:	CFLAGS += -g
 debug:	re
