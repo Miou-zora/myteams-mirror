@@ -7,7 +7,7 @@
 
 #include "commands.h"
 
-void quit(/* TODO: Server, Client */ char **args)
+void quit(char **args)
 {
     (void)args;
 }

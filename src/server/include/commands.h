@@ -25,21 +25,21 @@
 #define COMMAND_INFO "info"
 #define COMMAND_QUIT "quit"
 
-void help(/* TODO: Server, Client */ char **args);
-void login(/* TODO: Server, Client */ char **args);
-void logout(/* TODO: Server, Client */ char **args);
-void user(/* TODO: Server, Client */ char **args);
-void users(/* TODO: Server, Client */ char **args);
-void send(/* TODO: Server, Client */ char **args);
-void messages(/* TODO: Server, Client */ char **args);
-void subscribe(/* TODO: Server, Client */ char **args);
-void subscribed(/* TODO: Server, Client */ char **args);
-void unsubscribe(/* TODO: Server, Client */ char **args);
-void use(/* TODO: Server, Client */ char **args);
-void create(/* TODO: Server, Client */ char **args);
-void list(/* TODO: Server, Client */ char **args);
-void info(/* TODO: Server, Client */ char **args);
-void quit(/* TODO: Server, Client */ char **args);
+void help(char **args);
+void login(char **args);
+void logout(char **args);
+void user(char **args);
+void users(char **args);
+void send(char **args);
+void messages(char **args);
+void subscribe(char **args);
+void subscribed(char **args);
+void unsubscribe(char **args);
+void use(char **args);
+void create(char **args);
+void list(char **args);
+void info(char **args);
+void quit(char **args);
 
 typedef struct command {
     const char *name;

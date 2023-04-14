@@ -7,7 +7,7 @@
 
 #include "commands.h"
 
-void logout(/* TODO: Server, Client */ char **args)
+void logout(char **args)
 {
     (void)args;
 }

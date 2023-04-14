@@ -7,7 +7,7 @@
 
 #include "commands.h"
 
-void users(/* TODO: Server, Client */ char **args)
+void users(char **args)
 {
     (void)args;
 }

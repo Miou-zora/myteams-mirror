@@ -65,8 +65,8 @@ tests_run:	$(TESTS_OBJ)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
-		$(MV) *.gcno ../../tests/
-		$(MV) *.gcda ../../tests/
+		find . -type f -name '*.gcda' -exec $(MV) {} ../../tests/ \;
+		find . -type f -name '*.gcno' -exec $(MV) {} ../../tests/ \;
 
 clean:
 		$(RM) $(OBJ)
@@ -77,10 +77,8 @@ fclean:	clean
 		$(RM) $(TEST_BINARY)
 
 tclean:
-		$(RM) tests/*.gcno
-		$(RM) tests/*.gcda
-		$(RM) *.gcno
-		$(RM) *.gcda
+		@find . -type f -name '*.gcda' -exec $(RM) {} \;
+		@find . -type f -name '*.gcno' -exec $(RM) {} \;
 		$(RM) $(TEST_BINARY)
 
 re:	fclean all
