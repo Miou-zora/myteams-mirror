@@ -26,5 +26,6 @@ int main(int ac, char **av)
     server_t *server = server_init(av[1]);
     if (!server)
         return (84);
+    server_loop(server);
     return (0);
 }

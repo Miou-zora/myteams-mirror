@@ -25,8 +25,13 @@ COMMANDS 		=	help.c			\
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
 CORE_FOLDER 	=	src/core
-CORE 			=	server_init.c 	\
-					create_socket.c \
+CORE 			=	server_init.c 		\
+					create_socket.c 	\
+					server_loop.c 		\
+					accept_connexions.c \
+					client_actions.c 	\
+					client_leave.c 		\
+					set_actual_client.c \
 
 CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 
