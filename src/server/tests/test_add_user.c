@@ -9,8 +9,7 @@
 
 #include "data_core.h"
 
-Test(add_user, add_user)
-{
+Test(add_user, add_user) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "test");
     cr_assert_eq(ret, 0);
@@ -22,8 +21,7 @@ Test(add_user, add_user)
     cr_assert_eq(len, 1);
 }
 
-Test(add_user, already_exist)
-{
+Test(add_user, already_exist) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "test");
     cr_assert_eq(ret, 0);
@@ -37,8 +35,7 @@ Test(add_user, already_exist)
     cr_assert_eq(len, 1);
 }
 
-Test(add_user, multiple)
-{
+Test(add_user, multiple) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "test");
     cr_assert_eq(ret, 0);
@@ -54,14 +51,12 @@ Test(add_user, multiple)
     cr_assert_eq(len, 3);
 }
 
-Test(add_user, null_head)
-{
+Test(add_user, null_head) {
     int ret = add_user(NULL, "test");
     cr_assert_eq(ret, -1);
 }
 
-Test(add_user, null_username)
-{
+Test(add_user, null_username) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, NULL);
     cr_assert_eq(ret, -1);
@@ -73,8 +68,7 @@ Test(add_user, null_username)
     cr_assert_eq(len, 0);
 }
 
-Test(add_user, no_character_name)
-{
+Test(add_user, no_character_name) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "");
     cr_assert_eq(ret, -1);
@@ -86,8 +80,7 @@ Test(add_user, no_character_name)
     cr_assert_eq(len, 0);
 }
 
-Test(add_user, to_long_name)
-{
+Test(add_user, to_long_name) {
     struct user_head head = init_list_of_users();
     char *str = malloc(sizeof(char) * (MAX_NAME_LENGTH + 2));
     memset(str, 'a', MAX_NAME_LENGTH + 1);
@@ -100,5 +93,3 @@ Test(add_user, to_long_name)
     }
     cr_assert_eq(len, 0);
 }
-
-
