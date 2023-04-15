@@ -28,13 +28,13 @@ NAME	=	libmy.a
 		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 all:	$(NAME)
-		cp -r include/ ../server/
-		cp -r include/ ../client/
 
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
 	cp $(NAME) ../server/
 	$(MV) $(NAME) ../client/
+	cp -r include/ ../server/
+	cp -r include/ ../client/
 
 
 clean:
