@@ -7,6 +7,7 @@
 
 #include "client.h"
 #include <stddef.h>
+#include <sys/select.h>
 
 int select_cycle(int client_fd)
 {
