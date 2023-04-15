@@ -25,7 +25,7 @@ void accept_new_connection(server_t *server)
         if ((new_socket = accept(server->master_socket,
         (struct sockaddr*)NULL, NULL)) < 0) {
             perror("accept failed\n");
-            exit(EXIT_FAILURE);
+            exit(EPI_FAILURE);
         } else {
             printf("New connection, socket fd is %d\n", new_socket);
             write(new_socket, "SU20 Service ready for new user.\n", 33);

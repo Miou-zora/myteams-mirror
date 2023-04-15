@@ -17,7 +17,7 @@ void catch_client_message(int index, server_t *server)
     if ((valread = read(sd, command, sizeof(command))) == 0) {
         leave_instance(server->instance[index]);
     } else {
-        exec_command(server->instance[index], command);
+        exec_command(server, server->instance[index], command);
     }
     memset(command, 0, sizeof(command));
 }

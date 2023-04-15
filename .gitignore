@@ -5,3 +5,4 @@ myteams_server
 myteams_cli
 .vscode
 coding-style-reports.log
+*.a

@@ -7,6 +7,8 @@
 
 #include "commands.h"
 #include "instance.h"
+#include "server.h"
+#include "lib.h"
 
 const command_t COMMANDS_LIST[] = {
     {COMMAND_HELP, help},
@@ -27,14 +29,17 @@ const command_t COMMANDS_LIST[] = {
     {NULL, NULL}
 };
 
-void exec_command(instance_t *client, char *command)
+void exec_command(server_t *server, instance_t *current_instance, char *command)
 {
     (void)command;
+    (void)server;
+    char **args = data_to_array_str(command, " ");
+    (void)args;
     // for (int i = 0; i < 4; i++) {
     //     if (strcmp(args[0], COMMANDS_LIST[i].name) == 0) {
     //         COMMANDS_LIST[i].func(args);
     //         return;
     //     }
     // }
-    write(client->socket, "ES00 Unknown command.\n", 21);
+    write(current_instance->socket, "ES00 Unknown command.\n", 21);
 }

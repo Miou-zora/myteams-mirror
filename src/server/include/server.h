@@ -108,4 +108,4 @@ void set_actual_instance(server_t *server);
  * @param client
  * @param command
  */
-void exec_command(instance_t *client, char *command);
+void exec_command(server_t *server, instance_t *current_instance, char *command);

@@ -22,6 +22,7 @@ COMMANDS 		=	help.c			\
 					info.c			\
 					quit.c			\
 					commands.c
+
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
 CORE_FOLDER 	=	src/core
@@ -56,6 +57,8 @@ CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
 TEST_FLAGS	=	-lcriterion --coverage
 
+LIB_FLAGS	=	-L./ -lmy
+
 TEST_BINARY	=	unit_tests
 
 CC			=	gcc
@@ -63,12 +66,12 @@ CC			=	gcc
 MV			=	mv -f
 
 %.o:	%.c
-		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
+		$(CC) $(CFLAGS) $(LIB_FLAGS) $(INCLUDE) -o $@ -c $<
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ) $(OBJ_MAIN)
-		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) $(INCLUDE)
+		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) $(INCLUDE) $(LIB_FLAGS)
 
 debug:	CFLAGS += -g
 debug:	re

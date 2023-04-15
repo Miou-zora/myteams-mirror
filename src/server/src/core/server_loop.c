@@ -20,7 +20,7 @@ void server_loop(server_t *server)
         &(server->readfds), NULL, NULL, NULL);
         if ((activity < 0)) {
             printf("select error");
-            exit(EXIT_FAILURE);
+            exit(EPI_FAILURE);
         }
         accept_new_connection(server);
         do_client_action(server);
