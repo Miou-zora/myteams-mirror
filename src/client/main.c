@@ -16,6 +16,5 @@ int main(int ac, char **av)
         help();
         return (84);
     }
-    int output_value = client(av[1], av[2]);
-    return (output_value);
+    return (client(av[1], av[2]));
 }
