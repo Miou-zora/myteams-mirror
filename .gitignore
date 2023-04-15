@@ -6,3 +6,4 @@ myteams_cli
 .vscode
 coding-style-reports.log
 doc/*
+libshared.a

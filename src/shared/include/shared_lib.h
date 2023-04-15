@@ -37,4 +37,4 @@ shared_lib_t *load_shared_lib(char *path, char **functions_name,
 
 void unload_shared_lib(shared_lib_t *lib);
 
-void *get_function(shared_lib_t *lib, char *name);
+void *get_fcn_shared_lib(shared_lib_t *lib, char *name);

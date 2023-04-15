@@ -5,13 +5,14 @@
 ## Makefile
 ##
 
-SRC			=	src/load_lib.c			\
-				src/load_function.c		\
-				src/load_functions.c	\
-				src/unload_lib.c		\
-				src/unload_functions.c	\
-				src/load_shared_lib.c	\
-				src/unload_shared_lib.c	\
+SRC			=	src/load_lib.c				\
+				src/load_function.c			\
+				src/load_functions.c		\
+				src/unload_lib.c			\
+				src/unload_functions.c		\
+				src/load_shared_lib.c		\
+				src/unload_shared_lib.c		\
+				src/get_fcn_shared_lib.c	\
 				src/freen.c
 
 OBJ			=	$(SRC:.c=.o)
@@ -28,6 +29,8 @@ TEST_FLAGS	=	-lcriterion --coverage
 
 TEST_BINARY	=	unit_tests
 
+NAME		=	libshared.a
+
 CC			=	gcc
 
 MV			=	mv -f
@@ -35,7 +38,10 @@ MV			=	mv -f
 %.o:	%.c
 		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
-all:	$(OBJ)
+all:	$(NAME)
+
+$(NAME):	$(OBJ)
+		ar rc $(NAME) $(OBJ)
 
 debug:	CFLAGS += -g
 debug:	re
