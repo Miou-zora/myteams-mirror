@@ -1,3 +1,7 @@
 {
-    "epilinter.tokenizer_address": "ws://54.36.183.139:8081"
+    "epilinter.tokenizer_address": "ws://54.36.183.139:8081",
+    "files.associations": {
+        "*.ts": "typescript",
+        "response.h": "c"
+    }
 }

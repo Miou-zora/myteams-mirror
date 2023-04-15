@@ -36,8 +36,14 @@ CORE 			=	server_init.c 		\
 
 CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 
+RESPONSE_FOLDER =	src/response
+RESPONSE 		=	response.c
+
+RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
+
 SRC			=	$(COMMANDS)
 SRC 		+=	$(CORE)
+SRC 		+=	$(RESPONSE)
 
 OBJ			=	$(SRC:.c=.o)
 

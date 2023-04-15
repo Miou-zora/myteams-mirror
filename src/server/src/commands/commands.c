@@ -9,6 +9,7 @@
 #include "instance.h"
 #include "server.h"
 #include "lib.h"
+#include "response.h"
 
 const command_t COMMANDS_LIST[] = {
     {COMMAND_HELP, cmd_help},
@@ -33,11 +34,15 @@ void exec_command(server_t *server, instance_t *current_instance, char *command)
 {
     char **args = data_to_array_str(command, " \r\n");
 
+    if (args == NULL || args[0] == NULL) {
+        reply(current_instance->socket, "ES04");
+        return;
+    }
     for (int i = 0; COMMAND_LIST[i]; i++) {
         if (strcmp(args[0], COMMANDS_LIST[i].name) == 0) {
             COMMANDS_LIST[i].func(server, current_instance, &args[1]);
             return;
         }
     }
-    write(current_instance->socket, "ES00 Unknown command.\n", 22);
+    reply(current_instance->socket, "ES04");
 }

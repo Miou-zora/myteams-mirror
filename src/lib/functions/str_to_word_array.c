@@ -6,6 +6,7 @@
 */
 
 #include "lib.h"
+#include <stdio.h>
 
 bool is_char_is_that(char c, char const *array)
 {
@@ -32,17 +33,18 @@ char **data_to_array_str(char *new, char *sep)
     int nbr_ptr = 0;
     int i = 0;
 
-    for (; i < len_all; i++) {
-        if (is_char_is_that(new[i], sep)) {
+    for (; i < len_all; i++)
+        if (is_char_is_that(new[i], sep))
             new[i] = '\0';
-        }
-    }
-    for (i = 0; i < len_all; i++) {
+    for (i = 0; i < len_all; i++)
         if ((i == 0 || !new[i - 1]) && new[i]) {
             array[nbr_ptr] = &new[i];
             nbr_ptr = nbr_ptr + 1;
         }
-    }
     array[nbr_ptr] = NULL;
+    if (nbr_ptr == 0) {
+        free(array);
+        return (NULL);
+    }
     return (array);
 }
