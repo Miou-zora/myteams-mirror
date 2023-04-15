@@ -6,6 +6,7 @@
 */
 
 #include "commands.h"
+#include "instance.h"
 
 const command_t COMMANDS_LIST[] = {
     {COMMAND_HELP, help},
@@ -13,7 +14,7 @@ const command_t COMMANDS_LIST[] = {
     {COMMAND_LOGOUT, logout},
     {COMMAND_USERS, users},
     {COMMAND_USER, user},
-    {COMMAND_SEND, send},
+    // {COMMAND_SEND, send},
     {COMMAND_MESSAGES, messages},
     {COMMAND_SUBSCRIBE, subscribe},
     {COMMAND_SUBSCRIBED, subscribed},
@@ -25,3 +26,15 @@ const command_t COMMANDS_LIST[] = {
     {COMMAND_QUIT, quit},
     {NULL, NULL}
 };
+
+void exec_command(instance_t *client, char *command)
+{
+    (void)command;
+    // for (int i = 0; i < 4; i++) {
+    //     if (strcmp(args[0], COMMANDS_LIST[i].name) == 0) {
+    //         COMMANDS_LIST[i].func(args);
+    //         return;
+    //     }
+    // }
+    write(client->socket, "ES00 Unknown command.\n", 21);
+}

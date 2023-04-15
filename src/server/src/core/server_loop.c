@@ -15,7 +15,7 @@ void server_loop(server_t *server)
         FD_ZERO(&(server->readfds));
         FD_SET(server->master_socket, &(server->readfds));
         server->max_sd = server->master_socket;
-        set_actual_client(server);
+        set_actual_instance(server);
         activity = select(server->max_sd + 1,
         &(server->readfds), NULL, NULL, NULL);
         if ((activity < 0)) {

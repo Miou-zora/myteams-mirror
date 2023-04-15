@@ -9,6 +9,8 @@
 
 #include <stddef.h>
 
+#include "instance.h"
+
 #define COMMAND_HELP "help"
 #define COMMAND_LOGIN "login"
 #define COMMAND_LOGOUT "logout"
@@ -30,7 +32,7 @@ void login(char **args);
 void logout(char **args);
 void user(char **args);
 void users(char **args);
-void send(char **args);
+// void send(char **args);
 void messages(char **args);
 void subscribe(char **args);
 void subscribed(char **args);

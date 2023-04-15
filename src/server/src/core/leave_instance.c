@@ -2,12 +2,12 @@
 ** EPITECH PROJECT, 2023
 ** myteams-mirror
 ** File description:
-** client_leave
+** leave_instance
 */
 
 #include "server.h"
 
-void client_leave(client_t *client)
+void leave_instance(instance_t *client)
 {
     printf("Client disconnected\n");
     close(client->socket);

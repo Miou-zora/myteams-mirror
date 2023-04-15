@@ -7,6 +7,8 @@
         "stdbool.h": "c",
         "select.h": "c",
         "stdlib.h": "c",
-        "string.h": "c"
-    }
+        "string.h": "c",
+        "instance.h": "c"
+    },
+    "epilinter.tokenizer_address": "ws://54.36.183.139:8081"
 }

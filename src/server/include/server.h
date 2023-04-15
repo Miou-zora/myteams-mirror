@@ -17,20 +17,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+
+#include "instance.h"
 
 //! define list
-#define MAX_CLIENTS 10
+#define MAX_INSTANCES 10
 #define EPI_FAILURE 84
 
 //! struct list
-/**
- * @brief client parameters
- */
-typedef struct client_s {
-    int socket;
-    char *username;
-} client_t;
-
 /**
  * @brief server attributes
  */
@@ -38,10 +37,18 @@ typedef struct server_s {
     int port;
     int master_socket;
     bool is_running;
-
-    client_t *clients[MAX_CLIENTS];
+    fd_set readfds;
+    int max_sd;
+    instance_t *instance[MAX_INSTANCES];
 } server_t;
 
+/**
+ * @brief client action working like a map
+*/
+typedef struct client_action_s {
+    char *command;
+    void (*action)(instance_t *client, char *command);
+} client_action_t;
 
 //! function list
 /**
@@ -59,3 +66,46 @@ server_t *server_init(char *port);
  * @return socket fd
  */
 int create_socket(in_addr_t adress, int port);
+
+/**
+ * @brief server loop
+ *
+ * @param server
+ */
+void server_loop(server_t *server);
+
+/**
+ * @brief remove client from server
+ *
+ * @param client
+ */
+void leave_instance(instance_t *client);
+
+/**
+ * @brief do client action based on command send by client
+ *
+ * @param server
+ */
+void do_client_action(server_t *server);
+
+/**
+ * @brief accept new connection
+ *
+ * @param server
+ */
+void accept_new_connection(server_t *server);
+
+/**
+ * @brief set actual client
+ *
+ * @param server
+ */
+void set_actual_instance(server_t *server);
+
+/**
+ * @brief exec command based on the client received message
+ *
+ * @param client
+ * @param command
+ */
+void exec_command(instance_t *client, char *command);

@@ -37,9 +37,9 @@ server_t *server_init(char *port)
         free(server);
         return (NULL);
     }
-    for (size_t i = 0; i != MAX_CLIENTS; i++) {
-        server->clients[i] = malloc(sizeof(client_t));
-        server->clients[i]->socket = -1;
+    for (size_t i = 0; i != MAX_INSTANCES; i++) {
+        server->instance[i] = malloc(sizeof(instance_t));
+        server->instance[i]->socket = -1;
     }
     server->is_running = true;
     return (server);

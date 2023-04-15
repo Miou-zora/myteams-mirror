@@ -28,10 +28,10 @@ CORE_FOLDER 	=	src/core
 CORE 			=	server_init.c 		\
 					create_socket.c 	\
 					server_loop.c 		\
-					accept_connexions.c \
+					accept_connections.c \
 					client_actions.c 	\
-					client_leave.c 		\
-					set_actual_client.c \
+					leave_instance.c 		\
+					set_actual_instance.c \
 
 CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 

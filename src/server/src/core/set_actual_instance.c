@@ -2,17 +2,17 @@
 ** EPITECH PROJECT, 2023
 ** myteams-mirror
 ** File description:
-** set_actual_client
+** set_actual_instance
 */
 
 #include "server.h"
 
-void set_actual_client(server_t *server)
+void set_actual_instance(server_t *server)
 {
     int sd;
 
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        sd = server->clients[i]->socket;
+    for (int i = 0; i < MAX_INSTANCES; i++) {
+        sd = server->instance[i]->socket;
         if (sd > 0)
             FD_SET(sd, &(server->readfds));
         if (sd > server->max_sd)

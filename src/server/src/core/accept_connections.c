@@ -7,11 +7,11 @@
 
 #include "server.h"
 
-void set_new_client(server_t *server, int new_socket)
+void set_new_instance(server_t *server, int new_socket)
 {
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (server->clients[i]->socket == -1) {
-            server->clients[i]->socket = new_socket;
+    for (int i = 0; i < MAX_INSTANCES; i++) {
+        if (server->instance[i]->socket == -1) {
+            server->instance[i]->socket = new_socket;
             break;
         }
     }
@@ -28,8 +28,8 @@ void accept_new_connection(server_t *server)
             exit(EXIT_FAILURE);
         } else {
             printf("New connection, socket fd is %d\n", new_socket);
-            write(new_socket, "SU20 Service ready for new user.\n", 32);
+            write(new_socket, "SU20 Service ready for new user.\n", 33);
         }
-        set_new_client(server, new_socket);
+        set_new_instance(server, new_socket);
     }
 }
