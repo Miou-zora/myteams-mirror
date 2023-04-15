@@ -19,8 +19,7 @@ static int get_len(struct user_head *head)
     return len;
 }
 
-Test(del_user, casual)
-{
+Test(del_user, casual) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "test");
     cr_assert_eq(ret, 0);
@@ -30,8 +29,7 @@ Test(del_user, casual)
     cr_assert_eq(get_len(&head), 0);
 }
 
-Test(del_user, multiple)
-{
+Test(del_user, multiple) {
     struct user_head head = init_list_of_users();
     int ret = add_user(&head, "test");
     cr_assert_eq(ret, 0);
@@ -51,28 +49,24 @@ Test(del_user, multiple)
     cr_assert_eq(get_len(&head), 0);
 }
 
-Test(del_user, null_head)
-{
+Test(del_user, null_head) {
     int ret = del_user(NULL, "test");
     cr_assert_eq(ret, -1);
 }
 
-Test(del_user, null_username)
-{
+Test(del_user, null_username) {
     struct user_head head = init_list_of_users();
     int ret = del_user(&head, NULL);
     cr_assert_eq(ret, -1);
 }
 
-Test(del_user, empty_username)
-{
+Test(del_user, empty_username) {
     struct user_head head = init_list_of_users();
     int ret = del_user(&head, "");
     cr_assert_eq(ret, -1);
 }
 
-Test(del_user, too_long_username)
-{
+Test(del_user, too_long_username) {
     struct user_head head = init_list_of_users();
     char *str = malloc(sizeof(char) * (MAX_NAME_LENGTH + 2));
     memset(str, 'a', MAX_NAME_LENGTH + 1);
@@ -81,8 +75,7 @@ Test(del_user, too_long_username)
     cr_assert_eq(ret, -1);
 }
 
-Test(del_user, not_exist)
-{
+Test(del_user, not_exist) {
     struct user_head head = init_list_of_users();
     int ret = del_user(&head, "test");
     cr_assert_eq(ret, 1);

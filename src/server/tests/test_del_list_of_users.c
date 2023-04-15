@@ -9,7 +9,8 @@
 
 #include "data_core.h"
 
-static int get_len(struct user_head *head) {
+static int get_len(struct user_head *head)
+{
     int len = 0;
     user_t *user;
     LIST_FOREACH(user, head, next_user) {
