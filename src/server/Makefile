@@ -42,9 +42,10 @@ RESPONSE 		=	response.c
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
 USER_FOLDER		=	src/user
-USER			=	init_user.c		\
-					add_user.c		\
-					del_user.c		\
+USER			=	init_list_of_users.c			\
+					add_user.c			\
+					del_user.c			\
+					del_list_of_users.c	\
 
 USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
 
