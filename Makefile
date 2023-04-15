@@ -5,6 +5,8 @@
 ## Makefile
 ##
 
+SHARED_FOLDER	=	src/shared
+
 SERVER_FOLDER	=	src/server
 
 CLIENT_FOLDER	=	src/client
@@ -12,28 +14,32 @@ CLIENT_FOLDER	=	src/client
 MAKE			=	make
 
 all:
+		$(MAKE) -C $(SHARED_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER)
 		$(MAKE) -C $(CLIENT_FOLDER)
 
 debug:
+		$(MAKE) -C $(SHARED_FOLDER) debug
 		$(MAKE) -C $(SERVER_FOLDER) debug
 		$(MAKE) -C $(CLIENT_FOLDER) debug
 
 tests_run:
+		$(MAKE) -C $(SHARED_FOLDER) tests_run
 		$(MAKE) -C $(SERVER_FOLDER) tests_run
 		$(MAKE) -C $(CLIENT_FOLDER) tests_run
 
 clean:
+		$(MAKE) -C $(SHARED_FOLDER) clean
 		$(MAKE) -C $(SERVER_FOLDER) clean
 		$(MAKE) -C $(CLIENT_FOLDER) clean
 
 fclean: dclean
+		$(MAKE) -C $(SHARED_FOLDER) fclean
 		$(MAKE) -C $(SERVER_FOLDER) fclean
 		$(MAKE) -C $(CLIENT_FOLDER) fclean
-		$(RM) -rf doc/html
-		$(RM) -rf doc/latex
 
 tclean:
+		$(MAKE) -C $(SHARED_FOLDER) tclean
 		$(MAKE) -C $(SERVER_FOLDER) tclean
 		$(MAKE) -C $(CLIENT_FOLDER) tclean
 		@find tests -type f -name '*.gcda' -exec $(RM) {} \;
