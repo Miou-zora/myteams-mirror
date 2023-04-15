@@ -78,7 +78,7 @@ debug:	re
 
 tests_run:	$(TESTS_OBJ)
 		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
-		$(INCLUDE)
+		$(INCLUDE) $(LIB_FLAGS)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
