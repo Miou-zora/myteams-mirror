@@ -7,7 +7,9 @@
 
 #include "commands.h"
 
-void subscribed(char **args)
+void cmd_subscribed(server_t *server, instance_t *current_instance, char **args)
 {
     (void)args;
+    (void)server;
+    (void)current_instance;
 }

@@ -7,7 +7,9 @@
 
 #include "commands.h"
 
-void list(char **args)
+void cmd_list(server_t *server, instance_t *current_instance, char **args)
 {
     (void)args;
+    (void)server;
+    (void)current_instance;
 }

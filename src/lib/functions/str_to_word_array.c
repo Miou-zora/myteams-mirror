@@ -38,7 +38,12 @@ char **data_to_array_str(char *new, char *sep)
         }
     }
     for (i = 0; i < len_all; i++) {
-        if (i == 0 || (!new[i - 1] && !is_char_is_that(new[i], sep))) {
+        if (new[i] && i == 0) {
+            array[nbr_ptr] = &new[i];
+            nbr_ptr = nbr_ptr + 1;
+            continue;
+        }
+        if (!new[i - 1] && new[i]) {
             array[nbr_ptr] = &new[i];
             nbr_ptr = nbr_ptr + 1;
         }

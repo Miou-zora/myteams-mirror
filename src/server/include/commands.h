@@ -10,6 +10,7 @@
 #include <stddef.h>
 
 #include "instance.h"
+#include "server.h"
 
 #define COMMAND_HELP "help"
 #define COMMAND_LOGIN "login"
@@ -27,25 +28,25 @@
 #define COMMAND_INFO "info"
 #define COMMAND_QUIT "quit"
 
-void help(char **args);
-void login(char **args);
-void logout(char **args);
-void user(char **args);
-void users(char **args);
-// void send(char **args);
-void messages(char **args);
-void subscribe(char **args);
-void subscribed(char **args);
-void unsubscribe(char **args);
-void use(char **args);
-void create(char **args);
-void list(char **args);
-void info(char **args);
-void quit(char **args);
+void cmd_help(server_t *server, instance_t *current_instance, char **args);
+void cmd_login(server_t *server, instance_t *current_instance, char **args);
+void cmd_logout(server_t *server, instance_t *current_instance, char **args);
+void cmd_user(server_t *server, instance_t *current_instance, char **args);
+void cmd_users(server_t *server, instance_t *current_instance, char **args);
+void cmd_send(server_t *server, instance_t *current_instance, char **args);
+void cmd_messages(server_t *server, instance_t *current_instance, char **args);
+void cmd_subscribe(server_t *server, instance_t *current_instance, char **args);
+void cmd_subscribed(server_t *server, instance_t *current_instance, char **args);
+void cmd_unsubscribe(server_t *server, instance_t *current_instance, char **args);
+void cmd_use(server_t *server, instance_t *current_instance, char **args);
+void cmd_create(server_t *server, instance_t *current_instance, char **args);
+void cmd_list(server_t *server, instance_t *current_instance, char **args);
+void cmd_info(server_t *server, instance_t *current_instance, char **args);
+void cmd_quit(server_t *server, instance_t *current_instance, char **args);
 
 typedef struct command {
     const char *name;
-    void (*func)(char **args);
+    void (*func)(server_t *server, instance_t *current_instance, char **args);
 } command_t;
 
 extern const command_t COMMANDS_LIST[];
