@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "uuid.h": "c",
-        "data_core.h": "c"
-    }
-}
