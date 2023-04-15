@@ -83,6 +83,15 @@ typedef struct comment_s {
 // * User functions
 
 /**
+ * @brief Get a user from its username
+ *
+ * @param head Head of list of users
+ * @param username Username of the user
+ * @return user_t* Pointer to the user if found, NULL otherwise
+ */
+struct user_head init_user(void);
+
+/**
  * @brief Create a new user_t object
  *
  * @param head Head of list of users
@@ -91,6 +100,11 @@ typedef struct comment_s {
  */
 int add_user(struct user_head *head, const char *username);
 
-
-struct user_head init_user(void);
-
+/**
+ * @brief Get a user from its username
+ *
+ * @param head Head of list of users
+ * @param username Username of the user
+ * @return int 0 if success, 1 if user doesn't exist, -1 for other error
+ */
+int del_user(struct user_head *head, const char *username);
