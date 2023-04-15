@@ -14,14 +14,12 @@ int get_output_server(int client_fd)
 {
     char buffer[1024];
     size_t BUFFER_SIZE = 1024;
+    int read_bytes = 0;
 
     memset(buffer, 0, BUFFER_SIZE);
-    int read_bytes = read(client_fd, buffer, BUFFER_SIZE);
-    if (read_bytes == 0) {
-        printf("Server Disconnected\n");
+    read_bytes = read(client_fd, buffer, BUFFER_SIZE);
+    if (read_bytes == 0)
         return (1);
-    }
     buffer[read_bytes] = '\0';
-    printf("%s", buffer);
     return (0);
 }
