@@ -7,11 +7,16 @@
 
 SRC			=	src/load_lib.c			\
 				src/load_function.c		\
-				src/load_functions.c
+				src/load_functions.c	\
+				src/unload_lib.c		\
+				src/unload_functions.c	\
+				src/load_shared_lib.c	\
+				src/unload_shared_lib.c	\
+				src/freen.c
 
 OBJ			=	$(SRC:.c=.o)
 
-TESTS		=	tests/test.c
+TESTS		=	tests/test_unload_functions.c
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
