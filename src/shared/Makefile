@@ -60,6 +60,7 @@ clean:
 		$(RM) $(TESTS_OBJ)
 
 fclean:	clean
+		$(RM) $(NAME)
 		$(RM) $(TEST_BINARY)
 
 tclean:
