@@ -50,7 +50,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: check_coding_style
-        run: check.sh $(pwd) $(pwd)
+        run: check.sh $(pwd)/src $(pwd)
         continue-on-error: true
         #redirect to a specific line in a file when a Github Actions is clicked
         # so we need to include the file name, the line number and the error message
