@@ -9,7 +9,7 @@
 
 #include "data_core.h"
 
-int get_len(struct user_head *head)
+static int get_len(struct user_head *head)
 {
     int len = 0;
     user_t *user;
