@@ -32,9 +32,29 @@ typedef struct shared_lib_s {
     size_t nbr_of_function;
 } shared_lib_t;
 
+/**
+ * @brief Load a library
+ *
+ * @param path Path to the library
+ * @param functions_name List of function name
+ * @param nbr_of_function Number of function
+ * @return shared_lib_t* Structure of the library, NULL if error.
+ */
 shared_lib_t *load_shared_lib(char *path, char **functions_name,
     size_t nbr_of_function);
 
+/**
+ * @brief Unload a library
+ *
+ * @param lib Structure of the library
+ */
 void unload_shared_lib(shared_lib_t *lib);
 
+/**
+ * @brief Get a function pointer from a library
+ *
+ * @param lib Structure of the library
+ * @param name Name of the function
+ * @return void* Function pointer, NULL if error.
+ */
 void *get_fcn_shared_lib(shared_lib_t *lib, char *name);
