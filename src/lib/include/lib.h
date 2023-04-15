@@ -11,4 +11,4 @@
 #include <stdlib.h>
 #include <string.h>
 
-char **data_to_array_str(char *, char *);
+char **data_to_array_str(char *str, char *sep);

@@ -26,7 +26,7 @@
 #include "instance.h"
 
 //! define list
-#define MAX_INSTANCES 10
+#define MAX_INSTANCES 100
 #define EPI_FAILURE 84
 
 //! struct list

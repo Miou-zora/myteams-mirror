@@ -57,13 +57,13 @@ OBJ_MAIN	=	$(MAIN:.c=.o)
 
 NAME		=	../../myteams_server
 
-INCLUDE		=	-I./include
+INCLUDE		=	-I./include -I../lib/include
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
 TEST_FLAGS	=	-lcriterion --coverage
 
-LIB_FLAGS	=	-L./ -lmy
+LIB_FLAGS	=	-L../lib/ -lmy
 
 TEST_BINARY	=	unit_tests
 

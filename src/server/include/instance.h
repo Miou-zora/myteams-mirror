@@ -16,7 +16,5 @@
  */
 typedef struct instance_s {
     int socket;
-    char *username;
-    bool is_logged;
-
+    uuid_t uuid;
 } instance_t;

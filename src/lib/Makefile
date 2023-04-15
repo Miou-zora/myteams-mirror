@@ -31,10 +31,6 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	ar rc $(NAME) $(OBJ)
-	cp $(NAME) ../server/
-	$(MV) $(NAME) ../client/
-	cp -r include/ ../server/
-	cp -r include/ ../client/
 
 
 clean:
