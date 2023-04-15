@@ -9,6 +9,7 @@
 
 #include <sys/queue.h>
 #include <uuid/uuid.h>
+#include <stdbool.h>
 
 #define MAX_NAME_LENGTH 32
 #define MAX_DESCRIPTION_LENGTH 255
@@ -33,6 +34,8 @@ typedef struct user_s {
     LIST_ENTRY(user_s) next_user;
     LIST_HEAD(, uuid_list_s) teams_registered_head;
 } user_t;
+/// @brief Define head struct for user list
+LIST_HEAD(user_head, user_s);
 
 /**
  * @brief Teams created in the server
@@ -76,3 +79,18 @@ typedef struct comment_s {
     char body[MAX_BODY_LENGTH];
     LIST_ENTRY(comment_s) next_comment;
 } comment_t;
+
+// * User functions
+
+/**
+ * @brief Create a new user_t object
+ *
+ * @param head Head of list of users
+ * @param username Username of the user
+ * @return int 0 if success, 1 if user already exist, -1 for other error
+ */
+int add_user(struct user_head *head, const char *username);
+
+
+struct user_head init_user(void);
+
