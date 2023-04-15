@@ -22,9 +22,28 @@ COMMANDS 		=	help.c			\
 					info.c			\
 					quit.c			\
 					commands.c
+
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
+CORE_FOLDER 	=	src/core
+CORE 			=	server_init.c 		\
+					create_socket.c 	\
+					server_loop.c 		\
+					accept_connections.c \
+					client_actions.c 	\
+					leave_instance.c 		\
+					set_actual_instance.c \
+
+CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
+
+RESPONSE_FOLDER =	src/response
+RESPONSE 		=	response.c
+
+RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
+
 SRC			=	$(COMMANDS)
+SRC 		+=	$(CORE)
+SRC 		+=	$(RESPONSE)
 
 OBJ			=	$(SRC:.c=.o)
 
@@ -34,13 +53,17 @@ TESTS_OBJ	=	$(TESTS:.c=.o)
 
 MAIN		=	main.c
 
+OBJ_MAIN	=	$(MAIN:.c=.o)
+
 NAME		=	../../myteams_server
 
-INCLUDE		=	-I./include
+INCLUDE		=	-I./include -I../lib/include
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
 TEST_FLAGS	=	-lcriterion --coverage
+
+LIB_FLAGS	=	-L../lib/ -lmy
 
 TEST_BINARY	=	unit_tests
 
@@ -49,19 +72,19 @@ CC			=	gcc
 MV			=	mv -f
 
 %.o:	%.c
-		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
+		$(CC) $(CFLAGS) $(LIB_FLAGS) $(INCLUDE) -o $@ -c $<
 
 all:	$(NAME)
 
-$(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS) $(INCLUDE)
+$(NAME):	$(OBJ) $(OBJ_MAIN)
+		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) $(INCLUDE) $(LIB_FLAGS)
 
 debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
 		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
-		$(INCLUDE)
+		$(INCLUDE) $(LIB_FLAGS)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
@@ -71,6 +94,7 @@ tests_run:	$(TESTS_OBJ)
 clean:
 		$(RM) $(OBJ)
 		$(RM) $(TESTS_OBJ)
+		$(RM) $(OBJ_MAIN)
 
 fclean:	clean
 		$(RM) $(NAME)

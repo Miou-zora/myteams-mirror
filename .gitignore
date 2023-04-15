@@ -5,5 +5,8 @@ myteams_server
 myteams_cli
 .vscode
 coding-style-reports.log
+*.a
+src/server/include/lib.h
+src/client/include/lib.h
+.vscode
 doc/*
-libshared.a
