@@ -39,5 +39,5 @@ void exec_command(server_t *server, instance_t *current_instance, char *command)
             return;
         }
     }
-    write(current_instance->socket, "ES00 Unknown command.\n", 21);
+    write(current_instance->socket, "ES00 Unknown command.\n", 22);
 }
