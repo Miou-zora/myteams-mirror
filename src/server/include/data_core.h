@@ -22,8 +22,10 @@
 typedef struct uuid_list_s {
     /// @brief Copy of an uuid of a user or a team etc.
     uuid_t uuid;
-    LIST_ENTRY(user_registry_s) next_uuid;
+    LIST_ENTRY(uuid_list_s) next_uuid;
 } uuid_list_t;
+/// @brief Define head struct for uuid list
+LIST_HEAD(uuid_list_head, uuid_list_s);
 
 /**
  * @brief User registered in the server
@@ -32,7 +34,7 @@ typedef struct user_s {
     uuid_t uuid;
     char username[MAX_NAME_LENGTH];
     LIST_ENTRY(user_s) next_user;
-    LIST_HEAD(, uuid_list_s) teams_registered_head;
+    struct uuid_list_head teams_registered_head;
 } user_t;
 /// @brief Define head struct for user list
 LIST_HEAD(user_head, user_s);
@@ -44,7 +46,7 @@ typedef struct team_s {
     uuid_t uuid;
     char name[MAX_NAME_LENGTH];
     char description[MAX_DESCRIPTION_LENGTH];
-    LIST_HEAD(, user_registry_s) users_uuid_registered_head;
+    struct uuid_list_head users_uuid_registered_head;
     LIST_HEAD(, channel_s) channels_head;
     LIST_ENTRY(team_s) next_team;
 } team_t;
@@ -81,6 +83,25 @@ typedef struct comment_s {
     char body[MAX_BODY_LENGTH];
     LIST_ENTRY(comment_s) next_comment;
 } comment_t;
+
+// * UUID list functions
+
+/**
+ * @brief Add uuid to a list
+ *
+ * @param uuid UUID to copy
+ * @return int 0 if success, -1 for other error
+ */
+int add_uuid(struct uuid_list_head *head, uuid_t uuid);
+
+/**
+ * @brief Delete a uuid_list_t object
+ *
+ * @param head Head of list of uuid
+ * @param uuid UUID to delete
+ * @return int 0 if success, 1 if uuid doesn't exist, -1 for other error
+ */
+int del_uuid(struct uuid_list_head *head, uuid_t uuid);
 
 // * User functions
 
@@ -184,11 +205,11 @@ void del_list_of_teams(struct team_head *head);
  * @param teams_head Head of list of teams
  * @param users_head Head of list of users
  * @param team_name Name of the team
- * @param user_name Name of the user
+ * @param user_uuid Uuid of the user
  */
 void add_user_to_team(struct team_head *teams_head,
-    struct user_head *users_head, const char *team_name,
-    const char *user_name);
+    struct user_head *users_head, char *team_uuid,
+    char *user_uuid);
 
 /**
  * @brief Delete a user from a team

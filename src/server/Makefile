@@ -41,6 +41,12 @@ RESPONSE 		=	response.c
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
+UUID_LIST_FOLDER =	uuid_list
+UUID_LIST 		=	add_uuid.c					\
+					del_uuid.c					\
+
+UUID_LIST 		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
+
 USER_FOLDER		=	user
 USER			=	init_list_of_users.c			\
 					add_user.c						\
@@ -56,6 +62,7 @@ TEAM			=	init_list_of_teams.c			\
 					add_team_with_uuid.c			\
 					del_team.c						\
 					del_list_of_teams.c				\
+					add_user_to_team.c				\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -65,6 +72,7 @@ SRC 		+=	$(CORE)
 SRC 		+=	$(RESPONSE)
 SRC 		+=	$(USER)
 SRC 		+=	$(TEAM)
+SRC 		+=	$(UUID_LIST)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)
