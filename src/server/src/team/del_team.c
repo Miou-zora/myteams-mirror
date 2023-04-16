@@ -9,7 +9,8 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+// TODO : add a check if the team is empty before deleting it, if not,
+// TODO   remove all the users and channels before deleting the team.
 int del_team(struct team_head *head, const char *name)
 {
     team_t *team;

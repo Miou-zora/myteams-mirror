@@ -55,6 +55,7 @@ TEAM			=	init_list_of_teams.c			\
 					add_team.c						\
 					add_team_with_uuid.c			\
 					del_team.c						\
+					del_list_of_teams.c				\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -79,6 +80,7 @@ TESTS_TEAM_FOLDER	=	team
 TESTS_TEAM			=	test_add_team.c				\
 						test_add_team_with_uuid.c	\
 						test_del_team.c				\
+						test_del_list_of_teams.c	\
 
 TESTS_TEAM			:=	$(addprefix $(TESTS_TEAM_FOLDER)/, $(TESTS_TEAM))
 
