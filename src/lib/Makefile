@@ -41,6 +41,7 @@ clean:
 fclean:	clean
 		$(RM) ../server/$(NAME)
 		$(RM) ../client/$(NAME)
+		$(RM) $(NAME)
 
 re:	fclean all
 

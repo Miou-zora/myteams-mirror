@@ -41,13 +41,29 @@ RESPONSE 		=	response.c
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
+USER_FOLDER		=	src/user
+USER			=	init_list_of_users.c			\
+					add_user.c						\
+					add_user_with_uuid.c			\
+					del_user.c						\
+					del_list_of_users.c				\
+
+USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
+
 SRC			=	$(COMMANDS)
 SRC 		+=	$(CORE)
 SRC 		+=	$(RESPONSE)
+SRC 		+=	$(USER)
 
 OBJ			=	$(SRC:.c=.o)
 
-TESTS		=	tests/test.c
+TESTS_FOLDER	=	tests
+TESTS			=	test_add_user.c				\
+					test_add_user_with_uuid.c	\
+					test_del_user.c				\
+					test_del_list_of_users.c	\
+
+TESTS			:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
@@ -60,6 +76,8 @@ NAME		=	../../myteams_server
 INCLUDE		=	-I./include -I../lib/include
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
+
+UUID_LIB	=	-luuid
 
 TEST_FLAGS	=	-lcriterion --coverage
 
@@ -77,14 +95,15 @@ MV			=	mv -f
 all:	$(NAME)
 
 $(NAME):	$(OBJ) $(OBJ_MAIN)
-		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(CFLAGS) $(INCLUDE) $(LIB_FLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(OBJ_MAIN) $(UUID_LIB) $(CFLAGS) $(INCLUDE) \
+		$(LIB_FLAGS)
 
 debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
 		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
-		$(INCLUDE) $(LIB_FLAGS)
+		$(INCLUDE) $(LIB_FLAGS) $(UUID_LIB)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
