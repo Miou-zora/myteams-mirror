@@ -73,6 +73,7 @@ CHANNEL			=	init_list_of_channels.c			\
 					add_channel.c					\
 					add_channel_with_uuid.c			\
 					del_channel.c					\
+					del_list_of_channels.c			\
 
 CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
@@ -111,7 +112,8 @@ TESTS_UUID_LIST		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
 
 TESTS_CHANNEL		=	test_add_channel.c				\
 						test_add_channel_with_uuid.c	\
-						test_del_channel.c
+						test_del_channel.c				\
+						test_del_list_of_channels.c
 TESTS_CHANNEL		:=	$(addprefix $(CHANNEL_FOLDER)/, $(TESTS_CHANNEL))
 
 TESTS_FOLDER		=	tests
