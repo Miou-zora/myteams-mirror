@@ -8,7 +8,7 @@
 #include <dlfcn.h>
 #include <stddef.h>
 
-void *load_function(void *handle, char *function_name)
+void *load_function(void *handle, const char *function_name)
 {
     void *function = dlsym(handle, function_name);
     if (!function) {

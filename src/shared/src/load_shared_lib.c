@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 
-shared_lib_t *load_shared_lib(char *path, char **functions_name,
+shared_lib_t *load_shared_lib(char *path, const char **functions_name,
     size_t nbr_of_function)
 {
     shared_lib_t *shared_lib = calloc(1, sizeof(*shared_lib));

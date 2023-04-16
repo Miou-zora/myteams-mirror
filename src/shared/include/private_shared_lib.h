@@ -25,7 +25,7 @@ void *load_lib(char *path);
  * @param function_name Name of the function
  * @return void* Function pointer, NULL if error.
  */
-void *load_function(void *handle, char *function_name);
+void *load_function(void *handle, const char *function_name);
 
 /**
  * @brief Load a list of function from a library
@@ -35,7 +35,7 @@ void *load_function(void *handle, char *function_name);
  * @param nbr_of_function Number of function
  * @return ptr_function_t* List of function pointer, NULL if error.
  */
-ptr_function_t **load_functions(void *handler, char **functions_name,
+ptr_function_t **load_functions(void *handler, const char **functions_name,
     size_t nbr_of_function);
 
 /**

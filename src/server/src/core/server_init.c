@@ -7,6 +7,21 @@
 
 #include "server.h"
 
+const char *function_names[] = {
+    "server_event_team_created",
+    "server_event_channel_created",
+    "server_event_thread_created",
+    "server_event_reply_created",
+    "server_event_user_subscribed",
+    "server_event_user_unsubscribed",
+    "server_event_user_created",
+    "server_event_user_loaded",
+    "server_event_user_logged_in",
+    "server_event_user_logged_out",
+    "server_event_private_message_sended",
+    NULL
+};
+
 bool set_port(char *port, server_t *server)
 {
     for (size_t i = 0; i != strlen(port); i++)
@@ -22,25 +37,34 @@ bool set_port(char *port, server_t *server)
     return (true);
 }
 
-server_t *server_init(char *port)
+bool init_instance(server_t *server)
 {
-    server_t *server = malloc(sizeof(server_t));
-
-    if (!server)
-        return (NULL);
-    if (set_port(port, server) == false) {
-        free(server);
-        return (NULL);
-    }
-    server->master_socket = create_socket(inet_addr("127.0.0.1"), server->port);
-    if (server->master_socket == EPI_FAILURE) {
-        free(server);
-        return (NULL);
-    }
     for (size_t i = 0; i != MAX_INSTANCES; i++) {
         server->instance[i] = malloc(sizeof(instance_t));
+        if (!server->instance[i])
+            return (false);
         server->instance[i]->socket = -1;
     }
-    server->is_running = true;
-    return (server);
+    return (true);
+}
+
+server_t *server_init(char *port)
+{
+    server_t *serv = malloc(sizeof(server_t));
+
+    if (!serv)
+        return (NULL);
+    if (set_port(port, serv) == false) {
+        free(serv);
+        return (NULL);
+    }
+    serv->master_socket = create_socket(inet_addr("127.0.0.1"), serv->port);
+    if (serv->master_socket == EPI_FAILURE || init_instance(serv) == false) {
+        free(serv);
+        return (NULL);
+    }
+    serv->shared_lib = load_shared_lib("../libs/myteams/libmyteams.so",
+    function_names, 11);
+    serv->is_running = true;
+    return (serv);
 }
