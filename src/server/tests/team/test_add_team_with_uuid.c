@@ -26,5 +26,3 @@ Test(add_team_with_uuid, casual) {
     }
     cr_assert_eq(len, 1);
 }
-
-
