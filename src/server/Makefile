@@ -44,6 +44,7 @@ RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 USER_FOLDER		=	src/user
 USER			=	init_list_of_users.c			\
 					add_user.c						\
+					add_user_with_uuid.c			\
 					del_user.c						\
 					del_list_of_users.c				\
 
@@ -58,6 +59,7 @@ OBJ			=	$(SRC:.c=.o)
 
 TESTS_FOLDER	=	tests
 TESTS			=	test_add_user.c				\
+					test_add_user_with_uuid.c	\
 					test_del_user.c				\
 					test_del_list_of_users.c	\
 

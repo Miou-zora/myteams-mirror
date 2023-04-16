@@ -105,6 +105,16 @@ int add_user(struct user_head *head, const char *username);
  *
  * @param head Head of list of users
  * @param username Username of the user
+ * @return user_t* Pointer to the user if found, NULL otherwise
+ */
+int add_user_with_uuid(struct user_head *head, const char *username,
+    const char *uuid);
+
+/**
+ * @brief Get a user from its username
+ *
+ * @param head Head of list of users
+ * @param username Username of the user
  * @return int 0 if success, 1 if user doesn't exist, -1 for other error
  */
 int del_user(struct user_head *head, const char *username);
