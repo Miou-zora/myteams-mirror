@@ -65,6 +65,8 @@ TEAM			=	init_list_of_teams.c			\
 					del_list_of_teams.c				\
 					add_user_to_team.c				\
 					del_user_from_team.c			\
+					get_team_by_name.c				\
+					add_channel_to_team.c			\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -74,6 +76,7 @@ CHANNEL			=	init_list_of_channels.c			\
 					add_channel_with_uuid.c			\
 					del_channel.c					\
 					del_list_of_channels.c			\
+					get_channel_by_name.c
 
 CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
@@ -104,6 +107,7 @@ TESTS_TEAM			=	test_add_team.c				\
 						test_del_list_of_teams.c	\
 						test_add_user_to_team.c		\
 						test_del_user_from_team.c	\
+						test_add_channel_to_team.c	\
 
 TESTS_TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TESTS_TEAM))
 
