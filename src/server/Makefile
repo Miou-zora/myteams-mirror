@@ -53,6 +53,7 @@ USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
 TEAM_FOLDER		=	team
 TEAM			=	init_list_of_teams.c			\
 					add_team.c						\
+					add_team_with_uuid.c			\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -75,6 +76,7 @@ TESTS_USER		:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
 
 TESTS_TEAM_FOLDER	=	team
 TESTS_TEAM			=	test_add_team.c				\
+						test_add_team_with_uuid.c	\
 
 TESTS_TEAM			:=	$(addprefix $(TESTS_TEAM_FOLDER)/, $(TESTS_TEAM))
 
