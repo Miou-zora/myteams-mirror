@@ -44,6 +44,7 @@ RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 UUID_LIST_FOLDER =	uuid_list
 UUID_LIST 		=	add_uuid.c					\
 					del_uuid.c					\
+					init_list_of_uuids.c			\
 
 UUID_LIST 		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
 
@@ -63,6 +64,7 @@ TEAM			=	init_list_of_teams.c			\
 					del_team.c						\
 					del_list_of_teams.c				\
 					add_user_to_team.c				\
+					del_user_from_team.c			\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -89,12 +91,20 @@ TESTS_TEAM			=	test_add_team.c				\
 						test_add_team_with_uuid.c	\
 						test_del_team.c				\
 						test_del_list_of_teams.c	\
+						test_add_user_to_team.c		\
+						test_del_user_from_team.c	\
 
 TESTS_TEAM			:=	$(addprefix $(TESTS_TEAM_FOLDER)/, $(TESTS_TEAM))
+
+TESTS_UUID_LIST_FOLDER	=	uuid_list
+TESTS_UUID_LIST			=	test_add_uuid.c				\
+
+TESTS_UUID_LIST			:=	$(addprefix $(TESTS_UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
 
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
 TESTS				+=	$(TESTS_TEAM)
+TESTS				+=	$(TESTS_UUID_LIST)
 TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)

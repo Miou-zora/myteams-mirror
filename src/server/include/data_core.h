@@ -87,6 +87,12 @@ typedef struct comment_s {
 // * UUID list functions
 
 /**
+ * @brief Create a new uuid_list_t object
+ * @return uuid_list_t New uuid_list_t object
+ */
+struct uuid_list_head init_list_of_uuids(void);
+
+/**
  * @brief Add uuid to a list
  *
  * @param uuid UUID to copy
@@ -206,8 +212,10 @@ void del_list_of_teams(struct team_head *head);
  * @param users_head Head of list of users
  * @param team_name Name of the team
  * @param user_uuid Uuid of the user
+ * @return int 0 if success, 1 if team doesn't exist, 2 if user doesn't exist,
+ * 3 if user already in team, -1 for other error
  */
-void add_user_to_team(struct team_head *teams_head,
+int add_user_to_team(struct team_head *teams_head,
     struct user_head *users_head, char *team_uuid,
     char *user_uuid);
 
@@ -218,10 +226,12 @@ void add_user_to_team(struct team_head *teams_head,
  * @param users_head Head of list of users
  * @param team_name Name of the team
  * @param user_name Name of the user
+ * @return int 0 if success, 1 if team doesn't exist, 2 if user doesn't exist,
+ * 3 if user not in team, -1 for other error
  */
-void del_user_from_team(struct team_head *teams_head,
-    struct user_head *users_head, const char *team_name,
-    const char *user_name);
+int del_user_from_team(struct team_head *teams_head,
+    struct user_head *users_head, char *team_uuid,
+    char *user_uuid);
 
 /**
  * @brief Add a channel to a team

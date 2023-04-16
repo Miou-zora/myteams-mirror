@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** myteams-mirror
 ** File description:
-** add_user_to_team
+** del_user_from_team
 */
 
 #include "data_core.h"
@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static bool is_already_in_team(team_t *team, user_t *user)
+static bool is_in_team(team_t *team, user_t *user)
 {
     uuid_list_t *tmp;
 
@@ -25,16 +25,16 @@ static bool is_already_in_team(team_t *team, user_t *user)
 
 static int is_error(team_t *team, user_t *user)
 {
-    if (is_already_in_team(team, user))
-        return (3);
-    if (!user)
-        return (2);
     if (!team)
         return (1);
+    if (!user)
+        return (2);
+    if (!is_in_team(team, user))
+        return (3);
     return (0);
 }
 
-int add_user_to_team(struct team_head *teams_head,
+int del_user_from_team(struct team_head *teams_head,
     struct user_head *users_head, char *team_uuid,
     char *user_uuid)
 {
@@ -55,7 +55,7 @@ int add_user_to_team(struct team_head *teams_head,
             break;
     if (is_error(team, user))
         return (is_error(team, user));
-    add_uuid(&team->users_uuid_registered_head, user->uuid);
-    add_uuid(&user->teams_registered_head, team->uuid);
+    del_uuid(&team->users_uuid_registered_head, user->uuid);
+    del_uuid(&user->teams_registered_head, team->uuid);
     return (0);
 }
