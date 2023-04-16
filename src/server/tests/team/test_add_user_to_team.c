@@ -11,8 +11,7 @@
 
 #include <stdlib.h>
 
-Test(add_user_to_team, casual)
-{
+Test(add_user_to_team, casual) {
     struct team_head team_head = init_list_of_teams();
     struct user_head user_head = init_list_of_users();
     add_user_with_uuid(&user_head, "test1",

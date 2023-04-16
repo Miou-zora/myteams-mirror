@@ -11,8 +11,7 @@
 
 #include <stdlib.h>
 
-Test(add_uuid, casual)
-{
+Test(add_uuid, casual) {
     struct uuid_list_head head = init_list_of_uuids();
     uuid_t uuid;
     uuid_generate(uuid);
