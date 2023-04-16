@@ -48,6 +48,8 @@ typedef struct team_s {
     LIST_HEAD(, channel_s) channels_head;
     LIST_ENTRY(team_s) next_team;
 } team_t;
+/// @brief Define head struct for team list
+LIST_HEAD(team_head, team_s);
 
 /**
  * @brief Channels created in a team
@@ -127,3 +129,97 @@ int del_user(struct user_head *head, const char *username);
  * @return user_t* Pointer to the user if found, NULL otherwise
  */
 void del_list_of_users(struct user_head *head);
+
+// * Team functions
+
+/**
+ * @brief Create a list of teams
+ *
+ * @return struct team_head Head of list of teams
+ */
+struct team_head init_list_of_teams(void);
+
+/**
+ * @brief Add a team to the list of teams
+ *
+ * @param head Head of list of teams
+ * @param name Name of the team
+ * @param description Description of the team
+ * @return int 0 if success, 1 if team already exist, -1 for other error
+ */
+int add_team(struct team_head *head, const char *name,
+    const char *description);
+
+/**
+ * @brief Add a team to the list of teams with a specific uuid
+ *
+ * @param head Head of list of teams
+ * @param name Name of the team
+ * @param description Description of the team
+ * @param uuid Uuid of the team
+ * @return int 0 if success, 1 if team already exist, -1 for other error
+ */
+int add_team_with_uuid(struct team_head *head, const char *name,
+    const char *description, const char *uuid);
+
+/**
+ * @brief Delete a team from the list of teams
+ *
+ * @param head Head of list of teams
+ * @param name Name of the team
+ * @return int 0 if success, 1 if team doesn't exist, -1 for other error
+ */
+int del_team(struct team_head *head, const char *name);
+
+/**
+ * @brief Delete a list of teams
+ *
+ * @param head Head of list of teams
+ */
+void del_list_of_teams(struct team_head *head);
+
+/**
+ * @brief Add a user to a team
+ *
+ * @param teams_head Head of list of teams
+ * @param users_head Head of list of users
+ * @param team_name Name of the team
+ * @param user_name Name of the user
+ */
+void add_user_to_team(struct team_head *teams_head,
+    struct user_head *users_head, const char *team_name,
+    const char *user_name);
+
+/**
+ * @brief Delete a user from a team
+ *
+ * @param teams_head Head of list of teams
+ * @param users_head Head of list of users
+ * @param team_name Name of the team
+ * @param user_name Name of the user
+ */
+void del_user_from_team(struct team_head *teams_head,
+    struct user_head *users_head, const char *team_name,
+    const char *user_name);
+
+/**
+ * @brief Add a channel to a team
+ *
+ * @param teams_head Head of list of teams
+ * @param team_name Name of the team
+ * @param channel_name Name of the channel
+ * @param channel_description Description of the channel
+ */
+void add_channel_to_team(struct team_head *teams_head,
+    const char *team_name, const char *channel_name,
+    const char *channel_description);
+
+/**
+ * @brief Delete a channel from a team
+ *
+ * @param teams_head Head of list of teams
+ * @param team_name Name of the team
+ * @param channel_name Name of the channel
+ */
+void del_channel_from_team(struct team_head *teams_head,
+    const char *team_name, const char *channel_name);
