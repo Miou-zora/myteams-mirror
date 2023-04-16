@@ -82,6 +82,7 @@ OBJ			=	$(SRC:.c=.o)
 TESTS_FOLDER	=	tests
 
 TESTS_USER		=	test_add_user.c				\
+
 TESTS_USER		:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
 
 TESTS_TEAM			=	test_add_team.c				\
