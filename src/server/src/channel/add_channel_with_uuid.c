@@ -10,8 +10,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-static channel_t *new_channel_with_uuid(const char *name, const char *description,
-    const char *uuid)
+static channel_t *new_channel_with_uuid(const char *name,
+    const char *description, const char *uuid)
 {
     channel_t *channel = malloc(sizeof(*channel));
 

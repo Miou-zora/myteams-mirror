@@ -20,8 +20,7 @@ static int get_list_size(struct channel_head *head)
     return size;
 }
 
-Test(del_list_of_channels, casual)
-{
+Test(del_list_of_channels, casual) {
     struct channel_head head = init_list_of_channels();
     add_channel(&head, "name", "description");
     add_channel(&head, "name2", "description2");
@@ -31,8 +30,7 @@ Test(del_list_of_channels, casual)
     cr_assert_eq(LIST_EMPTY(&head), 1);
 }
 
-Test(del_list_of_channels, empty_list)
-{
+Test(del_list_of_channels, empty_list) {
     struct channel_head head = init_list_of_channels();
     cr_assert_eq(LIST_EMPTY(&head), 1);
     del_list_of_channels(&head);

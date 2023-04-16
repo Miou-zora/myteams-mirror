@@ -20,8 +20,7 @@ static int get_list_size(struct channel_head *head)
     return size;
 }
 
-Test(add_channel, add_channel)
-{
+Test(add_channel, add_channel) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "name", "description");
 
@@ -31,8 +30,7 @@ Test(add_channel, add_channel)
     cr_assert_str_eq(LIST_FIRST(&head)->description, "description");
 }
 
-Test(add_channel, add_channel_with_same_name)
-{
+Test(add_channel, add_channel_with_same_name) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "name", "description");
 
@@ -41,40 +39,35 @@ Test(add_channel, add_channel_with_same_name)
     cr_assert_eq(ret, 1);
 }
 
-Test(add_channel, add_channel_with_empty_name)
-{
+Test(add_channel, add_channel_with_empty_name) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "", "description");
 
     cr_assert_eq(ret, -1);
 }
 
-Test(add_channel, add_channel_with_empty_description)
-{
+Test(add_channel, add_channel_with_empty_description) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "name", "");
 
     cr_assert_eq(ret, -1);
 }
 
-Test(add_channel, add_channel_with_null_name)
-{
+Test(add_channel, add_channel_with_null_name) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, NULL, "description");
 
     cr_assert_eq(ret, -1);
 }
 
-Test(add_channel, add_channel_with_null_description)
-{
+Test(add_channel, add_channel_with_null_description) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "name", NULL);
 
     cr_assert_eq(ret, -1);
 }
 
-Test(add_channel, multiple_channel)
-{
+Test(add_channel, multiple_channel) {
     struct channel_head head = init_list_of_channels();
     int ret = add_channel(&head, "name", "description");
 
