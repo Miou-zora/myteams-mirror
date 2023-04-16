@@ -127,3 +127,12 @@ int del_user(struct user_head *head, const char *username);
  * @return user_t* Pointer to the user if found, NULL otherwise
  */
 void del_list_of_users(struct user_head *head);
+
+/**
+ * @brief Get a user from its username
+ *
+ * @param users
+ * @param username
+ * @return user_t* Pointer to the user if found, NULL otherwise
+ */
+user_t *find_user(struct user_head *users, char *username);

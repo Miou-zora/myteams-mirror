@@ -23,5 +23,6 @@ shared_lib_t *load_shared_lib(char *path, const char **functions_name,
         nbr_of_function);
     if (shared_lib->functions == NULL)
         return (NULL);
+    shared_lib->nbr_of_function = nbr_of_function;
     return (shared_lib);
 }

@@ -39,9 +39,11 @@ typedef struct server_s {
     int master_socket;
     bool is_running;
     fd_set readfds;
+    fd_set writefds;
     int max_sd;
     instance_t *instance[MAX_INSTANCES];
     shared_lib_t *shared_lib;
+    struct user_head users;
 } server_t;
 
 /**

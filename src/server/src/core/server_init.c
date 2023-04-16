@@ -44,6 +44,7 @@ bool init_instance(server_t *server)
         if (!server->instance[i])
             return (false);
         server->instance[i]->socket = -1;
+        uuid_clear(server->instance[i]->uuid);
     }
     return (true);
 }
@@ -63,8 +64,9 @@ server_t *server_init(char *port)
         free(serv);
         return (NULL);
     }
-    serv->shared_lib = load_shared_lib("../libs/myteams/libmyteams.so",
+    serv->shared_lib = load_shared_lib("./libs/myteams/libmyteams.so",
     function_names, 11);
+    serv->users = init_list_of_users();
     serv->is_running = true;
     return (serv);
 }
