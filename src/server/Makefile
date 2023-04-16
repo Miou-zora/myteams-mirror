@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-COMMANDS_FOLDER	=	src/commands
+COMMANDS_FOLDER	=	commands
 COMMANDS 		=	help.c			\
 					login.c			\
 					logout.c		\
@@ -25,7 +25,7 @@ COMMANDS 		=	help.c			\
 
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
-CORE_FOLDER 	=	src/core
+CORE_FOLDER 	=	core
 CORE 			=	server_init.c 		\
 					create_socket.c 	\
 					server_loop.c 		\
@@ -36,12 +36,19 @@ CORE 			=	server_init.c 		\
 
 CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 
-RESPONSE_FOLDER =	src/response
+RESPONSE_FOLDER =	response
 RESPONSE 		=	response.c
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
-USER_FOLDER		=	src/user
+UUID_LIST_FOLDER =	uuid_list
+UUID_LIST 		=	add_uuid.c					\
+					del_uuid.c					\
+					init_list_of_uuids.c			\
+
+UUID_LIST 		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
+
+USER_FOLDER		=	user
 USER			=	init_list_of_users.c			\
 					add_user.c						\
 					add_user_with_uuid.c			\
@@ -50,20 +57,51 @@ USER			=	init_list_of_users.c			\
 
 USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
 
+TEAM_FOLDER		=	team
+TEAM			=	init_list_of_teams.c			\
+					add_team.c						\
+					add_team_with_uuid.c			\
+					del_team.c						\
+					del_list_of_teams.c				\
+					add_user_to_team.c				\
+					del_user_from_team.c			\
+
+TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
+
+SRC_FOLDER	=	src
 SRC			=	$(COMMANDS)
 SRC 		+=	$(CORE)
 SRC 		+=	$(RESPONSE)
 SRC 		+=	$(USER)
+SRC 		+=	$(TEAM)
+SRC 		+=	$(UUID_LIST)
+SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)
 
 TESTS_FOLDER	=	tests
-TESTS			=	test_add_user.c				\
-					test_add_user_with_uuid.c	\
-					test_del_user.c				\
-					test_del_list_of_users.c	\
 
-TESTS			:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
+TESTS_USER		=	test_add_user.c				\
+
+TESTS_USER		:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
+
+TESTS_TEAM			=	test_add_team.c				\
+						test_add_team_with_uuid.c	\
+						test_del_team.c				\
+						test_del_list_of_teams.c	\
+						test_add_user_to_team.c		\
+						test_del_user_from_team.c	\
+
+TESTS_TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TESTS_TEAM))
+
+TESTS_UUID_LIST			=	test_add_uuid.c
+TESTS_UUID_LIST			:=	$(addprefix $(UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
+
+TESTS_FOLDER		=	tests
+TESTS				=	$(TESTS_USER)
+TESTS				+=	$(TESTS_TEAM)
+TESTS				+=	$(TESTS_UUID_LIST)
+TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
 
