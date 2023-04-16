@@ -65,8 +65,20 @@ TEAM			=	init_list_of_teams.c			\
 					del_list_of_teams.c				\
 					add_user_to_team.c				\
 					del_user_from_team.c			\
+					get_team_by_name.c				\
+					add_channel_to_team.c			\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
+
+CHANNEL_FOLDER	=	channel
+CHANNEL			=	init_list_of_channels.c			\
+					add_channel.c					\
+					add_channel_with_uuid.c			\
+					del_channel.c					\
+					del_list_of_channels.c			\
+					get_channel_by_name.c
+
+CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
 SRC_FOLDER	=	src
 SRC			=	$(COMMANDS)
@@ -75,6 +87,7 @@ SRC 		+=	$(RESPONSE)
 SRC 		+=	$(USER)
 SRC 		+=	$(TEAM)
 SRC 		+=	$(UUID_LIST)
+SRC 		+=	$(CHANNEL)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)
@@ -94,16 +107,24 @@ TESTS_TEAM			=	test_add_team.c				\
 						test_del_list_of_teams.c	\
 						test_add_user_to_team.c		\
 						test_del_user_from_team.c	\
+						test_add_channel_to_team.c	\
 
 TESTS_TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TESTS_TEAM))
 
 TESTS_UUID_LIST		=	test_add_uuid.c
 TESTS_UUID_LIST		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
 
+TESTS_CHANNEL		=	test_add_channel.c				\
+						test_add_channel_with_uuid.c	\
+						test_del_channel.c				\
+						test_del_list_of_channels.c
+TESTS_CHANNEL		:=	$(addprefix $(CHANNEL_FOLDER)/, $(TESTS_CHANNEL))
+
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
 TESTS				+=	$(TESTS_TEAM)
 TESTS				+=	$(TESTS_UUID_LIST)
+TESTS				+=	$(TESTS_CHANNEL)
 TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)

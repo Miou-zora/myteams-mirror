@@ -40,20 +40,6 @@ typedef struct user_s {
 LIST_HEAD(user_head, user_s);
 
 /**
- * @brief Teams created in the server
- */
-typedef struct team_s {
-    uuid_t uuid;
-    char name[MAX_NAME_LENGTH];
-    char description[MAX_DESCRIPTION_LENGTH];
-    struct uuid_list_head users_uuid_registered_head;
-    LIST_HEAD(, channel_s) channels_head;
-    LIST_ENTRY(team_s) next_team;
-} team_t;
-/// @brief Define head struct for team list
-LIST_HEAD(team_head, team_s);
-
-/**
  * @brief Channels created in a team
  */
 typedef struct channel_s {
@@ -63,6 +49,22 @@ typedef struct channel_s {
     LIST_HEAD(, thread_s) threads_head;
     LIST_ENTRY(channel_s) next_channel;
 } channel_t;
+/// @brief Define head struct for channel list
+LIST_HEAD(channel_head, channel_s);
+
+/**
+ * @brief Teams created in the server
+ */
+typedef struct team_s {
+    uuid_t uuid;
+    char name[MAX_NAME_LENGTH];
+    char description[MAX_DESCRIPTION_LENGTH];
+    struct uuid_list_head users_uuid_registered_head;
+    struct channel_head channels_head;
+    LIST_ENTRY(team_s) next_team;
+} team_t;
+/// @brief Define head struct for team list
+LIST_HEAD(team_head, team_s);
 
 /**
  * @brief Threads created in a channel
@@ -234,14 +236,24 @@ int del_user_from_team(struct team_head *teams_head,
     char *user_uuid);
 
 /**
+ * @brief Get a team from its name
+ *
+ * @param teams_head Head of list of teams
+ * @param team_name Name of the team
+ * @return team_t* Pointer to the team if found, NULL otherwise
+ */
+team_t *get_team_by_name(struct team_head *teams_head, const char *team_name);
+
+/**
  * @brief Add a channel to a team
  *
  * @param teams_head Head of list of teams
  * @param team_name Name of the team
  * @param channel_name Name of the channel
  * @param channel_description Description of the channel
+ * @return int 0 if success, 1 if team doesn't exist, 2 if channel already
  */
-void add_channel_to_team(struct team_head *teams_head,
+int add_channel_to_team(struct team_head *teams_head,
     const char *team_name, const char *channel_name,
     const char *channel_description);
 
@@ -254,3 +266,61 @@ void add_channel_to_team(struct team_head *teams_head,
  */
 void del_channel_from_team(struct team_head *teams_head,
     const char *team_name, const char *channel_name);
+
+// * Channel functions
+
+/**
+ * @brief Create a list of channels
+ *
+ * @return struct channel_head Head of list of channels
+ */
+struct channel_head init_list_of_channels(void);
+
+/**
+ * @brief Add a channel to the list of channels
+ *
+ * @param head Head of list of channels
+ * @param name Name of the channel
+ * @param description Description of the channel
+ * @return int 0 if success, 1 if channel already exist, -1 for other error
+ */
+int add_channel(struct channel_head *head, const char *name,
+    const char *description);
+
+/**
+ * @brief Add a channel to the list of channels with a specific uuid
+ *
+ * @param head Head of list of channels
+ * @param name Name of the channel
+ * @param description Description of the channel
+ * @param uuid Uuid of the channel
+ * @return int 0 if success, 1 if channel already exist, -1 for other error
+ */
+int add_channel_with_uuid(struct channel_head *head, const char *name,
+    const char *description, const char *uuid);
+
+/**
+ * @brief Delete a channel from the list of channels
+ *
+ * @param head Head of list of channels
+ * @param name Name of the channel
+ * @return int 0 if success, 1 if channel doesn't exist, -1 for other error
+ */
+int del_channel(struct channel_head *head, const char *name);
+
+/**
+ * @brief Delete a list of channels
+ *
+ * @param head Head of list of channels
+ */
+void del_list_of_channels(struct channel_head *head);
+
+/**
+ * @brief Get channel with a specific name
+ *
+ * @param channels_head Head of list of channels
+ * @param channel_name Name of the channel
+ * @return channel_t* Pointer to the channel if found, NULL otherwise
+ */
+channel_t *get_channel_by_name(struct channel_head *channels_head,
+    const char *channel_name);
