@@ -82,6 +82,9 @@ OBJ			=	$(SRC:.c=.o)
 TESTS_FOLDER	=	tests
 
 TESTS_USER		=	test_add_user.c				\
+					test_add_user_with_uuid.c	\
+					test_del_user.c				\
+					test_del_list_of_users.c	\
 
 TESTS_USER		:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
 
@@ -94,8 +97,8 @@ TESTS_TEAM			=	test_add_team.c				\
 
 TESTS_TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TESTS_TEAM))
 
-TESTS_UUID_LIST			=	test_add_uuid.c
-TESTS_UUID_LIST			:=	$(addprefix $(UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
+TESTS_UUID_LIST		=	test_add_uuid.c
+TESTS_UUID_LIST		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(TESTS_UUID_LIST))
 
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
