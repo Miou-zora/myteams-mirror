@@ -20,7 +20,6 @@ void server_loop(server_t *server)
         activity = select(server->max_sd + 1,
         &(server->readfds), &(server->writefds), NULL, NULL);
         if ((activity < 0)) {
-            printf("%i\n", server->max_sd + 1);
             perror("select error");
             exit(EPI_FAILURE);
         }
