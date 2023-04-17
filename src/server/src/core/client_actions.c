@@ -17,16 +17,53 @@ void catch_client_message(int index, server_t *server)
     if ((valread = read(sd, command, sizeof(command))) == 0) {
         leave_instance(server->instance[index]);
     } else {
-        exec_command(server, server->instance[index], command);
+        if (strlen(server->instance[index]->buff_in) +
+        strlen(command) >= MESSAGE_SIZE) {
+            leave_instance(server->instance[index]);
+            return;
+        }
+        strcat(server->instance[index]->buff_in, command);
     }
     memset(command, 0, sizeof(command));
+}
+
+void select_command(server_t *server, instance_t *instance)
+{
+    char *command = strdup(instance->buff_in);
+    char *tmp = strdup(instance->buff_in);
+    size_t i = 0;
+
+    tmp = strstr(tmp, "\n");
+    memset(instance->buff_in, 0, 1024);
+    strcpy(instance->buff_in, tmp + 1);
+    for (; command[i] != '\n'; i++);
+    command[i] = 0;
+    exec_command(server, instance, command);
+    free(command);
+}
+
+void send_message(instance_t *instance)
+{
+    write(instance->socket, instance->buff_out, strlen(instance->buff_out));
+    memset(instance->buff_out, 0, 1024);
 }
 
 void do_client_action(server_t *server)
 {
     for (int i = 0; i < MAX_INSTANCES; i++) {
-        if (FD_ISSET(server->instance[i]->socket, &(server->readfds))) {
+        if (FD_ISSET(server->instance[i]->socket, &(server->readfds))) {;
             catch_client_message(i, server);
+        }
+    }
+    for (int i = 0; i < MAX_INSTANCES; i++) {
+        if (strstr(server->instance[i]->buff_in, "\n") != NULL) {
+            select_command(server, server->instance[i]);
+        }
+    }
+    for (int i = 0; i < MAX_INSTANCES; i++) {
+        if (strlen(server->instance[i]->buff_out) != 0 &&
+        FD_ISSET(server->instance[i]->socket, &(server->writefds))) {
+            send_message(server->instance[i]);
         }
     }
 }

@@ -15,7 +15,7 @@ bool already_logged(server_t *serv, instance_t *current_instance, char **args)
 
     if (user != NULL) {
         server_event_user_logged_in(args[0]);
-        reply(current_instance->socket, "SU03");
+        reply(current_instance->buff_out, "SU03");
         uuid_copy(current_instance->uuid, user->uuid);
         return (true);
     }
@@ -32,7 +32,7 @@ void user_login(server_t *server, instance_t *current_instance, char *username)
     if (user != NULL) {
         uuid_unparse(user->uuid, tmp);
         server_event_user_created(tmp, user->username);
-        reply(current_instance->socket, "SU02");
+        reply(current_instance->buff_out, "SU02");
         uuid_copy(current_instance->uuid, user->uuid);
         return;
     }
@@ -42,7 +42,7 @@ void cmd_login(server_t *server, instance_t *current_instance, char **args)
 {
 
     if (get_array_size(args) != 1) {
-        reply(current_instance->socket, "EC02");
+        reply(current_instance->buff_out, "EC02");
         return;
     }
     args[0] = delete_quotes(args[0]);

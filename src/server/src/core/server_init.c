@@ -7,21 +7,6 @@
 
 #include "server.h"
 
-const char *function_names[] = {
-    "server_event_team_created",
-    "server_event_channel_created",
-    "server_event_thread_created",
-    "server_event_reply_created",
-    "server_event_user_subscribed",
-    "server_event_user_unsubscribed",
-    "server_event_user_created",
-    "server_event_user_loaded",
-    "server_event_user_logged_in",
-    "server_event_user_logged_out",
-    "server_event_private_message_sended",
-    NULL
-};
-
 bool set_port(char *port, server_t *server)
 {
     for (size_t i = 0; i != strlen(port); i++)
@@ -45,6 +30,10 @@ bool init_instance(server_t *server)
             return (false);
         server->instance[i]->socket = -1;
         uuid_clear(server->instance[i]->uuid);
+        memset(server->instance[i]->buff_in, 0,
+        sizeof(server->instance[i]->buff_in));
+        memset(server->instance[i]->buff_out, 0,
+        sizeof(server->instance[i]->buff_out));
     }
     return (true);
 }

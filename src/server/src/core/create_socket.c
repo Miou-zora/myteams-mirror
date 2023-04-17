@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include "network_lib.h"
 
 int create_socket(in_addr_t adress, int port)
 {
@@ -19,7 +20,7 @@ int create_socket(in_addr_t adress, int port)
         perror("socket failed");
         return (EPI_FAILURE);
     }
-    if (bind(sock, (struct sockaddr*)&addr, sizeof(addr)) < 0) {
+    if (bind_fd_addr(sock, addr) == 84) {
         perror("bind failed");
         return (EPI_FAILURE);
     }

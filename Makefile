@@ -16,7 +16,6 @@ NETWORK_LIB_FOLDER		=	src/network_lib
 MAKE			=	make
 
 all:
-		$(shell export) LD_LIBRARY_PATH=$(LD_LIBRARY_PATH):$(shell pwd)/libs/myteams
 		$(MAKE) -C $(LIB_FOLDER)
 		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER)
