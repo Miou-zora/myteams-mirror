@@ -40,7 +40,7 @@ typedef struct shared_lib_s {
  * @param nbr_of_function Number of function
  * @return shared_lib_t* Structure of the library, NULL if error.
  */
-shared_lib_t *load_shared_lib(char *path, char **functions_name,
+shared_lib_t *load_shared_lib(char *path, const char **functions_name,
     size_t nbr_of_function);
 
 /**

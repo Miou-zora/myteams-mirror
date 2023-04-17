@@ -15,6 +15,7 @@ const response_t RESPONSE_LIST[] = {
     {"SU20", "Service ready for new user"},
     {"EC00", "Bad Request"},
     {"EC01", "Unauthorized"},
+    {"EC02", "Invalid number of arguments"},
     {"EC03", "Forbidden"},
     {"EC04", "Not Found"},
     {"EC05", "Method Not Allowed"},

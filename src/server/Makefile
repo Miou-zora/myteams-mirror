@@ -54,6 +54,7 @@ USER			=	init_list_of_users.c			\
 					add_user_with_uuid.c			\
 					del_user.c						\
 					del_list_of_users.c				\
+					find_user.c 					\
 
 USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
 
@@ -135,7 +136,7 @@ OBJ_MAIN	=	$(MAIN:.c=.o)
 
 NAME		=	../../myteams_server
 
-INCLUDE		=	-I./include -I../lib/include
+INCLUDE		=	-I./include -I../lib/include -I../shared/include
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
@@ -143,7 +144,7 @@ UUID_LIB	=	-luuid
 
 TEST_FLAGS	=	-lcriterion --coverage
 
-LIB_FLAGS	=	-L../lib/ -lmy
+LIB_FLAGS	=	-L../lib/ -lmy -L../shared/ -lshared
 
 TEST_BINARY	=	unit_tests
 

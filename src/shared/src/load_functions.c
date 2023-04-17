@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-ptr_function_t **load_functions(void *handler, char **functions_name,
+ptr_function_t **load_functions(void *handler, const char **functions_name,
     size_t nbr_of_function)
 {
     ptr_function_t **list_of_ptr_functions = calloc(nbr_of_function,
@@ -18,6 +18,7 @@ ptr_function_t **load_functions(void *handler, char **functions_name,
     if (list_of_ptr_functions == NULL)
         return (NULL);
     for (size_t i = 0; i < nbr_of_function; i++) {
+        list_of_ptr_functions[i] = calloc(1, sizeof(**list_of_ptr_functions));
         list_of_ptr_functions[i]->name = strdup(functions_name[i]);
         if (list_of_ptr_functions[i]->name == NULL)
             return (NULL);
