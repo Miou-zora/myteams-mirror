@@ -24,7 +24,7 @@
 #include <sys/time.h>
 
 #include "instance.h"
-#include "shared_lib.h"
+#include "logging_server.h"
 
 //! define list
 #define MAX_INSTANCES 100
@@ -42,7 +42,6 @@ typedef struct server_s {
     fd_set writefds;
     int max_sd;
     instance_t *instance[MAX_INSTANCES];
-    shared_lib_t *shared_lib;
     struct user_head users;
 } server_t;
 

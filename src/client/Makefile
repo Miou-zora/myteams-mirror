@@ -22,13 +22,14 @@ MAIN		=	main.c
 
 NAME		=	../../myteams_cli
 
-INCLUDE		=	-I./include -I../network_lib/include
+INCLUDE		=	-I./include -I../network_lib/include \
+-I../../libs/myteams/include
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
 
 TEST_FLAGS	=	-lcriterion --coverage
 
-LIB_FLAGS   =   -L../network_lib -lnetwork
+LIB_FLAGS   =   -L../network_lib -lnetwork -L../../libs/myteams/ -lmyteams
 
 TEST_BINARY	=	unit_tests
 

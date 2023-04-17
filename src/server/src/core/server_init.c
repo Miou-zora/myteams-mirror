@@ -64,8 +64,6 @@ server_t *server_init(char *port)
         free(serv);
         return (NULL);
     }
-    serv->shared_lib = load_shared_lib("./libs/myteams/libmyteams.so",
-    function_names, 11);
     serv->users = init_list_of_users();
     serv->is_running = true;
     return (serv);
