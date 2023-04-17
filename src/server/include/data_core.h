@@ -59,7 +59,7 @@ typedef struct channel_s {
     uuid_t uuid;
     char name[MAX_NAME_LENGTH];
     char description[MAX_DESCRIPTION_LENGTH];
-    LIST_HEAD(, thread_s) threads_head;
+    struct thread_head threads_head;
     LIST_ENTRY(channel_s) next_channel;
 } channel_t;
 /// @brief Define head struct for channel list
@@ -335,6 +335,30 @@ void del_list_of_channels(struct channel_head *head);
  */
 channel_t *get_channel_by_name(struct channel_head *channels_head,
     const char *channel_name);
+
+/**
+ * @brief Add a thread to a channel
+ *
+ * @param channels_head Head of list of channels
+ * @param channel_name Name of the channel
+ * @param thread_name Name of the thread
+ * @param thread_description Description of the thread
+ * @return int 0 if success, 1 if channel doesn't exist, 2 if thread already
+ */
+int add_thread_to_channel(struct channel_head *channels_head,
+    const char *channel_name, const char *thread_name,
+    const char *thread_description);
+
+/**
+ * @brief Delete a thread from a channel
+ *
+ * @param channels_head Head of list of channels
+ * @param channel_name Name of the channel
+ * @param thread_name Name of the thread
+ * @return int 0 if success, 1 if channel doesn't exist, 2 if thread doesn't
+ */
+void del_thread_from_channel(struct channel_head *channels_head,
+    const char *channel_name, const char *thread_name);
 
 // * Thread functions
 

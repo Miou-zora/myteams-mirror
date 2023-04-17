@@ -77,7 +77,9 @@ CHANNEL			=	init_list_of_channels.c			\
 					add_channel_with_uuid.c			\
 					del_channel.c					\
 					del_list_of_channels.c			\
-					get_channel_by_name.c
+					get_channel_by_name.c			\
+					add_thread_to_channel.c			\
+					del_thread_from_channel.c		\
 
 CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
