@@ -7,9 +7,6 @@
 
 SRC			=	src/help.c				\
 				src/client.c			\
-				src/create_addr.c		\
-				src/bind_fd_addr.c		\
-				src/connect_fd_addr.c	\
 				src/init_client.c		\
 				src/get_output_server.c	\
 				src/get_input_client.c	\
@@ -25,11 +22,13 @@ MAIN		=	main.c
 
 NAME		=	../../myteams_cli
 
-INCLUDE		=	-I./include
+INCLUDE		=	-I./include -I../network_lib/include
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
 
 TEST_FLAGS	=	-lcriterion --coverage
+
+LIB_FLAGS   =   -L../network_lib -lnetwork
 
 TEST_BINARY	=	unit_tests
 
@@ -40,18 +39,19 @@ RM			=	rm -f
 MV			=	mv -f
 
 %.o:	%.c
-		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
+		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $< $(LIB_FLAGS)
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS)
+		$(CC) -o $(NAME) $(OBJ) $(MAIN) $(CFLAGS) $(LIB_FLAGS)
 
 debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS)
+		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) \
+		$(TEST_FLAGS) $(LIB_FLAGS)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu

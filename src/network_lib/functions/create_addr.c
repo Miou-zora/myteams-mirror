@@ -5,9 +5,7 @@
 ** create_addr
 */
 
-#include "client.h"
-#include <arpa/inet.h>
-#include <stdlib.h>
+#include "network_lib.h"
 
 struct sockaddr_in create_addr(char *ip, char *port)
 {

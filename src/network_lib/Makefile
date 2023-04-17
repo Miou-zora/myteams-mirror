@@ -6,9 +6,9 @@
 ##
 
 LIB_FOLDER 		=	functions
-LIB 			=	str_to_word_array.c		\
-					get_array_size.c		\
-					delete_quotes.c			\
+LIB 			=	bind_fd_addr.c		\
+					connect_fd_addr.c	\
+					create_addr.c		\
 
 LIB 			:=	$(addprefix $(LIB_FOLDER)/, $(LIB))
 
@@ -24,7 +24,7 @@ CC			=	gcc
 
 MV			=	mv -f
 
-NAME	=	libmy.a
+NAME	=	libnetwork.a
 
 %.o:	%.c
 		$(CC) $(CFLAGS) $(INCLUDE) -o $@ -c $<
@@ -37,8 +37,8 @@ $(NAME):	$(OBJ)
 
 clean:
 		$(RM) $(OBJ)
-		$(RM) ../server/include/lib.h
-		$(RM) ../client/include/lib.h
+		$(RM) ../server/include/network_lib.h
+		$(RM) ../client/include/network_lib.h
 
 fclean:	clean
 		$(RM) $(NAME)

@@ -5,7 +5,7 @@
 ** connect_fd_addr
 */
 
-#include "client.h"
+#include "network_lib.h"
 
 int connect_fd_addr(int fd, struct sockaddr_in addr)
 {

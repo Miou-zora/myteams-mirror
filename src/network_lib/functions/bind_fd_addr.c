@@ -5,7 +5,7 @@
 ** bind_fd_addr
 */
 
-#include "client.h"
+#include "network_lib.h"
 
 int bind_fd_addr(int fd, struct sockaddr_in addr)
 {

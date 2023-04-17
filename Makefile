@@ -13,10 +13,13 @@ CLIENT_FOLDER	=	src/client
 
 LIB_FOLDER		=	src/lib
 
+NETWORK_LIB_FOLDER		=	src/network_lib
+
 MAKE			=	make
 
 all:
 		$(MAKE) -C $(LIB_FOLDER)
+		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SHARED_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER)
 		$(MAKE) -C $(CLIENT_FOLDER)
@@ -28,18 +31,21 @@ debug:
 
 tests_run:
 		$(MAKE) -C $(LIB_FOLDER)
+		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SHARED_FOLDER) tests_run
 		$(MAKE) -C $(SERVER_FOLDER) tests_run
 		$(MAKE) -C $(CLIENT_FOLDER) tests_run
 
 clean:
 		$(MAKE) -C $(LIB_FOLDER) clean
+		$(MAKE) -C $(NETWORK_LIB_FOLDER) clean
 		$(MAKE) -C $(SHARED_FOLDER) clean
 		$(MAKE) -C $(SERVER_FOLDER) clean
 		$(MAKE) -C $(CLIENT_FOLDER) clean
 
 fclean: dclean
 		$(MAKE) -C $(LIB_FOLDER) fclean
+		$(MAKE) -C $(NETWORK_LIB_FOLDER) fclean
 		$(MAKE) -C $(SHARED_FOLDER) fclean
 		$(MAKE) -C $(SERVER_FOLDER) fclean
 		$(MAKE) -C $(CLIENT_FOLDER) fclean
