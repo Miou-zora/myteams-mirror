@@ -133,11 +133,19 @@ TESTS_CHANNEL		=	test_add_channel.c				\
 						test_del_list_of_channels.c
 TESTS_CHANNEL		:=	$(addprefix $(CHANNEL_FOLDER)/, $(TESTS_CHANNEL))
 
+TESTS_THREAD		=	test_add_thread.c				\
+						test_add_thead_with_uuid.c		\
+						test_del_thread.c				\
+						test_del_list_of_threads.c		\
+
+TESTS_THREAD		:=	$(addprefix $(THREAD_FOLDER)/, $(TESTS_THREAD))
+
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
 TESTS				+=	$(TESTS_TEAM)
 TESTS				+=	$(TESTS_UUID_LIST)
 TESTS				+=	$(TESTS_CHANNEL)
+TESTS				+=	$(TESTS_THREAD)
 TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
