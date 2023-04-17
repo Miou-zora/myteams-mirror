@@ -81,6 +81,17 @@ CHANNEL			=	init_list_of_channels.c			\
 
 CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
+THREAD_FOLDER	=	thread
+THREAD			=	init_list_of_threads.c			\
+					add_thread.c					\
+					add_thread_with_uuid.c			\
+					del_thread.c					\
+					del_list_of_threads.c			\
+					get_thread_by_name.c			\
+					get_thread_by_uuid.c			\
+
+THREAD			:=	$(addprefix $(THREAD_FOLDER)/, $(THREAD))
+
 SRC_FOLDER	=	src
 SRC			=	$(COMMANDS)
 SRC 		+=	$(CORE)
@@ -89,6 +100,7 @@ SRC 		+=	$(USER)
 SRC 		+=	$(TEAM)
 SRC 		+=	$(UUID_LIST)
 SRC 		+=	$(CHANNEL)
+SRC 		+=	$(THREAD)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)

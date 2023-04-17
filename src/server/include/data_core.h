@@ -40,6 +40,19 @@ typedef struct user_s {
 LIST_HEAD(user_head, user_s);
 
 /**
+ * @brief Threads created in a channel
+ */
+typedef struct thread_s {
+    uuid_t uuid;
+    char title[MAX_NAME_LENGTH];
+    char message[MAX_BODY_LENGTH];
+    LIST_HEAD(, comment_s) comments_head;
+    LIST_ENTRY(thread_s) next_thread;
+} thread_t;
+/// @brief Define head struct for thread list
+LIST_HEAD(thread_head, thread_s);
+
+/**
  * @brief Channels created in a team
  */
 typedef struct channel_s {
@@ -65,17 +78,6 @@ typedef struct team_s {
 } team_t;
 /// @brief Define head struct for team list
 LIST_HEAD(team_head, team_s);
-
-/**
- * @brief Threads created in a channel
- */
-typedef struct thread_s {
-    uuid_t uuid;
-    char title[MAX_NAME_LENGTH];
-    char message[MAX_BODY_LENGTH];
-    LIST_HEAD(, comment_s) threads_head;
-    LIST_ENTRY(thread_s) next_channel;
-} thread_t;
 
 /**
  * @brief Comments created in a thread
@@ -333,3 +335,71 @@ void del_list_of_channels(struct channel_head *head);
  */
 channel_t *get_channel_by_name(struct channel_head *channels_head,
     const char *channel_name);
+
+// * Thread functions
+
+/**
+ * @brief Create a list of threads
+ *
+ * @return struct thread_head Head of list of threads
+ */
+struct thread_head init_list_of_threads(void);
+
+/**
+ * @brief Add a thread to the list of threads
+ *
+ * @param head Head of list of threads
+ * @param name Name of the thread
+ * @param description Description of the thread
+ * @return int 0 if success, 1 if thread already exist, -1 for other error
+ */
+int add_thread(struct thread_head *head, const char *name,
+    const char *description);
+
+/**
+ * @brief Add a thread to the list of threads with a specific uuid
+ *
+ * @param head Head of list of threads
+ * @param name Name of the thread
+ * @param description Description of the thread
+ * @param uuid Uuid of the thread
+ * @return int 0 if success, 1 if thread already exist, -1 for other error
+ */
+int add_thread_with_uuid(struct thread_head *head, const char *name,
+    const char *description, const char *uuid);
+
+/**
+ * @brief Delete a thread from the list of threads
+ *
+ * @param head Head of list of threads
+ * @param name Name of the thread
+ * @return int 0 if success, 1 if thread doesn't exist, -1 for other error
+ */
+int del_thread(struct thread_head *head, const char *name);
+
+/**
+ * @brief Delete a list of threads
+ *
+ * @param head Head of list of threads
+ */
+void del_list_of_threads(struct thread_head *head);
+
+/**
+ * @brief Get thread with a specific name
+ *
+ * @param threads_head Head of list of threads
+ * @param thread_name Name of the thread
+ * @return thread_t* Pointer to the thread if found, NULL otherwise
+ */
+thread_t *get_thread_by_name(struct thread_head *threads_head,
+    const char *thread_name);
+
+/**
+ * @brief Get thread with a specific uuid
+ *
+ * @param threads_head Head of list of threads
+ * @param thread_uuid Uuid of the thread
+ * @return thread_t* Pointer to the thread if found, NULL otherwise
+ */
+thread_t *get_thread_by_uuid(struct thread_head *threads_head,
+    uuid_t thread_uuid);
