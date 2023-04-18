@@ -15,8 +15,6 @@ NETWORK_LIB_FOLDER		=	src/network_lib
 
 MAKE			=	make
 
-MY_TEAMS_LIB    =   ./libs/myteams/
-
 all:
 		$(MAKE) -C $(LIB_FOLDER)
 		$(MAKE) -C $(NETWORK_LIB_FOLDER)
@@ -28,7 +26,6 @@ debug:
 		$(MAKE) -C $(CLIENT_FOLDER) debug
 
 tests_run:
-		$(MAKE) -C $(MY_TEAMS_LIB)
 		$(MAKE) -C $(LIB_FOLDER)
 		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER) tests_run
