@@ -13,6 +13,7 @@ on:
 env:
   MIRROR_URL: "git@github.com:EpitechPromo2026/B-NWP-400-NAN-4-1-myteams-quentin.brejoin.git"
   EXECUTABLES: "myteams_server,myteams_cli"
+  LD_LIBRARY_PATH: "$(pwd)/libs/myteams"
 
 jobs:
   check_repository_cleanliness:
@@ -83,8 +84,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: |
-          cd libs/myteams/ ; export LD_LIBRARY_PATH=$(pwd) ; cd ../.. ; echo $LD_LIBRARY_PATH
+      
 
       - run: make
         timeout-minutes: 2
