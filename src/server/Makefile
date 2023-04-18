@@ -190,8 +190,8 @@ debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
-		$(INCLUDE) $(LIB_FLAGS) $(UUID_LIB)
+		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(LIB_FLAGS) \
+		$(TEST_FLAGS) $(INCLUDE)  $(UUID_LIB)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu
