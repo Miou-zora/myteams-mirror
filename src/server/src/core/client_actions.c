@@ -54,6 +54,7 @@ void send_message(instance_t *instance)
         return;
     sprintf(message, "%s\n", current_output->message);
     write(instance->socket, message, strlen(message));
+    free(current_output->message);
     free(current_output);
 }
 

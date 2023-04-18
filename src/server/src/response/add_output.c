@@ -13,7 +13,8 @@ static output_t *new_output(const char *code, const char *message)
 
     if (!output)
         return NULL;
-    output->message = malloc(sizeof(char) * 1024);
+    output->message = malloc(sizeof(char) * strlen(code)
+    + strlen(message) + 2);
     strcpy(output->message, code);
     strcat(output->message, " ");
     strcat(output->message, message);
