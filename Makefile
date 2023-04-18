@@ -17,7 +17,8 @@ MAKE			=	make
 
 MY_TEAMS_LIB    =   ./libs/myteams/
 
-all:	$(MAKE) -C $(MY_TEAMS_LIB)
+all:
+		$(MAKE) -C $(MY_TEAMS_LIB)
 		$(MAKE) -C $(LIB_FOLDER)
 		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER)
