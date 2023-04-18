@@ -5,116 +5,128 @@
 ## Makefile
 ##
 
-COMMANDS_FOLDER	=	commands
-COMMANDS 		=	help.c			\
-					login.c			\
-					logout.c		\
-					user.c			\
-					users.c			\
-					send.c			\
-					messages.c		\
-					subscribe.c		\
-					subscribed.c	\
-					unsubscribe.c	\
-					use.c			\
-					create.c		\
-					list.c			\
-					info.c			\
-					quit.c			\
-					commands.c
+COMMANDS_FOLDER		=	commands
+COMMANDS 			=	help.c			\
+						login.c			\
+						logout.c		\
+						user.c			\
+						users.c			\
+						send.c			\
+						messages.c		\
+						subscribe.c		\
+						subscribed.c	\
+						unsubscribe.c	\
+						use.c			\
+						create.c		\
+						list.c			\
+						info.c			\
+						quit.c			\
+						commands.c
 
-COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
+COMMANDS			:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
-CORE_FOLDER 	=	core
-CORE 			=	server_init.c 		\
-					create_socket.c 	\
-					server_loop.c 		\
-					accept_connections.c \
-					client_actions.c 	\
-					leave_instance.c 		\
-					set_actual_instance.c \
+CORE_FOLDER 		=	core
+CORE 				=	server_init.c 		\
+						create_socket.c 	\
+						server_loop.c 		\
+						accept_connections.c \
+						client_actions.c 	\
+						leave_instance.c 		\
+						set_actual_instance.c \
 
-CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
+CORE 				:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 
-RESPONSE_FOLDER =	response
-RESPONSE 		=	response.c
+RESPONSE_FOLDER 	=	response
+RESPONSE 			=	response.c
 
-RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
+RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
-UUID_LIST_FOLDER =	uuid_list
-UUID_LIST 		=	add_uuid.c					\
-					del_uuid.c					\
-					init_list_of_uuids.c			\
+UUID_LIST_FOLDER 	=	uuid_list
+UUID_LIST 			=	add_uuid.c					\
+						del_uuid.c					\
+						init_list_of_uuids.c			\
 
-UUID_LIST 		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
+UUID_LIST 			:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
 
-USER_FOLDER		=	user
-USER			=	init_list_of_users.c			\
-					add_user.c						\
-					add_user_with_uuid.c			\
-					del_user.c						\
-					del_list_of_users.c				\
-					find_user.c 					\
+USER_FOLDER			=	user
+USER				=	init_list_of_users.c			\
+						add_user.c						\
+						add_user_with_uuid.c			\
+						del_user.c						\
+						del_list_of_users.c				\
+						find_user.c 					\
 
-USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
+USER				:=	$(addprefix $(USER_FOLDER)/, $(USER))
 
-TEAM_FOLDER		=	team
-TEAM			=	init_list_of_teams.c			\
-					add_team.c						\
-					add_team_with_uuid.c			\
-					del_team.c						\
-					del_list_of_teams.c				\
-					add_user_to_team.c				\
-					del_user_from_team.c			\
-					get_team_by_name.c				\
-					add_channel_to_team.c			\
+TEAM_FOLDER			=	team
+TEAM				=	init_list_of_teams.c			\
+						add_team.c						\
+						add_team_with_uuid.c			\
+						del_team.c						\
+						del_list_of_teams.c				\
+						add_user_to_team.c				\
+						del_user_from_team.c			\
+						get_team_by_name.c				\
+						add_channel_to_team.c			\
 
-TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
+TEAM				:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
-CHANNEL_FOLDER	=	channel
-CHANNEL			=	init_list_of_channels.c			\
-					add_channel.c					\
-					add_channel_with_uuid.c			\
-					del_channel.c					\
-					del_list_of_channels.c			\
-					get_channel_by_name.c			\
-					add_thread_to_channel.c			\
-					del_thread_from_channel.c		\
+CHANNEL_FOLDER		=	channel
+CHANNEL				=	init_list_of_channels.c			\
+						add_channel.c					\
+						add_channel_with_uuid.c			\
+						del_channel.c					\
+						del_list_of_channels.c			\
+						get_channel_by_name.c			\
+						add_thread_to_channel.c			\
+						del_thread_from_channel.c		\
 
-CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
+CHANNEL				:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 
-THREAD_FOLDER	=	thread
-THREAD			=	init_list_of_threads.c			\
-					add_thread.c					\
-					add_thread_with_uuid.c			\
-					del_thread.c					\
-					del_list_of_threads.c			\
-					get_thread_by_name.c			\
-					get_thread_by_uuid.c			\
+THREAD_FOLDER		=	thread
+THREAD				=	init_list_of_threads.c			\
+						add_thread.c					\
+						add_thread_with_uuid.c			\
+						del_thread.c					\
+						del_list_of_threads.c			\
+						get_thread_by_name.c			\
+						get_thread_by_uuid.c			\
+						add_comment_to_thread.c			\
+						del_comment_from_thread.c		\
 
-THREAD			:=	$(addprefix $(THREAD_FOLDER)/, $(THREAD))
+THREAD				:=	$(addprefix $(THREAD_FOLDER)/, $(THREAD))
 
-SRC_FOLDER	=	src
-SRC			=	$(COMMANDS)
-SRC 		+=	$(CORE)
-SRC 		+=	$(RESPONSE)
-SRC 		+=	$(USER)
-SRC 		+=	$(TEAM)
-SRC 		+=	$(UUID_LIST)
-SRC 		+=	$(CHANNEL)
-SRC 		+=	$(THREAD)
-SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
+COMMENT_FOLDER		=	comment
+COMMENT				=	init_list_of_comments.c			\
+						add_comment.c					\
+						add_comment_with_uuid.c			\
+						del_comment.c					\
+						del_list_of_comments.c			\
+						get_comment_by_uuid.c			\
 
-OBJ			=	$(SRC:.c=.o)
+COMMENT				:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 
-TESTS_FOLDER	=	tests
+SRC_FOLDER			=	src
+SRC					=	$(COMMANDS)
+SRC 				+=	$(CORE)
+SRC 				+=	$(RESPONSE)
+SRC 				+=	$(USER)
+SRC 				+=	$(TEAM)
+SRC 				+=	$(UUID_LIST)
+SRC 				+=	$(CHANNEL)
+SRC 				+=	$(THREAD)
+SRC 				+=	$(COMMENT)
+SRC 				:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
-TESTS_USER		=	test_add_user.c				\
-					test_add_user_with_uuid.c	\
-					test_del_user.c				\
-					test_del_list_of_users.c	\
+OBJ					=	$(SRC:.c=.o)
 
-TESTS_USER		:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
+TESTS_FOLDER		=	tests
+
+TESTS_USER			=	test_add_user.c				\
+						test_add_user_with_uuid.c	\
+						test_del_user.c				\
+						test_del_list_of_users.c
+TESTS_USER			:=	$(addprefix $(USER_FOLDER)/, $(TESTS_USER))
 
 TESTS_TEAM			=	test_add_team.c				\
 						test_add_team_with_uuid.c	\
@@ -122,8 +134,7 @@ TESTS_TEAM			=	test_add_team.c				\
 						test_del_list_of_teams.c	\
 						test_add_user_to_team.c		\
 						test_del_user_from_team.c	\
-						test_add_channel_to_team.c	\
-
+						test_add_channel_to_team.c
 TESTS_TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TESTS_TEAM))
 
 TESTS_UUID_LIST		=	test_add_uuid.c
@@ -138,9 +149,13 @@ TESTS_CHANNEL		:=	$(addprefix $(CHANNEL_FOLDER)/, $(TESTS_CHANNEL))
 TESTS_THREAD		=	test_add_thread.c				\
 						test_add_thead_with_uuid.c		\
 						test_del_thread.c				\
-						test_del_list_of_threads.c		\
-
+						test_del_list_of_threads.c
 TESTS_THREAD		:=	$(addprefix $(THREAD_FOLDER)/, $(TESTS_THREAD))
+
+TESTS_COMMENT		=	test_add_comment.c				\
+						test_del_comment.c				\
+						test_del_list_of_comments.c
+TESTS_COMMENT		:=	$(addprefix $(COMMENT_FOLDER)/, $(TESTS_COMMENT))
 
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
@@ -148,6 +163,7 @@ TESTS				+=	$(TESTS_TEAM)
 TESTS				+=	$(TESTS_UUID_LIST)
 TESTS				+=	$(TESTS_CHANNEL)
 TESTS				+=	$(TESTS_THREAD)
+TESTS				+=	$(TESTS_COMMENT)
 TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)
