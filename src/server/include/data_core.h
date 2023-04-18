@@ -431,6 +431,29 @@ thread_t *get_thread_by_name(struct thread_head *threads_head,
 thread_t *get_thread_by_uuid(struct thread_head *threads_head,
     uuid_t thread_uuid);
 
+/**
+ * @brief Add a comment to a thread
+ *
+ * @param threads_head Head of list of threads
+ * @param thread_name Name of the thread
+ * @param message Comment to add
+ * @param user_uuid Uuid of the user who sent the comment
+ * @return int 0 if success, 1 if thread doesn't exist, 2 if comment already
+ */
+int add_comment_to_thread(struct thread_head *threads_head,
+    const char *thread_name, const char *message, uuid_t user_uuid);
+
+/**
+ * @brief Delete a comment from a thread
+ *
+ * @param threads_head Head of list of threads
+ * @param thread_name Name of the thread
+ * @param comment_uuid Uuid of the comment to delete
+ * @return int 0 if success, 1 if thread doesn't exist, 2 if comment doesn't
+ */
+int del_comment_from_thread(struct thread_head *threads_head,
+    const char *thread_name, const char *comment_uuid);
+
 // * Comment functions
 
 /**

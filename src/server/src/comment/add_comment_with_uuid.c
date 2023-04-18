@@ -24,8 +24,8 @@ static comment_t *new_comment_with_uuid(const char *comment_content,
     return comment;
 }
 
-int add_comment_with_uuid(struct comment_head *head, const char *comment_content,
-    uuid_t author_uuid, uuid_t uuid)
+int add_comment_with_uuid(struct comment_head *head,
+    const char *comment_content, uuid_t author_uuid, uuid_t uuid)
 {
     comment_t *comment;
 
