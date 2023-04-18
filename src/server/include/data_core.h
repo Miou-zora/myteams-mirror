@@ -40,13 +40,25 @@ typedef struct user_s {
 LIST_HEAD(user_head, user_s);
 
 /**
+ * @brief Comments created in a thread
+ */
+typedef struct comment_s {
+    uuid_t author_uuid;
+    uuid_t uuid;
+    char body[MAX_BODY_LENGTH];
+    LIST_ENTRY(comment_s) next_comment;
+} comment_t;
+/// @brief Define head struct for comment list
+LIST_HEAD(comment_head, comment_s);
+
+/**
  * @brief Threads created in a channel
  */
 typedef struct thread_s {
     uuid_t uuid;
     char title[MAX_NAME_LENGTH];
     char message[MAX_BODY_LENGTH];
-    LIST_HEAD(, comment_s) comments_head;
+    struct comment_head comments_head;
     LIST_ENTRY(thread_s) next_thread;
 } thread_t;
 /// @brief Define head struct for thread list
@@ -78,15 +90,6 @@ typedef struct team_s {
 } team_t;
 /// @brief Define head struct for team list
 LIST_HEAD(team_head, team_s);
-
-/**
- * @brief Comments created in a thread
- */
-typedef struct comment_s {
-    uuid_t author_uuid;
-    char body[MAX_BODY_LENGTH];
-    LIST_ENTRY(comment_s) next_comment;
-} comment_t;
 
 // * UUID list functions
 
@@ -427,3 +430,63 @@ thread_t *get_thread_by_name(struct thread_head *threads_head,
  */
 thread_t *get_thread_by_uuid(struct thread_head *threads_head,
     uuid_t thread_uuid);
+
+// * Comment functions
+
+/**
+ * @brief Create a list of comments
+ *
+ * @return struct comment_head Head of list of comments
+ */
+struct comment_head init_list_of_comments(void);
+
+/**
+ * @brief Add a comment to the list of comments
+ *
+ * @param head Head of list of comments
+ * @param message comment to add
+ * @param user_uuid Uuid of the user who sent the comment
+ * @return int 0 if success, -1 if error
+ */
+int add_comment(struct comment_head *head, const char *message,
+    uuid_t user_uuid);
+
+/**
+ * @brief Add a comment to the list of comments with a specific uuid
+ *
+ * @param head Head of list of comments
+ * @param message comment to add
+ * @param user_uuid Uuid of the user who sent the comment
+ * @param uuid Uuid of the comment
+ * @return int 0 if success, -1 if error
+ */
+int add_comment_with_uuid(struct comment_head *head, const char *message,
+    uuid_t user_uuid, uuid_t comment_uuid);
+
+/**
+ * @brief Add a comment to the list of comments with a specific uuid
+ *
+ * @param head Head of list of comments
+ * @param comment comment to add
+ * @param user_uuid Uuid of the user who sent the comment
+ * @param uuid Uuid of the comment
+ * @return int 0 if success, 1 if comment doesn't exist, -1 for other error
+ */
+int del_comment(struct comment_head *head, uuid_t comment_uuid);
+
+/**
+ * @brief Delete a list of comments
+ *
+ * @param head Head of list of comments
+ */
+void del_list_of_comments(struct comment_head *head);
+
+/**
+ * @brief Get comment with a specific uuid
+ *
+ * @param comments_head Head of list of comments
+ * @param comment_uuid Uuid of the comment
+ * @return comment_t* Pointer to the comment if found, NULL otherwise
+ */
+comment_t *get_comment_by_uuid(struct comment_head *comments_head,
+    uuid_t comment_uuid);
