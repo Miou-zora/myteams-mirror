@@ -83,7 +83,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: export LD_LIBRARY_PATH=./libs/myteams/
+      - run: |
+          export LD_LIBRARY_PATH=./libs/myteams/
+          echo $LD_LIBRARY_PATH
 
       - run: make
         timeout-minutes: 2
