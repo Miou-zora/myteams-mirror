@@ -37,5 +37,5 @@ int add_comment_with_uuid(struct comment_head *head,
     if (comment == NULL)
         return -1;
     LIST_INSERT_HEAD(head, comment, next_comment);
-    return 0;
+    return (0);
 }
