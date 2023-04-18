@@ -159,7 +159,7 @@ OBJ_MAIN	=	$(MAIN:.c=.o)
 NAME		=	../../myteams_server
 
 INCLUDE		=	-I./include -I../lib/include \
--I../network_lib/include -I../../libs/myteams/include
+-I../network_lib/include -I../../libs/myteams
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
