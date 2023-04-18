@@ -11,6 +11,7 @@
 
 #include "instance.h"
 #include "server.h"
+#include "response.h"
 
 #define COMMAND_HELP "/help"
 #define COMMAND_LOGIN "/login"
