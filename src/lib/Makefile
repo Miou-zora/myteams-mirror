@@ -41,8 +41,6 @@ clean:
 		$(RM) ../client/include/lib.h
 
 fclean:	clean
-		$(RM) ../server/$(NAME)
-		$(RM) ../client/$(NAME)
 		$(RM) $(NAME)
 
 re:	fclean all

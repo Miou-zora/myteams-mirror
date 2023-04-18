@@ -158,7 +158,8 @@ OBJ_MAIN	=	$(MAIN:.c=.o)
 
 NAME		=	../../myteams_server
 
-INCLUDE		=	-I./include -I../lib/include -I../shared/include
+INCLUDE		=	-I./include -I../lib/include \
+-I../network_lib/include -I../../libs/myteams
 
 CFLAGS		=	-Wall -Wextra -Werror -Wshadow
 
@@ -166,7 +167,9 @@ UUID_LIB	=	-luuid
 
 TEST_FLAGS	=	-lcriterion --coverage
 
-LIB_FLAGS	=	-L../lib/ -lmy -L../shared/ -lshared
+
+LIB_FLAGS	=	-L../lib/ -lmy -L../../libs/myteams/ -lmyteams \
+-L../network_lib/ -lnetwork
 
 TEST_BINARY	=	unit_tests
 
@@ -187,8 +190,8 @@ debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(TEST_FLAGS) \
-		$(INCLUDE) $(LIB_FLAGS) $(UUID_LIB)
+		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) $(LIB_FLAGS) \
+		$(TEST_FLAGS) $(INCLUDE)  $(UUID_LIB)
 		./$(TEST_BINARY)
 		gcovr -e tests
 		gcovr -e tests -bu

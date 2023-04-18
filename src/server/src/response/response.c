@@ -31,18 +31,13 @@ const response_t RESPONSE_LIST[] = {
     {NULL, NULL}
 };
 
-void reply(int socket, const char *code)
+char *reply(char *str, const char *code)
 {
-    char *response;
-
     for (int i = 0; RESPONSE_LIST[i].code; i++) {
         if (strcmp(code, RESPONSE_LIST[i].code) == 0) {
-            response = malloc(sizeof(char) * (strlen(code) +
-            strlen(RESPONSE_LIST[i].message) + 2));
-            sprintf(response, "%s %s\n", code, RESPONSE_LIST[i].message);
-            write(socket, response, strlen(response));
-            free(response);
-            return;
+            sprintf(str, "%s %s\n", code, RESPONSE_LIST[i].message);
+            return (str);
         }
     }
+    return (NULL);
 }

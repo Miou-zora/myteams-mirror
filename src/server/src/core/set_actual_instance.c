@@ -15,6 +15,8 @@ void set_actual_instance(server_t *server)
         sd = server->instance[i]->socket;
         if (sd > 0)
             FD_SET(sd, &(server->readfds));
+        if (server->instance[i]->buff_out[0] != '\0' && sd > 0)
+            FD_SET(sd, &(server->writefds));
         if (sd > server->max_sd)
             server->max_sd = sd;
     }

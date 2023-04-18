@@ -25,4 +25,4 @@ typedef struct response_s {
  * @param mess the message to send
  */
 
-void reply(int socket, const char *code);
+char *reply(char *str, const char *code);
