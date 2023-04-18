@@ -13,11 +13,12 @@ int select_cycle(int client_fd)
 {
     fd_set readfds;
     int max_fd = client_fd + 1;
-    int activity = select(max_fd, &readfds, NULL, NULL, NULL);
+    int activity;
 
     FD_ZERO(&readfds);
     FD_SET(client_fd, &readfds);
     FD_SET(0, &readfds);
+    activity = select(max_fd, &readfds, NULL, NULL, NULL);
     if (activity < 0)
         return (84);
     if (FD_ISSET(client_fd, &readfds))

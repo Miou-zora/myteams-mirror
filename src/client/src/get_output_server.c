@@ -21,5 +21,6 @@ int get_output_server(int client_fd)
     if (read_bytes == 0)
         return (1);
     buffer[read_bytes] = '\0';
+    analyse_response(buffer);
     return (0);
 }
