@@ -50,6 +50,8 @@ void send_message(instance_t *instance)
     if (TAILQ_FIRST(&instance->output) == NULL)
         return;
     current_output = pop_output(&instance->output);
+    if (current_output == NULL)
+        return;
     sprintf(message, "%s\n", current_output->message);
     write(instance->socket, message, strlen(message));
     free(current_output);

@@ -25,10 +25,10 @@ int add_output(struct output_head *head, const char *code, const char *message)
     output_t *output;
 
     if (!head || !code || !message)
-        return (-1);
+        exit(84);
     output = new_output(code, message);
     if (!output)
-        return (-1);
+        exit(84);
     TAILQ_INSERT_TAIL(head, output, next_output);
     return (0);
 }
