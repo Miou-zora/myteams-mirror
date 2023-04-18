@@ -84,10 +84,7 @@ jobs:
           fetch-depth: 0
 
       - run: |
-          cd libs/myteams/
-          export LD_LIBRARY_PATH=$(pwd)
-          cd ../..
-          echo $LD_LIBRARY_PATH
+          cd libs/myteams/ ; export LD_LIBRARY_PATH=$(pwd) ; cd ../.. ; echo $LD_LIBRARY_PATH
 
       - run: make
         timeout-minutes: 2
