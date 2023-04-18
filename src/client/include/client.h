@@ -18,3 +18,4 @@ int init_client(char *ip, char *port);
 int get_output_server(int client_fd);
 int get_input_client(int client_fd);
 int select_cycle(int client_fd);
+void analyse_response(char *response);

@@ -44,8 +44,18 @@ void select_command(server_t *server, instance_t *instance)
 
 void send_message(instance_t *instance)
 {
-    write(instance->socket, instance->buff_out, strlen(instance->buff_out));
-    memset(instance->buff_out, 0, 1024);
+    char message[1024];
+    output_t *current_output;
+
+    if (TAILQ_FIRST(&instance->output) == NULL)
+        return;
+    current_output = pop_output(&instance->output);
+    if (current_output == NULL)
+        return;
+    sprintf(message, "%s\n", current_output->message);
+    write(instance->socket, message, strlen(message));
+    free(current_output->message);
+    free(current_output);
 }
 
 void do_client_action(server_t *server)
@@ -61,8 +71,7 @@ void do_client_action(server_t *server)
         }
     }
     for (int i = 0; i < MAX_INSTANCES; i++) {
-        if (strlen(server->instance[i]->buff_out) != 0 &&
-        FD_ISSET(server->instance[i]->socket, &(server->writefds))) {
+        if (FD_ISSET(server->instance[i]->socket, &(server->writefds))) {
             send_message(server->instance[i]);
         }
     }

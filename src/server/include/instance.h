@@ -9,9 +9,9 @@
 
 #include <unistd.h>
 #include <stdbool.h>
-#include "data_core.h"
 
-#define MESSAGE_SIZE 1024
+#include "data_core.h"
+#include "response.h"
 
 /**
  * @brief client parameters
@@ -20,5 +20,5 @@ typedef struct instance_s {
     int socket;
     uuid_t uuid;
     char buff_in[MESSAGE_SIZE];
-    char buff_out[MESSAGE_SIZE];
+    struct output_head output;
 } instance_t;

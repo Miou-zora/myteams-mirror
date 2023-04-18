@@ -12,6 +12,8 @@ void set_new_instance(server_t *server, int new_socket)
     for (int i = 0; i < MAX_INSTANCES; i++) {
         if (server->instance[i]->socket == -1) {
             server->instance[i]->socket = new_socket;
+            add_output(&server->instance[i]->output, "SU20",
+            "Service ready for new user.");
             break;
         }
     }
@@ -28,8 +30,7 @@ void accept_new_connection(server_t *server)
             exit(EPI_FAILURE);
         } else {
             printf("New connection, socket fd is %d\n", new_socket);
-            write(new_socket, "SU20 Service ready for new user.\n", 33);
+            set_new_instance(server, new_socket);
         }
-        set_new_instance(server, new_socket);
     }
 }

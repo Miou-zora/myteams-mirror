@@ -10,9 +10,18 @@ SRC			=	src/help.c				\
 				src/init_client.c		\
 				src/get_output_server.c	\
 				src/get_input_client.c	\
-				src/select_cycle.c
+				src/select_cycle.c		\
+				src/server_response.c	\
+
+RESPONSE_FOLDER 	=	src/response_functions
+RESPONSE 			=	response_default.c 			\
+						response_login.c 			\
+						response_initialisation.c 	\
+
+RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
 OBJ			=	$(SRC:.c=.o)
+OBJ 		+=	$(RESPONSE:.c=.o)
 
 TESTS		=	tests/test.c
 
@@ -23,13 +32,14 @@ MAIN		=	main.c
 NAME		=	../../myteams_cli
 
 INCLUDE		=	-I./include -I../network_lib/include \
--I../../libs/myteams/include
+-I../../libs/myteams -I../lib/include
 
 CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
 
 TEST_FLAGS	=	-lcriterion --coverage
 
-LIB_FLAGS   =   -L../network_lib -lnetwork -L../../libs/myteams/ -lmyteams
+LIB_FLAGS   =   -L../network_lib -lnetwork -L../../libs/myteams/ -lmyteams \
+-L../lib/ -lmy
 
 TEST_BINARY	=	unit_tests
 
@@ -51,7 +61,7 @@ debug:	CFLAGS += -g
 debug:	re
 
 tests_run:	$(TESTS_OBJ)
-		$(CC) -o $(TEST_BINARY) $(SRC) $(TESTS_OBJ) $(CFLAGS) \
+		$(CC) -o $(TEST_BINARY) $(SRC) $(RESPONSE) $(TESTS_OBJ) $(CFLAGS) \
 		$(TEST_FLAGS) $(LIB_FLAGS)
 		./$(TEST_BINARY)
 		gcovr -e tests
