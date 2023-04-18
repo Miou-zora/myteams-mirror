@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include "response.h"
 
 bool set_port(char *port, server_t *server)
 {
@@ -30,10 +31,9 @@ bool init_instance(server_t *server)
             return (false);
         server->instance[i]->socket = -1;
         uuid_clear(server->instance[i]->uuid);
+        TAILQ_INIT(&server->instance[i]->output);
         memset(server->instance[i]->buff_in, 0,
         sizeof(server->instance[i]->buff_in));
-        memset(server->instance[i]->buff_out, 0,
-        sizeof(server->instance[i]->buff_out));
     }
     return (true);
 }

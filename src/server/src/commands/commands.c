@@ -35,7 +35,7 @@ void exec_command(server_t *server, instance_t *current_instance, char *command)
     char **args = data_to_array_str(command, " \r\n");
 
     if (args == NULL || args[0] == NULL) {
-        reply(current_instance->buff_out, "ES04");
+        add_output(&current_instance->output, "ES04", "Unknown command");
         return;
     }
     for (int i = 0; COMMAND_LIST[i]; i++) {
@@ -44,5 +44,5 @@ void exec_command(server_t *server, instance_t *current_instance, char *command)
             return;
         }
     }
-    reply(current_instance->buff_out, "ES04");
+    add_output(&current_instance->output, "ES04", "Unknown command");
 }
