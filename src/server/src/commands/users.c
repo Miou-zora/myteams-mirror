@@ -6,6 +6,7 @@
 */
 
 #include "commands.h"
+#include "lib.h"
 
 void check_connected(char *buffer, server_t *server, user_t *user, char *uuid)
 {
@@ -42,7 +43,7 @@ void cmd_users(server_t *server, instance_t *current_instance, char **args)
         add_output(&current_instance->output, "EC01",
         "You must be logged in to use this command");
         return;
-    } else if (args[0] != NULL) {
+    } else if (args[0] != NULL || get_array_size(args) != 0) {
         add_output(&current_instance->output, "EC02",
         "Invalid number of arguments");
         return;

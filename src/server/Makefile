@@ -108,6 +108,16 @@ COMMENT			=	init_list_of_comments.c			\
 
 COMMENT			:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 
+SAVE_FOLDER		=	save
+SAVE			=	save_users.c					\
+
+SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
+
+LOAD_FOLDER		=	load
+LOAD			=	load_users.c					\
+
+LOAD			:=	$(addprefix $(LOAD_FOLDER)/, $(LOAD))
+
 SRC_FOLDER	=	src
 SRC			=	$(COMMANDS)
 SRC 		+=	$(CORE)
@@ -118,6 +128,8 @@ SRC 		+=	$(UUID_LIST)
 SRC 		+=	$(CHANNEL)
 SRC 		+=	$(THREAD)
 SRC 		+=	$(COMMENT)
+SRC 		+=	$(SAVE)
+SRC 		+=	$(LOAD)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)

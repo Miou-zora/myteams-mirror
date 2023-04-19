@@ -17,7 +17,8 @@ RESPONSE_FOLDER 	=	src/response_functions
 RESPONSE 			=	response_default.c 			\
 						response_login.c 			\
 						response_initialisation.c 	\
-						response_users.c
+						response_users.c			\
+						response_help.c				\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
