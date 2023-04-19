@@ -8,6 +8,7 @@
 #include "commands.h"
 #include "response.h"
 #include "lib.h"
+#include "save.h"
 
 char *get_login_infos(char *uuid, char *username)
 {
@@ -49,6 +50,7 @@ void user_login(server_t *server, instance_t *current_instance, char *username)
         uuid_copy(current_instance->uuid, user->uuid);
         add_output(&current_instance->output, "SU02",
         get_login_infos(tmp, user->username));
+        save_users(server);
         return;
     }
 }

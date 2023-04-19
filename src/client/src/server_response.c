@@ -9,6 +9,7 @@
 #include "lib.h"
 
 const response_t RESPONSE_LIST[] = {
+    {"EC01", response_default},
     {"EC02", response_default},
     {"ES04", response_default},
     {"SU01", response_default},

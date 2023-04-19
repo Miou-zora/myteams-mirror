@@ -7,6 +7,7 @@
 
 #include "server.h"
 #include "response.h"
+#include "load.h"
 
 bool set_port(char *port, server_t *server)
 {
@@ -55,5 +56,7 @@ server_t *server_init(char *port)
     }
     serv->users = init_list_of_users();
     serv->is_running = true;
+    if (load_users(serv) == 84)
+        return (NULL);
     return (serv);
 }
