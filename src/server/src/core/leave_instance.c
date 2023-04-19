@@ -12,4 +12,5 @@ void leave_instance(instance_t *client)
     printf("Client disconnected\n");
     close(client->socket);
     client->socket = -1;
+    uuid_clear(client->uuid);
 }

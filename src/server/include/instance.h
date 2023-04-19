@@ -22,3 +22,4 @@ typedef struct instance_s {
     char buff_in[MESSAGE_SIZE];
     struct output_head output;
 } instance_t;
+

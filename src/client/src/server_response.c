@@ -14,18 +14,28 @@ const response_t RESPONSE_LIST[] = {
     {"SU01", response_default},
     {"SU02", response_login},
     {"SU03", response_login},
+    {"SU04", response_users},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };
 
-void analyse_response(char *response)
+static void print_response(char **tab)
 {
-    char **tab = data_to_array_str(response, " ");
-
     for (int i = 0; RESPONSE_LIST[i].code != NULL; i++) {
         if (strcmp(RESPONSE_LIST[i].code, tab[0]) == 0) {
             RESPONSE_LIST[i].func(tab);
             return;
         }
+    }
+}
+
+void analyse_response(char *response)
+{
+    char **tmp = data_to_array_str(response, "\n");
+    char **tab = NULL;
+
+    for (int i = 0; tmp[i] != NULL; i++) {
+        tab = data_to_array_str(tmp[i], " ");
+        print_response(tab);
     }
 }
