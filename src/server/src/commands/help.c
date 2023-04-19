@@ -32,7 +32,6 @@ void cmd_help(server_t *server, instance_t *current_instance, char **args)
         "Invalid number of arguments");
         return;
     }
-    add_output(&current_instance->output, "SU01", help);
     list_of_line_of_help = data_to_array_str(strdup(help), "\n");
     for (size_t i = 0; list_of_line_of_help[i]; i++) {
         add_output(&current_instance->output, "SU01", list_of_line_of_help[i]);
