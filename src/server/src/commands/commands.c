@@ -32,7 +32,7 @@ const command_t COMMANDS_LIST[] = {
 
 void exec_command(server_t *server, instance_t *current_instance, char *command)
 {
-    char **args = data_to_array_str(command, " \r\n");
+    char **args = split_line(command);
 
     if (args == NULL || args[0] == NULL) {
         add_output(&current_instance->output, "ES04", "Unknown command");

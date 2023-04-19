@@ -13,5 +13,5 @@ void response_default(char **args)
 
     for (; args[i + 1] != NULL; i++)
         printf("%s ", args[i]);
-    printf("%s", args[i]);
+    printf("%s\n", args[i]);
 }
