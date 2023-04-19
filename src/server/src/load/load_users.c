@@ -8,6 +8,19 @@
 #include "load.h"
 #include "lib.h"
 
+static int check_args(server_t *server, char **args)
+{
+    if (args == NULL) {
+        printf("Error while loading user\n");
+        return (84);
+    }
+    if (add_user_with_uuid(&server->users, args[1], args[0]) == 84) {
+        printf("Error while loading user %s %s\n", args[1], args[0]);
+        return (84);
+    }
+    return (0);
+}
+
 int load_users(server_t *server)
 {
     FILE *file = fopen("data/users", "r");
@@ -21,16 +34,10 @@ int load_users(server_t *server)
         file = fopen("data/users", "w");
     }
     while ((read = getline(&line, &len, file)) != -1) {
-        args = data_to_array_str(line, " ");
-        if (args == NULL) {
-            printf("Error while loading user\n");
+        args = split_line(line);
+        if (check_args(server, args) == 84)
             return (84);
-        }
-        if (add_user_with_uuid(&server->users, args[0], args[1]) == 84) {
-            printf("Error while loading user %s %s\n", args[0], args[1]);
-            return (84);
-        }
-        server_event_user_loaded(args[1], args[0]);
+        server_event_user_loaded(args[0], args[1]);
     }
     fclose(file);
     return (0);

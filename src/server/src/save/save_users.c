@@ -20,9 +20,9 @@ void save_users(server_t *server)
     printf("Saving users...\n");
     LIST_FOREACH(user, &server->users, next_user) {
         printf("Saving user %s\n", user->username);
-        fprintf(file, "%s ", user->username);
         uuid_unparse(user->uuid, tmp);
         fprintf(file, "%s ", tmp);
+        fprintf(file, "\"%s\" ", user->username);
         LIST_FOREACH(team, &user->teams_registered_head, next_uuid) {
             uuid_unparse(team->uuid, tmp);
             fprintf(file, "%s ", tmp);
