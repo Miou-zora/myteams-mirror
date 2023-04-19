@@ -21,7 +21,7 @@ subscribed to a team\n/unsubscribe [“team_uuid”] : unsubscribe from a team\n
 context to a team/channel/thread\n/create : create the sub resource\n\
 /list : list all the sub resources \n/info : display details of the \
 current resource";
-add_last_valueadd_last_value
+
 void cmd_help(server_t *server, instance_t *current_instance, char **args)
 {
     (void)server;
