@@ -116,6 +116,15 @@ int add_uuid(struct uuid_list_head *head, uuid_t uuid);
  */
 int del_uuid(struct uuid_list_head *head, uuid_t uuid);
 
+/**
+ * @brief Get a uuid from a list
+ *
+ * @param head Head of list of uuid
+ * @param uuid UUID to get
+ * @return uuid_t* Pointer to the uuid if found, NULL otherwise
+ */
+uuid_t *get_uuid(struct uuid_list_head *head, uuid_t uuid);
+
 // * User functions
 
 /**

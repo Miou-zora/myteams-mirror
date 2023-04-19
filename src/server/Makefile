@@ -46,6 +46,7 @@ UUID_LIST_FOLDER =	uuid_list
 UUID_LIST 		=	add_uuid.c					\
 					del_uuid.c					\
 					init_list_of_uuids.c			\
+					get_uuid.c
 
 UUID_LIST 		:=	$(addprefix $(UUID_LIST_FOLDER)/, $(UUID_LIST))
 
@@ -92,8 +93,20 @@ THREAD			=	init_list_of_threads.c			\
 					del_list_of_threads.c			\
 					get_thread_by_name.c			\
 					get_thread_by_uuid.c			\
+					add_comment_to_thread.c			\
+					del_comment_from_thread.c		\
 
 THREAD			:=	$(addprefix $(THREAD_FOLDER)/, $(THREAD))
+
+COMMENT_FOLDER	=	comment
+COMMENT			=	init_list_of_comments.c			\
+					add_comment.c					\
+					add_comment_with_uuid.c			\
+					del_comment.c					\
+					del_list_of_comments.c			\
+					get_comment_by_uuid.c			\
+
+COMMENT			:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 
 SRC_FOLDER	=	src
 SRC			=	$(COMMANDS)
@@ -104,6 +117,7 @@ SRC 		+=	$(TEAM)
 SRC 		+=	$(UUID_LIST)
 SRC 		+=	$(CHANNEL)
 SRC 		+=	$(THREAD)
+SRC 		+=	$(COMMENT)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)
@@ -143,12 +157,19 @@ TESTS_THREAD		=	test_add_thread.c				\
 
 TESTS_THREAD		:=	$(addprefix $(THREAD_FOLDER)/, $(TESTS_THREAD))
 
+TESTS_COMMENT		=	test_add_comment.c				\
+						test_del_comment.c				\
+						test_del_list_of_comments.c		\
+
+TESTS_COMMENT		:=	$(addprefix $(COMMENT_FOLDER)/, $(TESTS_COMMENT))
+
 TESTS_FOLDER		=	tests
 TESTS				=	$(TESTS_USER)
 TESTS				+=	$(TESTS_TEAM)
 TESTS				+=	$(TESTS_UUID_LIST)
 TESTS				+=	$(TESTS_CHANNEL)
 TESTS				+=	$(TESTS_THREAD)
+TESTS				+=	$(TESTS_COMMENT)
 TESTS				:=	$(addprefix $(TESTS_FOLDER)/, $(TESTS))
 
 TESTS_OBJ	=	$(TESTS:.c=.o)

@@ -14,6 +14,7 @@
 void response_default(char **args);
 void response_login(char **args);
 void response_initialisation(char **args);
+void response_users(char **args);
 
 typedef struct response_s {
     const char *code;
