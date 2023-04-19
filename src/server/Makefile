@@ -93,6 +93,8 @@ THREAD			=	init_list_of_threads.c			\
 					del_list_of_threads.c			\
 					get_thread_by_name.c			\
 					get_thread_by_uuid.c			\
+					add_comment_to_thread.c			\
+					del_comment_from_thread.c		\
 
 THREAD			:=	$(addprefix $(THREAD_FOLDER)/, $(THREAD))
 

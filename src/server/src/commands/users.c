@@ -18,21 +18,12 @@ void check_connected(char *buffer, server_t *server, user_t *user, char *uuid)
     }
 }
 
-void cmd_users(server_t *server, instance_t *current_instance, char **args)
+void send_user_info(server_t *server, instance_t *current_instance)
 {
-    user_t *user;
     char buffer[1019];
     char uuid[37];
+    user_t *user;
 
-    if (uuid_is_null(current_instance->uuid)) {
-        add_output(&current_instance->output, "EC01",
-        "You must be logged in to use this command");
-        return;
-    } else if (args[0] != NULL) {
-        add_output(&current_instance->output, "EC02",
-        "Invalid number of arguments");
-        return;
-    }
     LIST_FOREACH(user, &server->users, next_user) {
         memset(buffer, 0, 1019);
         memset(uuid, 0, 37);
@@ -43,4 +34,18 @@ void cmd_users(server_t *server, instance_t *current_instance, char **args)
         }
         add_output(&current_instance->output, "SU04", buffer);
     }
+}
+
+void cmd_users(server_t *server, instance_t *current_instance, char **args)
+{
+    if (uuid_is_null(current_instance->uuid)) {
+        add_output(&current_instance->output, "EC01",
+        "You must be logged in to use this command");
+        return;
+    } else if (args[0] != NULL) {
+        add_output(&current_instance->output, "EC02",
+        "Invalid number of arguments");
+        return;
+    }
+    send_user_info(server, current_instance);
 }
