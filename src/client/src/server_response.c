@@ -11,11 +11,13 @@
 const response_t RESPONSE_LIST[] = {
     {"EC01", response_default},
     {"EC02", response_default},
+    {"EC30", response_user_dont_exist},
     {"ES04", response_default},
     {"SU01", response_default},
     {"SU02", response_login},
     {"SU03", response_login},
     {"SU04", response_users},
+    {"SU05", response_user_exist},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };

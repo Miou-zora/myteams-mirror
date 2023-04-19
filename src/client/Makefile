@@ -18,6 +18,8 @@ RESPONSE 			=	response_default.c 			\
 						response_login.c 			\
 						response_initialisation.c 	\
 						response_users.c			\
+						response_user_exist.c		\
+						response_user_dont_exist.c	\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
