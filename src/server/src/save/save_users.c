@@ -10,7 +10,7 @@
 
 void save_users(server_t *server)
 {
-    FILE *file = fopen("data/users", "w+");
+    FILE *file = fopen("users", "w+");
     user_t *user;
     uuid_list_t *team;
     char tmp[37];

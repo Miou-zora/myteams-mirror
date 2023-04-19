@@ -23,7 +23,7 @@ static int check_args(server_t *server, char **args)
 
 int load_users(server_t *server)
 {
-    FILE *file = fopen("data/users", "r");
+    FILE *file = fopen("users", "r");
     char *line = NULL;
     size_t len = 0;
     ssize_t read;
@@ -31,7 +31,9 @@ int load_users(server_t *server)
 
     if (file == NULL) {
         printf("No users found, creating new file\n");
-        file = fopen("data/users", "w");
+        file = fopen("users", "w");
+        fclose(file);
+        return (0);
     }
     while ((read = getline(&line, &len, file)) != -1) {
         args = split_line(line);
