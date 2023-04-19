@@ -9,7 +9,8 @@ LIB_FOLDER 		=	functions
 LIB 			=	str_to_word_array.c		\
 					get_array_size.c		\
 					delete_quotes.c			\
-					parse_string.c
+					parse_string.c			\
+					split_line.c
 
 LIB 			:=	$(addprefix $(LIB_FOLDER)/, $(LIB))
 
