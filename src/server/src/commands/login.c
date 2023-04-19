@@ -12,11 +12,12 @@
 
 char *get_login_infos(char *uuid, char *username)
 {
-    char *save = calloc(strlen(uuid) + strlen((username)) + 2, sizeof(char));
+    char *save = calloc(strlen(uuid) + strlen((username)) + 4, sizeof(char));
 
     save = strcpy(save, uuid);
-    save = strcat(save, " ");
+    save = strcat(save, " \"");
     save = strcat(save, username);
+    save = strcat(save, "\"");
     return (save);
 }
 

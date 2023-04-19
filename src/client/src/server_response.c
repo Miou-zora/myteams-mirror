@@ -32,11 +32,11 @@ static void print_response(char **tab)
 
 void analyse_response(char *response)
 {
-    char **tmp = data_to_array_str(response, "\n");
+    char **tmp = parse_string(response);
     char **tab = NULL;
 
     for (int i = 0; tmp[i] != NULL; i++) {
-        tab = data_to_array_str(tmp[i], " ");
+        tab = split_line(tmp[i]);
         print_response(tab);
     }
 }
