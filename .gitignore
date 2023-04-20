@@ -11,3 +11,4 @@ src/client/include/lib.h
 .vscode
 doc/*
 data/*
+users
