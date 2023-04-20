@@ -65,6 +65,11 @@ void cmd_login(server_t *server, instance_t *current_instance, char **args)
         return;
     }
     args[0] = delete_quotes(args[0]);
+    if (strlen(args[0]) > MAX_NAME_LENGTH) {
+        add_output(&current_instance->output, "EC07",
+        "invalid argument size");
+        return;
+    }
     if (already_logged(server, current_instance, args) == true)
         return;
     user_login(server, current_instance, args[0]);
