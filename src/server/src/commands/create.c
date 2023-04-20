@@ -141,7 +141,7 @@ static void create_team(server_t *server, instance_t *current_instance,
     uuid_unparse(current_instance->user_uuid, uuid_user);
     sprintf(buffer, "%s \"%s\" \"%s\"", uuid_team, args[0], args[1]);
     server_event_team_created(uuid_team, args[0], uuid_user);
-    add_output(&current_instance->output, "SU07", buffer); // Send that to all
+    send_message_every_users(server, "SU07", buffer);
 }
 
 void cmd_create(server_t *server, instance_t *current_instance, char **args)
@@ -185,17 +185,14 @@ void cmd_create(server_t *server, instance_t *current_instance, char **args)
                     return;
                 }
             } else {
-                printf("create thread\n");
                 create_thread(channel, current_instance, args);
                 return;
             }
         } else {
-            printf("create channel\n");
             create_channel(team, current_instance, args);
             return;
         }
     } else {
-        printf("create team\n");
         create_team(server, current_instance, args);
         return;
     }
