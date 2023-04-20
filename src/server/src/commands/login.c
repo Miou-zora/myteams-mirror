@@ -28,7 +28,7 @@ bool already_logged(server_t *serv, instance_t *current_instance, char **args)
 
     if (user != NULL) {
         uuid_unparse(user->uuid, tmp);
-        server_event_user_logged_in(args[0]);
+        server_event_user_logged_in(tmp);
         add_output(&current_instance->output, "SU03",
         get_login_infos(tmp, user->username));
         uuid_copy(current_instance->uuid, user->uuid);
@@ -48,6 +48,7 @@ void user_login(server_t *server, instance_t *current_instance, char *username)
         uuid_unparse(user->uuid, tmp);
         server_event_user_created(tmp, user->username);
         uuid_copy(current_instance->uuid, user->uuid);
+        server_event_user_logged_in(tmp);
         add_output(&current_instance->output, "SU02",
         get_login_infos(tmp, user->username));
         save_users(server);
