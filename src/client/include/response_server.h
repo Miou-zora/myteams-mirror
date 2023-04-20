@@ -18,6 +18,7 @@ void response_users(char **args);
 void response_user_exist(char **args);
 void response_user_dont_exist(char **args);
 void response_not_connected(char **args);
+void response_logout(char **tab);
 
 typedef struct response_s {
     const char *code;
