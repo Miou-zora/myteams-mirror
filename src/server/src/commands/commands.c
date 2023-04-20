@@ -39,7 +39,7 @@ void exec_command(server_t *server, instance_t *current_instance, char *command)
         return;
     }
     args = split_line(command);
-    for (int i = 0; COMMAND_LIST[i]; i++) {
+    for (int i = 0; COMMANDS_LIST[i].name; i++) {
         if (strcmp(args[0], COMMANDS_LIST[i].name) == 0) {
             COMMANDS_LIST[i].func(server, current_instance, &args[1]);
             return;

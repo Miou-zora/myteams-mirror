@@ -9,12 +9,11 @@
 
 void catch_client_message(int index, server_t *server)
 {
-    int valread;
     char command[1024];
     int sd = server->instance[index]->socket;
 
-    memset(command, 0, sizeof(command));
-    if ((valread = read(sd, command, sizeof(command))) == 0) {
+    memset(command, 0, 1024);
+    if (read(sd, command, sizeof(command)) == 0) {
         leave_instance(server->instance[index]);
     } else {
         if (strlen(server->instance[index]->buff_in) +
@@ -24,7 +23,6 @@ void catch_client_message(int index, server_t *server)
         }
         strcat(server->instance[index]->buff_in, command);
     }
-    memset(command, 0, sizeof(command));
 }
 
 void select_command(server_t *server, instance_t *instance)
