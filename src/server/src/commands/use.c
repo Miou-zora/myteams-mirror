@@ -15,7 +15,7 @@ static void clear_uuids(instance_t *current_instance)
     uuid_clear(current_instance->thread_uuid);
 }
 
-static void select_item(server_t *server, instance_t *current_instance,
+static void select_item(instance_t *current_instance,
     char **args)
 {
     switch (get_array_size(args)) {
@@ -42,6 +42,7 @@ static void select_item(server_t *server, instance_t *current_instance,
 
 void cmd_use(server_t *server, instance_t *current_instance, char **args)
 {
+    (void)server;
     if (uuid_is_null(current_instance->user_uuid)) {
         add_output(&current_instance->output, "EC01",
         "You must be logged in to use this command");
@@ -52,5 +53,5 @@ void cmd_use(server_t *server, instance_t *current_instance, char **args)
         "Invalid number of arguments");
         return;
     }
-    select_item(server, current_instance, args);
+    select_item(current_instance, args);
 }
