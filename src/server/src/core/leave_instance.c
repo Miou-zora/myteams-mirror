@@ -25,5 +25,5 @@ void leave_instance(server_t *server, instance_t *instance)
     uuid_clear(instance->team_uuid);
     uuid_clear(instance->channel_uuid);
     uuid_clear(instance->thread_uuid);
-    send_message_every_users(server, "201", buffer);
+    send_message_every_users(server, "SU06", buffer);
 }

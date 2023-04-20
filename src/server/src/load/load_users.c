@@ -17,8 +17,6 @@ static int check_args(server_t *server, char **args)
     if (add_user_with_uuid(&server->users, args[1], args[0]) == 84) {
         printf("Error while loading user %s %s\n", args[1], args[0]);
         return (84);
-    } else {
-        server_event_user_loaded(args[0], args[1]);
     }
     return (0);
 }
