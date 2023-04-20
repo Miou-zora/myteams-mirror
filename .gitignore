@@ -12,3 +12,4 @@ src/client/include/lib.h
 doc/*
 data/*
 users
+teams
