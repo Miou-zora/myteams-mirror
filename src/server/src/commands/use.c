@@ -15,7 +15,8 @@ static void clear_uuids(instance_t *current_instance)
     uuid_clear(current_instance->thread_uuid);
 }
 
-static void select_item(server_t *server, instance_t *current_instance, char **args)
+static void select_item(server_t *server, instance_t *current_instance,
+    char **args)
 {
     switch (get_array_size(args)) {
         case 1:

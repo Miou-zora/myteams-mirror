@@ -12,7 +12,8 @@ static void check_connected(char *buffer, server_t *server, user_t *user,
     char *uuid)
 {
     for (size_t instance = 0; instance < MAX_INSTANCES; instance++) {
-        if (uuid_compare(server->instance[instance]->user_uuid, user->uuid) == 0) {
+        if (uuid_compare(server->instance[instance]->user_uuid,
+        user->uuid) == 0) {
             uuid_unparse(user->uuid, uuid);
             sprintf(buffer, "%s %s \"%s\"", "online", uuid, user->username);
             instance = MAX_INSTANCES;
