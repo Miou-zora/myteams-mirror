@@ -31,7 +31,10 @@ bool init_instance(server_t *server)
         if (!server->instance[i])
             return (false);
         server->instance[i]->socket = -1;
-        uuid_clear(server->instance[i]->uuid);
+        uuid_clear(server->instance[i]->user_uuid);
+        uuid_clear(server->instance[i]->team_uuid);
+        uuid_clear(server->instance[i]->channel_uuid);
+        uuid_clear(server->instance[i]->thread_uuid);
         TAILQ_INIT(&server->instance[i]->output);
         memset(server->instance[i]->buff_in, 0,
         sizeof(server->instance[i]->buff_in));
