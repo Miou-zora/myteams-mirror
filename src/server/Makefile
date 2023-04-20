@@ -116,6 +116,7 @@ SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 
 LOAD_FOLDER		=	load
 LOAD			=	load_users.c					\
+					load_teams.c					\
 
 LOAD			:=	$(addprefix $(LOAD_FOLDER)/, $(LOAD))
 

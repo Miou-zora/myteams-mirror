@@ -43,6 +43,7 @@ typedef struct server_s {
     int max_sd;
     instance_t *instance[MAX_INSTANCES];
     struct user_head users;
+    struct team_head teams;
 } server_t;
 
 /**
