@@ -277,6 +277,15 @@ int del_user_from_team(struct team_head *teams_head,
 team_t *get_team_by_name(struct team_head *teams_head, const char *team_name);
 
 /**
+ * @brief Get a team from its uuid
+ *
+ * @param teams_head Head of list of teams
+ * @param team_uuid Uuid of the team
+ * @return team_t* Pointer to the team if found, NULL otherwise
+ */
+team_t *get_team_by_uuid(struct team_head *teams, const char *team_uuid);
+
+/**
  * @brief Add a channel to a team
  *
  * @param teams_head Head of list of teams
@@ -356,6 +365,16 @@ void del_list_of_channels(struct channel_head *head);
  */
 channel_t *get_channel_by_name(struct channel_head *channels_head,
     const char *channel_name);
+
+/**
+ * @brief Get the channel by uuid object
+ *
+ * @param channels_head
+ * @param uuid
+ * @return channel_t*
+ */
+channel_t *get_channel_by_uuid(struct channel_head *channels_head,
+    const char *uuid);
 
 /**
  * @brief Add a thread to a channel
@@ -447,7 +466,7 @@ thread_t *get_thread_by_name(struct thread_head *threads_head,
  * @return thread_t* Pointer to the thread if found, NULL otherwise
  */
 thread_t *get_thread_by_uuid(struct thread_head *threads_head,
-    uuid_t thread_uuid);
+    const char *thread_uuid);
 
 /**
  * @brief Add a comment to a thread
