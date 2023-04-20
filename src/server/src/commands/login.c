@@ -29,9 +29,9 @@ bool already_logged(server_t *serv, instance_t *current_instance, char **args)
     if (user != NULL) {
         uuid_unparse(user->uuid, tmp);
         server_event_user_logged_in(tmp);
-        add_output(&current_instance->output, "SU03",
-        get_login_infos(tmp, user->username));
         uuid_copy(current_instance->user_uuid, user->uuid);
+        send_message_every_users(serv, "SU03",
+        get_login_infos(tmp, user->username));
         return (true);
     }
     return (false);
@@ -49,7 +49,7 @@ void user_login(server_t *server, instance_t *current_instance, char *username)
         server_event_user_created(tmp, user->username);
         uuid_copy(current_instance->user_uuid, user->uuid);
         server_event_user_logged_in(tmp);
-        add_output(&current_instance->output, "SU02",
+        send_message_every_users(server, "SU02",
         get_login_infos(tmp, user->username));
         save_users(server);
         return;
