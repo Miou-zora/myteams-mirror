@@ -12,7 +12,7 @@ static void check_connected(char *buffer, server_t *server, user_t *user,
     char *uuid)
 {
     for (size_t instance = 0; instance < MAX_INSTANCES; instance++) {
-        if (uuid_compare(server->instance[instance]->uuid, user->uuid) == 0) {
+        if (uuid_compare(server->instance[instance]->user_uuid, user->uuid) == 0) {
             uuid_unparse(user->uuid, uuid);
             sprintf(buffer, "%s %s \"%s\"", "online", uuid, user->username);
             instance = MAX_INSTANCES;
@@ -40,7 +40,7 @@ void send_users_info(server_t *server, instance_t *current_instance)
 
 void cmd_users(server_t *server, instance_t *current_instance, char **args)
 {
-    if (uuid_is_null(current_instance->uuid)) {
+    if (uuid_is_null(current_instance->user_uuid)) {
         add_output(&current_instance->output, "EC01",
         "You must be logged in to use this command");
         return;
