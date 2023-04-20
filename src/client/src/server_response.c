@@ -12,6 +12,9 @@ const response_t RESPONSE_LIST[] = {
     {"EC01", response_not_connected},
     {"EC02", response_default},
     {"EC03", response_default/*response_team_dont_exist*/},
+    {"EC04", response_default/*response_channel_dont_exist*/},
+    {"EC05", response_default/*response_thread_dont_exist*/},
+    {"EC06", response_default/*response_already_exist*/},
     {"EC30", response_user_dont_exist},
     {"ES04", response_default},
     {"SU01", response_default},
@@ -20,6 +23,10 @@ const response_t RESPONSE_LIST[] = {
     {"SU04", response_users},
     {"SU05", response_user_exist},
     {"SU06", response_logout},
+    {"SU07", response_default/*resonse_team_created*/},
+    {"SU08", response_default/*resonse_channel_created*/},
+    {"SU09", response_default/*resonse_thread_created*/},
+    {"SU10", response_default/*resonse_comment_created*/},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };
