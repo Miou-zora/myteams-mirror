@@ -18,6 +18,7 @@ const response_t RESPONSE_LIST[] = {
     {"SU03", response_login},
     {"SU04", response_users},
     {"SU05", response_user_exist},
+    {"SU06", response_logout},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };

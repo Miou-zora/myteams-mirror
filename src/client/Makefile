@@ -21,6 +21,7 @@ RESPONSE 			=	response_default.c 			\
 						response_user_exist.c		\
 						response_user_dont_exist.c	\
 						response_not_connected.c	\
+						response_logout.c			\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
