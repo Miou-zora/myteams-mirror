@@ -32,12 +32,13 @@ const command_t COMMANDS_LIST[] = {
 
 void exec_command(server_t *server, instance_t *current_instance, char *command)
 {
-    char **args = split_line(command);
+    char **args = NULL;
 
-    if (args == NULL || args[0] == NULL) {
+    if (command == NULL || command[0] == '\0') {
         add_output(&current_instance->output, "ES04", "Unknown command");
         return;
     }
+    args = split_line(command);
     for (int i = 0; COMMAND_LIST[i]; i++) {
         if (strcmp(args[0], COMMANDS_LIST[i].name) == 0) {
             COMMANDS_LIST[i].func(server, current_instance, &args[1]);
