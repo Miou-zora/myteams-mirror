@@ -14,11 +14,11 @@ void catch_client_message(int index, server_t *server)
 
     memset(command, 0, 1024);
     if (read(sd, command, sizeof(command)) == 0) {
-        leave_instance(server->instance[index]);
+        leave_instance(server, server->instance[index]);
     } else {
         if (strlen(server->instance[index]->buff_in) +
         strlen(command) >= MESSAGE_SIZE) {
-            leave_instance(server->instance[index]);
+            leave_instance(server, server->instance[index]);
             return;
         }
         strcat(server->instance[index]->buff_in, command);

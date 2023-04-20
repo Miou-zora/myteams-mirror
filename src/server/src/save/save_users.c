@@ -16,7 +16,7 @@ void save_users(server_t *server)
     char tmp[37];
 
     if (file == NULL)
-        return;
+        file = fopen("users", "w");
     printf("Saving users...\n");
     LIST_FOREACH(user, &server->users, next_user) {
         printf("Saving user %s\n", user->username);

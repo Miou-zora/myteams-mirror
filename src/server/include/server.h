@@ -82,7 +82,7 @@ void server_loop(server_t *server);
  *
  * @param client
  */
-void leave_instance(instance_t *client);
+void leave_instance(server_t *server, instance_t *client);
 
 /**
  * @brief do client action based on command send by client
@@ -112,3 +112,12 @@ void set_actual_instance(server_t *server);
  * @param command
  */
 void exec_command(server_t *server, instance_t *instance, char *command);
+
+/**
+ * @brief send message to every users
+ *
+ * @param server
+ * @param code
+ * @param args
+ */
+void send_message_every_users(server_t *server, char *code, char *args);

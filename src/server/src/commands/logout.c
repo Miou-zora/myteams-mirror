@@ -27,7 +27,7 @@ void cmd_logout(server_t *server, instance_t *current_instance, char **args)
         uuid_unparse(current_instance->user_uuid, uuid);
         user = get_user_by_uuid(&server->users, uuid);
         sprintf(buffer, "%s \"%s\"", uuid, user->username);
-        add_output(&current_instance->output, "SU06", buffer);
+        send_message_every_users(server, "SU06", buffer);
         uuid_clear(current_instance->user_uuid);
         server_event_user_logged_out(uuid);
     }
