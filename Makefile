@@ -26,7 +26,7 @@ debug:
 		$(MAKE) -C $(CLIENT_FOLDER) debug
 
 tests_run:
-		$(MAKE) -C $(LIB_FOLDER)
+		$(MAKE) -C $(LIB_FOLDER) tests_run
 		$(MAKE) -C $(NETWORK_LIB_FOLDER)
 		$(MAKE) -C $(SERVER_FOLDER) tests_run
 		$(MAKE) -C $(CLIENT_FOLDER) tests_run
