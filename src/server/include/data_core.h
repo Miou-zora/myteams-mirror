@@ -182,6 +182,15 @@ void del_list_of_users(struct user_head *head);
  */
 user_t *find_user(struct user_head *users, char *username);
 
+/**
+ * @brief Get the user by uuid object
+ *
+ * @param server
+ * @param user_uuid
+ * @return user_t*
+ */
+user_t *get_user_by_uuid(struct user_head *users, const char *user_uuid);
+
 // * Team functions
 
 /**

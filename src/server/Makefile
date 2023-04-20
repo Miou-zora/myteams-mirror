@@ -57,6 +57,7 @@ USER			=	init_list_of_users.c			\
 					del_user.c						\
 					del_list_of_users.c				\
 					find_user.c 					\
+					get_user_by_uuid.c				\
 
 USER			:=	$(addprefix $(USER_FOLDER)/, $(USER))
 
