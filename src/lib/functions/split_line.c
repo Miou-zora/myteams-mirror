@@ -11,7 +11,8 @@
 
 static char **compute(char **parsed_quotes, char **parsed_spaces, int *indice)
 {
-    char **buffer = calloc(sizeof(char *), 1000);
+    char **buffer = calloc(sizeof(*buffer), 1000);
+
     for (int i = 0; parsed_quotes[i] != NULL; i++) {
         if (i % 2 != 0) {
             buffer[*indice] = parsed_quotes[i];
@@ -19,6 +20,8 @@ static char **compute(char **parsed_quotes, char **parsed_spaces, int *indice)
             continue;
         }
         parsed_spaces = data_to_array_str(parsed_quotes[i], " ");
+        if (parsed_spaces == NULL)
+            continue;
         for (int j = 0; parsed_spaces[j] != NULL; j++) {
             buffer[*indice] = parsed_spaces[j];
             (*indice)++;
