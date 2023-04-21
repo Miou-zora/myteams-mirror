@@ -7,9 +7,13 @@
 
 #pragma once
 
+#define _XOPEN_SOURCE
+
 #include <stddef.h>
 #include <string.h>
 #include <stdio.h>
+
+#include "logging_client.h"
 
 void response_default(char **args);
 void response_login(char **args);
@@ -20,6 +24,17 @@ void response_user_dont_exist(char **args);
 void response_not_connected(char **args);
 void response_logout(char **tab);
 void response_send(char **tab);
+void response_create_already_exist(char **args);
+void response_thread_not_exist(char **args);
+void response_channel_not_exist(char **args);
+void response_team_not_exist(char **args);
+void success_create_reply(char **args);
+void success_create_thread(char **args);
+void success_create_channel(char **args);
+void success_create_team(char **args);
+void success_subscribe(char **args);
+void success_subscribed(char **args);
+void success_unsubscribe(char **args);
 
 typedef struct response_s {
     const char *code;

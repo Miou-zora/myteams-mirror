@@ -10,12 +10,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-int add_comment_to_thread(struct thread_head *threads_head,
+comment_t *add_comment_to_thread(struct thread_head *threads_head,
     const char *thread_name, const char *message, uuid_t user_uuid)
 {
     thread_t *thread = get_thread_by_name(threads_head, thread_name);
 
     if (thread == NULL)
-        return -1;
+        return NULL;
     return add_comment(&thread->comments_head, message, user_uuid);
 }

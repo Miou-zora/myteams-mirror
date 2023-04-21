@@ -11,3 +11,5 @@
 
 void save_users(server_t *server);
 void save_conversations(server_t *server);
+void save_team(server_t *server);
+void save_channels(server_t *server);

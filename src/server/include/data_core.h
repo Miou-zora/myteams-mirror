@@ -64,6 +64,7 @@ LIST_HEAD(user_head, user_s);
 typedef struct comment_s {
     uuid_t author_uuid;
     uuid_t uuid;
+    time_t timestamp;
     char body[MAX_BODY_LENGTH];
     LIST_ENTRY(comment_s) next_comment;
 } comment_t;
@@ -75,6 +76,7 @@ LIST_HEAD(comment_head, comment_s);
  */
 typedef struct thread_s {
     uuid_t uuid;
+    time_t timestamp;
     char title[MAX_NAME_LENGTH];
     char message[MAX_BODY_LENGTH];
     struct comment_head comments_head;
@@ -210,6 +212,15 @@ user_t *find_user(struct user_head *users, char *username);
  */
 user_t *get_user_by_uuid(struct user_head *users, const char *user_uuid);
 
+/**
+ * @brief Get the user by uuid object
+ *
+ * @param server
+ * @param user_uuid
+ * @return user_t*
+ */
+bool is_user_subscribed(user_t *user, team_t *team);
+
 // * Team functions
 
 /**
@@ -296,6 +307,15 @@ int del_user_from_team(struct team_head *teams_head,
 team_t *get_team_by_name(struct team_head *teams_head, const char *team_name);
 
 /**
+ * @brief Get a team from its uuid
+ *
+ * @param teams_head Head of list of teams
+ * @param team_uuid Uuid of the team
+ * @return team_t* Pointer to the team if found, NULL otherwise
+ */
+team_t *get_team_by_uuid(struct team_head *teams, const char *team_uuid);
+
+/**
  * @brief Add a channel to a team
  *
  * @param teams_head Head of list of teams
@@ -375,6 +395,16 @@ void del_list_of_channels(struct channel_head *head);
  */
 channel_t *get_channel_by_name(struct channel_head *channels_head,
     const char *channel_name);
+
+/**
+ * @brief Get the channel by uuid object
+ *
+ * @param channels_head
+ * @param uuid
+ * @return channel_t*
+ */
+channel_t *get_channel_by_uuid(struct channel_head *channels_head,
+    const char *uuid);
 
 /**
  * @brief Add a thread to a channel
@@ -466,7 +496,7 @@ thread_t *get_thread_by_name(struct thread_head *threads_head,
  * @return thread_t* Pointer to the thread if found, NULL otherwise
  */
 thread_t *get_thread_by_uuid(struct thread_head *threads_head,
-    uuid_t thread_uuid);
+    const char *thread_uuid);
 
 /**
  * @brief Add a comment to a thread
@@ -477,7 +507,7 @@ thread_t *get_thread_by_uuid(struct thread_head *threads_head,
  * @param user_uuid Uuid of the user who sent the comment
  * @return int 0 if success, 1 if thread doesn't exist, 2 if comment already
  */
-int add_comment_to_thread(struct thread_head *threads_head,
+comment_t *add_comment_to_thread(struct thread_head *threads_head,
     const char *thread_name, const char *message, uuid_t user_uuid);
 
 /**
@@ -508,7 +538,7 @@ struct comment_head init_list_of_comments(void);
  * @param user_uuid Uuid of the user who sent the comment
  * @return int 0 if success, -1 if error
  */
-int add_comment(struct comment_head *head, const char *message,
+comment_t *add_comment(struct comment_head *head, const char *message,
     uuid_t user_uuid);
 
 /**
