@@ -8,6 +8,7 @@
 #include "server.h"
 #include "data_core.h"
 #include "lib.h"
+#include "save.h"
 
 static void send_reply_code(instance_t *instance, thread_t *thread,
     char **args, server_t *server)
@@ -31,6 +32,7 @@ static void send_reply_code(instance_t *instance, thread_t *thread,
     uuid_unparse(instance->team_uuid, team_uuid);
     team = get_team_by_uuid(&server->teams, team_uuid);
     send_message_to_team(server, "SU10", buffer, team);
+    save_comments(server, instance);
 }
 
 static void reply(server_t *server, instance_t *instance, char **args,
