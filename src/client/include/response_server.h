@@ -23,6 +23,7 @@ void response_user_exist(char **args);
 void response_user_dont_exist(char **args);
 void response_not_connected(char **args);
 void response_logout(char **tab);
+void response_send(char **tab);
 void response_create_already_exist(char **args);
 void response_thread_not_exist(char **args);
 void response_channel_not_exist(char **args);

@@ -31,6 +31,7 @@ const response_t RESPONSE_LIST[] = {
     {"SU11", success_subscribe},
     {"SU12", success_subscribed},
     {"SU13", success_unsubscribe},
+    {"SU14", response_send},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };
