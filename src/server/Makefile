@@ -124,7 +124,6 @@ MESSAGES		:=	$(addprefix $(MESSAGES_FOLDER)/, $(MESSAGES))
 
 SAVE_FOLDER		=	save
 SAVE			=	save_users.c					\
-					save_conversations.c			\
 
 SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 

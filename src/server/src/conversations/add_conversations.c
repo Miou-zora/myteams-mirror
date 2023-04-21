@@ -54,12 +54,13 @@ static bool is_in_contact(user_t *user1, user_t *user2)
 
 void create_users_conversation(user_t *user1, user_t *user2)
 {
-    conversation_t *conversation = new_conversation(user1, user2);
+    conversation_t *conversation = NULL;
 
     if (!conversation)
         return;
     if (is_in_contact(user1, user2))
         return;
+    conversation = new_conversation(user1, user2);
     add_conversation_to_list(&user1->conversations, conversation);
     add_conversation_to_list(&user2->conversations, conversation);
 }
