@@ -17,6 +17,8 @@ static int check_args(server_t *server, char **args)
     if (add_team_with_uuid(&server->teams, args[1], args[2], args[0]) == 84) {
         return (84);
     }
+    for (int i = 3; args[i] != NULL; i++)
+        add_user_to_team(&server->teams, &server->users, args[0], args[i]);
     return (0);
 }
 
