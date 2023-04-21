@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** myteams-mirror
 ** File description:
-** help
+** help command
 */
 
 #include "client.h"
