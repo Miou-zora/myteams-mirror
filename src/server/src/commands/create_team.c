@@ -8,6 +8,7 @@
 #include "server.h"
 #include "data_core.h"
 #include "lib.h"
+#include "save.h"
 
 static bool check_args(char **args, instance_t *instance)
 {
@@ -43,4 +44,5 @@ void create_team(server_t *server, instance_t *instance, char **args)
     server_event_team_created(uuid_team, args[0], uuid_user);
     sprintf(buffer, "%s \"%s\" \"%s\"", uuid_team, args[0], args[1]);
     send_message_every_users(server, "SU07", buffer);
+    save_team(server);
 }
