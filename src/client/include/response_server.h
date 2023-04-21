@@ -35,6 +35,9 @@ void success_create_team(char **args);
 void success_subscribe(char **args);
 void success_subscribed(char **args);
 void success_unsubscribe(char **args);
+void success_list_channel(char **args);
+void success_list_thread(char **args);
+void success_list_reply(char **args);
 
 typedef struct response_s {
     const char *code;
