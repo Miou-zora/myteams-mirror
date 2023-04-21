@@ -30,12 +30,44 @@ void subscribed_teams(server_t *server, instance_t *current_instance)
     }
 }
 
+static void check_connected(char *buffer, server_t *server, user_t *user)
+{
+    char uuid[37];
+
+    for (size_t instance = 0; instance < MAX_INSTANCES; instance++) {
+        if (uuid_compare(server->instance[instance]->user_uuid,
+        user->uuid) == 0) {
+            uuid_unparse(user->uuid, uuid);
+            sprintf(buffer, "%s %s \"%s\"", "online",
+                uuid, user->username);
+            instance = MAX_INSTANCES;
+        }
+    }
+}
+
 void subscribed_users(server_t *server, instance_t *current_instance,
     char **args)
 {
-    (void)args;
-    (void)server;
-    (void)current_instance;
+    team_t *team = NULL;
+    user_t *user = NULL;
+    char uuid_user[37];
+    char buffer[1019];
+
+    team = get_team_by_uuid(&server->teams, args[0]);
+    if (team == NULL) {
+        add_output(&current_instance->output, "EC03", args[0]);
+        return;
+    }
+    LIST_FOREACH(user, &server->users, next_user) {
+        if (is_user_subscribed(user, team)) {
+            uuid_unparse(user->uuid, uuid_user);
+            check_connected(buffer, server, user);
+            if (strlen(buffer) == 0)
+                sprintf(buffer, "%s %s \"%s\"", "offline",
+                    uuid_user, user->username);
+            add_output(&current_instance->output, "SU05", buffer);
+        }
+    }
 }
 
 void cmd_subscribed(server_t *server, instance_t *current_instance, char **args)
