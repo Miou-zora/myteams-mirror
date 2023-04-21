@@ -119,6 +119,7 @@ COMMENT			:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 
 SAVE_FOLDER		=	save
 SAVE			=	save_users.c					\
+					save_teams.c					\
 
 SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 
