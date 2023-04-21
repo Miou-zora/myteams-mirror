@@ -15,6 +15,7 @@ const response_t RESPONSE_LIST[] = {
     {"EC04", response_channel_not_exist},
     {"EC05", response_thread_not_exist},
     {"EC06", response_create_already_exist},
+    {"EC07", response_default},
     {"EC30", response_user_dont_exist},
     {"ES04", response_default},
     {"SU01", response_default},
