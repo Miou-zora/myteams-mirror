@@ -118,10 +118,23 @@ COMMENT			=	init_list_of_comments.c			\
 
 COMMENT			:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 
+CONVERSATIONS_FOLDER = conversations
+CONVERSATIONS	=	init_list_of_conversations.c	\
+					add_conversations.c				\
+
+CONVERSATIONS	:=	$(addprefix $(CONVERSATIONS_FOLDER)/, $(CONVERSATIONS))
+
+
+MESSAGES_FOLDER = messages
+MESSAGES		=	add_message.c					\
+
+MESSAGES		:=	$(addprefix $(MESSAGES_FOLDER)/, $(MESSAGES))
+
 SAVE_FOLDER		=	save
 SAVE			=	save_users.c					\
 					save_teams.c					\
 					save_channels.c					\
+					save_threads.c					\
 
 SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 
@@ -129,6 +142,7 @@ LOAD_FOLDER		=	load
 LOAD			=	load_users.c					\
 					load_teams.c					\
 					load_channels.c					\
+					load_threads.c					\
 
 LOAD			:=	$(addprefix $(LOAD_FOLDER)/, $(LOAD))
 
@@ -144,6 +158,8 @@ SRC 		+=	$(THREAD)
 SRC 		+=	$(COMMENT)
 SRC 		+=	$(SAVE)
 SRC 		+=	$(LOAD)
+SRC 		+=	$(CONVERSATIONS)
+SRC 		+=	$(MESSAGES)
 SRC 		:=	$(addprefix $(SRC_FOLDER)/, $(SRC))
 
 OBJ			=	$(SRC:.c=.o)

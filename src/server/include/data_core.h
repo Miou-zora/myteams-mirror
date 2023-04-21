@@ -27,6 +27,24 @@ typedef struct uuid_list_s {
 /// @brief Define head struct for uuid list
 LIST_HEAD(uuid_list_head, uuid_list_s);
 
+typedef struct message_s {
+    char *message;
+    uuid_t author_uuid;
+    uuid_t uuid;
+    LIST_ENTRY(message_s) next_message;
+    time_t time_stamp;
+} message_t;
+LIST_HEAD(message_head, message_s);
+
+typedef struct conversation_s {
+    uuid_t uuid_conv;
+    uuid_t user1;
+    uuid_t user2;
+    LIST_ENTRY(conversation_s) next_conversation;
+    struct message_head messages;
+} conversation_t;
+LIST_HEAD(conversation_head, conversation_s);
+
 /**
  * @brief User registered in the server
  */
@@ -35,6 +53,7 @@ typedef struct user_s {
     char username[MAX_NAME_LENGTH];
     LIST_ENTRY(user_s) next_user;
     struct uuid_list_head teams_registered_head;
+    struct conversation_head conversations;
 } user_t;
 /// @brief Define head struct for user list
 LIST_HEAD(user_head, user_s);
@@ -561,3 +580,12 @@ void del_list_of_comments(struct comment_head *head);
  */
 comment_t *get_comment_by_uuid(struct comment_head *comments_head,
     uuid_t comment_uuid);
+
+
+message_t *send_message_into_conv(user_t *userfrom, user_t *userto,
+    char *message);
+
+message_t *add_message(struct message_head *head, const char *mess,
+    uuid_t author);
+
+struct conversation_head init_list_of_conversations(void);

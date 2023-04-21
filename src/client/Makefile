@@ -14,6 +14,15 @@ SRC			=	src/help.c				\
 				src/server_response.c	\
 
 RESPONSE_FOLDER 	=	src/response_functions
+RESPONSE 			=	response_default.c 			\
+						response_login.c 			\
+						response_initialisation.c 	\
+						response_users.c			\
+						response_user_exist.c		\
+						response_user_dont_exist.c	\
+						response_not_connected.c	\
+						response_logout.c			\
+
 RESPONSE 			=	response_default.c 					\
 						response_login.c 					\
 						response_initialisation.c 			\
@@ -31,6 +40,7 @@ RESPONSE 			=	response_default.c 					\
 						response_success_list_channel.c		\
 						response_success_list_thread.c		\
 						response_success_list_reply.c		\
+            response_send.c				\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
