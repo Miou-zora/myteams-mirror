@@ -10,6 +10,25 @@
 #include "lib.h"
 #include "commands.h"
 
+static bool is_user_subscibe(instance_t *instance, server_t *server)
+{
+    team_t *team;
+    char team_uuid[37];
+    user_t *user;
+    char user_uuid[37];
+
+    uuid_unparse(instance->team_uuid, team_uuid);
+    uuid_unparse(instance->user_uuid, user_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    user = get_user_by_uuid(&server->users, user_uuid);
+    if (!is_user_subscribed(user, team)) {
+        add_output(&instance->output, "EC01",
+        "You must be subscribed to the team to create a channel");
+        return (true);
+    }
+    return (false);
+}
+
 static bool create_team_or_channel(instance_t *instance, char **args,
     server_t *server)
 {
@@ -20,6 +39,8 @@ static bool create_team_or_channel(instance_t *instance, char **args,
         create_team(server, instance, args);
         return (true);
     }
+    if (!is_user_subscibe(instance, server))
+        return (true);
     if (uuid_is_null(instance->channel_uuid)) {
         uuid_unparse(instance->team_uuid, team_uuid);
         team = get_team_by_uuid(&server->teams, team_uuid);

@@ -18,6 +18,8 @@ static int check_args(server_t *server, char **args)
         printf("Error while loading user %s %s\n", args[1], args[0]);
         return (84);
     }
+    for (int i = 2; args[i] != NULL; i++)
+        add_user_to_team(&server->teams, &server->users, args[i], args[0]);
     return (0);
 }
 
