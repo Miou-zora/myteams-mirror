@@ -34,6 +34,8 @@ void send_mess(server_t *server, instance_t *current_instance, char **args)
     sprintf(buffer, "%s \"%s\" \"%s\"", uuid, user->username, args[1]);
     send_message_into_conv(user, userto, args[1]);
     find_instance(server->instance, &userto->uuid, buffer);
+    server_event_private_message_sended(args[0],
+        uuid, args[1]);
 }
 
 void cmd_send(server_t *server, instance_t *current_instance, char **args)
