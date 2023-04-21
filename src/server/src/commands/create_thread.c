@@ -8,6 +8,7 @@
 #include "server.h"
 #include "data_core.h"
 #include "lib.h"
+#include "save.h"
 
 static void send_data(server_t *server, instance_t *instance,
 char **args, channel_t *channel)
@@ -51,6 +52,7 @@ static void create_thread(server_t *server, instance_t *instance,
         return;
     }
     send_data(server, instance, args, channel);
+    save_threads(server);
 }
 
 void check_before_create_thread(server_t *server, instance_t *instance,

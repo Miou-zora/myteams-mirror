@@ -8,7 +8,9 @@
 #pragma once
 
 #include "server.h"
+#include <time.h>
 
 int load_users(server_t *server);
 int load_teams(server_t *server);
 int load_channels(server_t *server);
+int load_threads(server_t *server);
