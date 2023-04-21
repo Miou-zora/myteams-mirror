@@ -37,8 +37,9 @@ CORE 			=	server_init.c 		\
 CORE 			:=	$(addprefix $(CORE_FOLDER)/, $(CORE))
 
 RESPONSE_FOLDER =	response
-RESPONSE 		=	add_output.c 	\
-					pop_output.c
+RESPONSE 		=	add_output.c 				\
+					pop_output.c				\
+					send_message_every_users.c 	\
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
