@@ -134,6 +134,7 @@ SAVE			=	save_users.c					\
 					save_teams.c					\
 					save_channels.c					\
 					save_threads.c					\
+					save_comments.c					\
 
 SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 
@@ -142,6 +143,7 @@ LOAD			=	load_users.c					\
 					load_teams.c					\
 					load_channels.c					\
 					load_threads.c					\
+					load_comments.c					\
 
 LOAD			:=	$(addprefix $(LOAD_FOLDER)/, $(LOAD))
 
