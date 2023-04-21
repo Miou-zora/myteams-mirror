@@ -25,12 +25,12 @@ static bool is_already_in_team(team_t *team, user_t *user)
 
 static int is_error(team_t *team, user_t *user)
 {
-    if (is_already_in_team(team, user))
-        return (3);
-    if (!user)
-        return (2);
     if (!team)
         return (1);
+    if (!user)
+        return (2);
+    if (is_already_in_team(team, user))
+        return (3);
     return (0);
 }
 

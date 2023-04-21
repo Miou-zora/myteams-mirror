@@ -25,6 +25,7 @@ RESPONSE 			=	response_default.c 					\
 						response_create_already_exist.c		\
 						response_resource_not_exist.c		\
 						response_success_create.c			\
+						response_success_subscribe.c		\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
