@@ -14,7 +14,6 @@ static void is_connected(server_t *server, uuid_t user_uuid,
         if (!uuid_is_null(server->instance[i]->user_uuid) &&
             uuid_compare(server->instance[i]->user_uuid, user_uuid) == 0) {
             add_output(&server->instance[i]->output, code, buffer);
-            return;
         }
     }
 }
