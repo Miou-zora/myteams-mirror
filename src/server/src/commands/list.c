@@ -95,7 +95,6 @@ void list_teams(server_t *server, instance_t *current_instance)
 
 void cmd_list(server_t *server, instance_t *current_instance, char **args)
 {
-    return;
     if (uuid_is_null(current_instance->user_uuid)) {
         add_output(&current_instance->output, "EC01",
         "You must be logged in to use this command");
