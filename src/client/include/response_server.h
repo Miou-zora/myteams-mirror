@@ -25,6 +25,10 @@ void response_create_already_exist(char **args);
 void response_thread_not_exist(char **args);
 void response_channel_not_exist(char **args);
 void response_team_not_exist(char **args);
+void success_create_reply(char **args);
+void success_create_thread(char **args);
+void success_create_channel(char **args);
+void success_create_team(char **args);
 
 typedef struct response_s {
     const char *code;

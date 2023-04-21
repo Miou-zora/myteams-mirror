@@ -40,6 +40,7 @@ RESPONSE_FOLDER =	response
 RESPONSE 		=	add_output.c 				\
 					pop_output.c				\
 					send_message_every_users.c 	\
+					send_message_to_team.c 		\
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 

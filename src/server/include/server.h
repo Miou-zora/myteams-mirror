@@ -122,3 +122,14 @@ void exec_command(server_t *server, instance_t *instance, char *command);
  * @param args
  */
 void send_message_every_users(server_t *server, char *code, char *args);
+
+/**
+ * @brief send message to every users
+ *
+ * @param server
+ * @param code
+ * @param buffer
+ * @param team
+ */
+void send_message_to_team(server_t *server, char *code, char *buffer,
+    team_t *team);

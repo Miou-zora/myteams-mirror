@@ -2,198 +2,220 @@
 ** EPITECH PROJECT, 2023
 ** myteams-mirror
 ** File description:
-** create
+** create_team
 */
 
-#include "commands.h"
-#include "lib.h"
+#include "server.h"
 #include "data_core.h"
+#include "lib.h"
 
-static void create_comment(thread_t *thread, instance_t *current_instance,
-    char **args)
+void create_team(server_t *server, instance_t *instance, char **args)
 {
-    char buffer[1019];
-    char uuid_channel[37];
-    char uuid_thread[37];
-    char uuid_user[37];
-    int ret = 0;
-
-    if (get_array_size(args) != 1) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid number of arguments");
-        return;
-    }
-    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[0]) == 0) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid arguments");
-        return;
-    }
-    ret = add_comment(&thread->comments_head, args[0], current_instance->user_uuid);
-    if (ret == 1) {
-        add_output(&current_instance->output, "EC06",
-            "Comment already exists");
-        return;
-    }
-    uuid_unparse(current_instance->user_uuid, uuid_user);
-    uuid_unparse(current_instance->channel_uuid, uuid_channel);
-    uuid_unparse(current_instance->thread_uuid, uuid_thread);
-    sprintf(buffer, "%s %s %s \"%s\"", uuid_thread, uuid_user, "timestamp",
-        args[0]);
-    server_event_reply_created(uuid_thread, uuid_user, args[0]);
-    add_output(&current_instance->output, "SU10", buffer); // Send that to all
-}
-
-static void create_thread(channel_t *channel, instance_t *current_instance,
-    char **args)
-{
-    char buffer[1019];
-    char uuid_channel[37];
-    char uuid_thread[37];
-    char uuid_user[37];
-    int ret = 0;
-
-    if (get_array_size(args) != 2) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid number of arguments");
-        return;
-    }
-    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) >
-    MAX_DESCRIPTION_LENGTH || strlen(args[0]) == 0 || strlen(args[1]) == 0) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid arguments");
-        return;
-    }
-    ret = add_thread(&channel->threads_head, args[0], args[1]);
-    if (ret == 1) {
-        add_output(&current_instance->output, "EC06",
-            "Thread already exists");
-        return;
-    }
-    uuid_unparse(get_thread_by_name(&channel->threads_head,
-        args[0])->uuid, uuid_thread);
-    uuid_unparse(channel->uuid, uuid_channel);
-    uuid_unparse(current_instance->user_uuid, uuid_user);
-    sprintf(buffer, "%s \"%s\" \"%s\"", uuid_thread, args[0], args[1]);
-    printf("thread created\n");
-    server_event_thread_created(uuid_channel, uuid_thread, uuid_user, args[0],
-        args[1]);
-    add_output(&current_instance->output, "SU09", buffer); // Send that to all
-}
-
-static void create_channel(team_t *teams, instance_t *current_instance,
-    char **args)
-{
-    char buffer[1019];
-    char uuid_channel[37];
-    char uuid_user[37];
-    int ret = 0;
-
-    if (get_array_size(args) != 2) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid number of arguments");
-        return;
-    }
-    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) >
-    MAX_DESCRIPTION_LENGTH || strlen(args[0]) == 0 || strlen(args[1]) == 0) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid arguments");
-        return;
-    }
-    ret = add_channel(&teams->channels_head, args[0], args[1]);
-    if (ret == 1) {
-        add_output(&current_instance->output, "EC06",
-            "Already exists");
-        return;
-    }
-    uuid_unparse(get_channel_by_name(&teams->channels_head, args[0])->uuid, uuid_channel);
-    uuid_unparse(current_instance->user_uuid, uuid_user);
-    sprintf(buffer, "%s \"%s\" \"%s\"", uuid_channel, args[0], args[1]);
-    server_event_channel_created(uuid_channel, args[0], uuid_user);
-    add_output(&current_instance->output, "SU08", buffer); // Send that to all
-}
-
-static void create_team(server_t *server, instance_t *current_instance,
-    char **args)
-{
-    char buffer[1019];
+    team_t *team;
     char uuid_team[37];
     char uuid_user[37];
+    char buffer[1019];
 
-    int ret = 0;
     if (get_array_size(args) != 2) {
-        add_output(&current_instance->output, "EC02",
-        "Invalid number of arguments");
+        add_output(&instance->output, "EC02", "Invalid number of arguments");
         return;
     }
-    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) >
-    MAX_DESCRIPTION_LENGTH || strlen(args[0]) == 0 || strlen(args[1]) == 0) {
-        add_output(&current_instance->output, "EC02",
-            "Invalid arguments");
+    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) > MAX_DESCRIPTION_LENGTH) {
+        add_output(&instance->output, "EC07", "Invalid arguments size");
         return;
     }
-    ret = add_team(&server->teams, args[0], args[1]);
-    if (ret == 1) {
-        add_output(&current_instance->output, "EC06",
-            "Already exists");
+    if (add_team(&server->teams, args[0], args[1]) == 1) {
+        add_output(&instance->output, "EC06", "Team already exists");
         return;
     }
-    uuid_unparse(get_team_by_name(&server->teams, args[0])->uuid, uuid_team);
-    uuid_unparse(current_instance->user_uuid, uuid_user);
-    sprintf(buffer, "%s \"%s\" \"%s\"", uuid_team, args[0], args[1]);
+    team = get_team_by_name(&server->teams, args[0]);
+    uuid_unparse(team->uuid, uuid_team);
+    uuid_unparse(instance->user_uuid, uuid_user);
     server_event_team_created(uuid_team, args[0], uuid_user);
+    sprintf(buffer, "%s \"%s\" \"%s\"", uuid_team, args[0], args[1]);
     send_message_every_users(server, "SU07", buffer);
 }
 
-void cmd_create(server_t *server, instance_t *current_instance, char **args)
+void create_channel(server_t *server, instance_t *instance, char **args, team_t *team)
 {
-    team_t *team = NULL;
-    channel_t *channel = NULL;
-    thread_t *thread = NULL;
-    char uuid[37];
+    char uuid_team[37];
+    char uuid_channel[37];
+    channel_t *channel;
     char buffer[1019];
 
-    if (uuid_is_null(current_instance->user_uuid)) {
-        add_output(&current_instance->output, "EC01",
-            "You must be logged in to use this command");
+    memset(uuid_team, 0, 37);
+    if (team == NULL) {
+        uuid_unparse(instance->team_uuid, uuid_team);
+        add_output(&instance->output, "EC03", uuid_team);
         return;
     }
-    if (!uuid_is_null(current_instance->team_uuid)) {
-        uuid_unparse(current_instance->team_uuid, uuid);
-        team = get_team_by_uuid(&server->teams, uuid);
-        if (team == NULL) {
-            sprintf(buffer, "%s", uuid);
-            add_output(&current_instance->output, "EC03", buffer);
-            return;
-        }
-        if (!uuid_is_null(current_instance->channel_uuid)) {
-            uuid_unparse(current_instance->channel_uuid, uuid);
-            channel = get_channel_by_uuid(&team->channels_head, uuid);
-            if (channel == NULL) {
-                sprintf(buffer, "%s", uuid);
-                add_output(&current_instance->output, "EC04", buffer);
-                return;
-            }
-            if (!uuid_is_null(current_instance->thread_uuid)) {
-                uuid_unparse(current_instance->thread_uuid, uuid);
-                thread = get_thread_by_uuid(&channel->threads_head, uuid);
-                if (thread == NULL) {
-                    sprintf(buffer, "%s", uuid);
-                    add_output(&current_instance->output, "EC05", buffer);
-                    return;
-                } else {
-                    create_comment(thread, current_instance, args);
-                    return;
-                }
-            } else {
-                create_thread(channel, current_instance, args);
-                return;
-            }
-        } else {
-            create_channel(team, current_instance, args);
-            return;
-        }
-    } else {
-        create_team(server, current_instance, args);
+    if (get_array_size(args) != 2) {
+        add_output(&instance->output, "EC02", "Invalid number of arguments");
         return;
     }
+    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) > MAX_DESCRIPTION_LENGTH) {
+        add_output(&instance->output, "EC07", "Invalid arguments size");
+        return;
+    }
+    if (add_channel(&team->channels_head, args[0], args[1]) == 1) {
+        add_output(&instance->output, "EC06", "Channel already exists");
+        return;
+    }
+    uuid_unparse(instance->team_uuid, uuid_team);
+    channel = get_channel_by_name(&team->channels_head, args[0]);
+    uuid_unparse(channel->uuid, uuid_channel);
+    server_event_channel_created(uuid_team, uuid_channel, args[0]);
+    sprintf(buffer, "%s \"%s\" \"%s\"", uuid_channel, args[0], args[1]);
+    send_message_to_team(server, "SU08", buffer, team);
+}
+
+void create_thread(server_t *server, instance_t *instance, char **args, channel_t *channel)
+{
+    thread_t *thread;
+    char team_uuid[37];
+    char channel_uuid[37];
+    char thread_uuid[37];
+    char user_uuid[37];
+    char buffer[1019];
+    char *timestamp;
+    team_t *team;
+
+    if (get_array_size(args) != 2) {
+        add_output(&instance->output, "EC02", "Invalid number of arguments");
+        return;
+    }
+    if (strlen(args[0]) > MAX_NAME_LENGTH || strlen(args[1]) > MAX_DESCRIPTION_LENGTH) {
+        add_output(&instance->output, "EC07", "Invalid arguments size");
+        return;
+    }
+    if (add_thread(&channel->threads_head, args[0], args[1]) == 1) {
+        add_output(&instance->output, "EC06", "Thread already exists");
+        return;
+    }
+    uuid_unparse(instance->channel_uuid, channel_uuid);
+    thread = get_thread_by_name(&channel->threads_head, args[0]);
+    uuid_unparse(thread->uuid, thread_uuid);
+    uuid_unparse(instance->user_uuid, user_uuid);
+    timestamp = ctime(&thread->timestamp);
+    server_event_thread_created(channel_uuid, thread_uuid, user_uuid, args[0], args[1]);
+    sprintf(buffer, "%s %s %s \"%s\" \"%s\"", thread_uuid, user_uuid, timestamp, args[0], args[1]);
+    uuid_unparse(instance->team_uuid, team_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    send_message_to_team(server, "SU09", buffer, team);
+}
+
+void check_before_create_thread(server_t *server, instance_t *instance, char **args, team_t *team)
+{
+    char tmp1[37];
+    char tmp2[37];
+    channel_t *channel;
+
+    memset(tmp1, 0, 37);
+    memset(tmp2, 0, 37);
+    if (team == NULL) {
+        uuid_unparse(instance->team_uuid, tmp1);
+        uuid_unparse(instance->channel_uuid, tmp2);
+        add_output(&instance->output, "EC03", tmp1);
+        add_output(&instance->output, "EC04", tmp2);
+        return;
+    }
+    uuid_unparse(instance->channel_uuid, tmp2);
+    channel = get_channel_by_uuid(&team->channels_head, tmp2);
+    if (channel == NULL) {
+        add_output(&instance->output, "EC04", tmp2);
+        return;
+    }
+    create_thread(server, instance, args, channel);
+}
+
+void reply(server_t *server, instance_t *instance, char **args, thread_t *thread)
+{
+    char uuid_thread[37];
+    char user_uuid[37];
+    char buffer[1019];
+    char *timestamp;
+    comment_t *comment;
+    team_t *team;
+    char team_uuid[37];
+
+    if (get_array_size(args) != 1) {
+        add_output(&instance->output, "EC02", "Invalid number of arguments");
+        return;
+    }
+    if (strlen(args[0]) > MAX_DESCRIPTION_LENGTH) {
+        add_output(&instance->output, "EC07", "Invalid arguments size");
+        return;
+    }
+    uuid_unparse(instance->thread_uuid, uuid_thread);
+    uuid_unparse(instance->user_uuid, user_uuid);
+    comment = add_comment(&thread->comments_head, args[0], instance->user_uuid);
+    server_event_reply_created(uuid_thread, user_uuid, args[0]);
+    timestamp = ctime(&comment->timestamp);
+    sprintf(buffer, "%s %s %s \"%s\"", uuid_thread, user_uuid, timestamp, args[0]);
+    uuid_unparse(instance->team_uuid, team_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    send_message_to_team(server, "SU10", buffer, team);
+}
+
+void check_before_reply(server_t *server, instance_t *instance, char **args, team_t *team)
+{
+    char tmp1[37];
+    char tmp2[37];
+    char tmp3[37];
+    channel_t *channel;
+    thread_t *thread;
+
+    memset(tmp1, 0, 37);
+    memset(tmp2, 0, 37);
+    memset(tmp3, 0, 37);
+    if (team == NULL) {
+        uuid_unparse(instance->team_uuid, tmp1);
+        uuid_unparse(instance->channel_uuid, tmp2);
+        uuid_unparse(instance->thread_uuid, tmp3);
+        add_output(&instance->output, "EC03", tmp1);
+        add_output(&instance->output, "EC04", tmp2);
+        add_output(&instance->output, "EC05", tmp3);
+        return;
+    }
+    uuid_unparse(instance->channel_uuid, tmp2);
+    channel = get_channel_by_uuid(&team->channels_head, tmp2);
+    if (channel == NULL) {
+        uuid_unparse(instance->thread_uuid, tmp3);
+        add_output(&instance->output, "EC04", tmp2);
+        add_output(&instance->output, "EC05", tmp3);
+        return;
+    }
+    uuid_unparse(instance->thread_uuid, tmp3);
+    thread = get_thread_by_uuid(&channel->threads_head, tmp3);
+    if (thread == NULL) {
+        add_output(&instance->output, "EC05", tmp3);
+        return;
+    }
+    reply(server, instance, args, thread);
+}
+
+void cmd_create(server_t *server, instance_t *instance, char **args)
+{
+    team_t *team;
+    char team_uuid[37];
+
+    if (uuid_is_null(instance->team_uuid)) {
+        create_team(server, instance, args);
+        return;
+    }
+    if (uuid_is_null(instance->channel_uuid)) {
+        uuid_unparse(instance->team_uuid, team_uuid);
+        team = get_team_by_uuid(&server->teams, team_uuid);
+        create_channel(server, instance, args, team);
+        return;
+    }
+    if (uuid_is_null(instance->thread_uuid)) {
+        uuid_unparse(instance->team_uuid, team_uuid);
+        team = get_team_by_uuid(&server->teams, team_uuid);
+        check_before_create_thread(server, instance, args, team);
+        return;
+    }
+    uuid_unparse(instance->team_uuid, team_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    check_before_reply(server, instance, args, team);
 }

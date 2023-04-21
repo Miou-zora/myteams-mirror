@@ -23,10 +23,10 @@ const response_t RESPONSE_LIST[] = {
     {"SU04", response_users},
     {"SU05", response_user_exist},
     {"SU06", response_logout},
-    {"SU07", response_default/*resonse_team_created*/},
-    {"SU08", response_default/*resonse_channel_created*/},
-    {"SU09", response_default/*resonse_thread_created*/},
-    {"SU10", response_default/*resonse_comment_created*/},
+    {"SU07", success_create_team},
+    {"SU08", success_create_channel},
+    {"SU09", success_create_thread},
+    {"SU10", success_create_reply},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };

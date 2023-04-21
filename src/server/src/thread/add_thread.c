@@ -19,6 +19,7 @@ static thread_t *new_thread(const char *title, const char *body)
     uuid_generate(thread->uuid);
     strcpy(thread->title, title);
     strcpy(thread->message, body);
+    thread->timestamp = time(NULL);
     LIST_INIT(&thread->comments_head);
     return thread;
 }

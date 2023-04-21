@@ -45,6 +45,7 @@ LIST_HEAD(user_head, user_s);
 typedef struct comment_s {
     uuid_t author_uuid;
     uuid_t uuid;
+    time_t timestamp;
     char body[MAX_BODY_LENGTH];
     LIST_ENTRY(comment_s) next_comment;
 } comment_t;
@@ -56,6 +57,7 @@ LIST_HEAD(comment_head, comment_s);
  */
 typedef struct thread_s {
     uuid_t uuid;
+    time_t timestamp;
     char title[MAX_NAME_LENGTH];
     char message[MAX_BODY_LENGTH];
     struct comment_head comments_head;
@@ -477,7 +479,7 @@ thread_t *get_thread_by_uuid(struct thread_head *threads_head,
  * @param user_uuid Uuid of the user who sent the comment
  * @return int 0 if success, 1 if thread doesn't exist, 2 if comment already
  */
-int add_comment_to_thread(struct thread_head *threads_head,
+comment_t *add_comment_to_thread(struct thread_head *threads_head,
     const char *thread_name, const char *message, uuid_t user_uuid);
 
 /**
@@ -508,7 +510,7 @@ struct comment_head init_list_of_comments(void);
  * @param user_uuid Uuid of the user who sent the comment
  * @return int 0 if success, -1 if error
  */
-int add_comment(struct comment_head *head, const char *message,
+comment_t *add_comment(struct comment_head *head, const char *message,
     uuid_t user_uuid);
 
 /**
