@@ -27,6 +27,7 @@ RESPONSE 			=	response_default.c 					\
 						response_success_create.c			\
 						response_success_subscribe.c		\
 						response_success_subscribed.c		\
+						response_success_unsubscribe.c		\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
