@@ -25,18 +25,15 @@ void send_mess(server_t *server, instance_t *current_instance, char **args)
     user_t *user = NULL;
     char uuid[37];
     uuid_t tmp;
-    message_t *message;
     user_t *userto;
 
-    memset(buffer, 0, 1019);
     uuid_unparse(current_instance->user_uuid, uuid);
     uuid_parse(args[0], tmp);
     user = get_user_by_uuid(&server->users, uuid);
     userto = get_user_by_uuid(&server->users, args[0]);
     sprintf(buffer, "%s \"%s\" \"%s\"", uuid, user->username, args[1]);
-    message = send_message_into_conv(user, userto, args[1]);
+    send_message_into_conv(user, userto, args[1]);
     find_instance(server->instance, &userto->uuid, buffer);
-    (void) message;
 }
 
 void cmd_send(server_t *server, instance_t *current_instance, char **args)
