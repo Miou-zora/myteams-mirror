@@ -8,6 +8,18 @@
 #include "commands.h"
 #include "lib.h"
 
+bool is_user_subscribed(user_t *user, team_t *team)
+{
+    uuid_t *user_uuid = get_uuid(&team->users_uuid_registered_head,
+        user->uuid);
+    uuid_t *team_uuid = get_uuid(&user->teams_registered_head, team->uuid);
+
+    if (user_uuid && team_uuid) {
+        return (true);
+    }
+    return (false);
+}
+
 void subscribe_to_team(server_t *server, instance_t *current_instance,
     char *team_uuid)
 {
