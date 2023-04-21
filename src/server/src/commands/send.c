@@ -15,7 +15,7 @@ static void find_instance(instance_t *instances[100], uuid_t *uuid_to_find,
 {
     for (int i = 0; i < 100; i++) {
         if (uuid_compare(instances[i]->user_uuid, *uuid_to_find) == 0)
-            add_output(&instances[i]->output, "SU07", buffer);
+            add_output(&instances[i]->output, "SU14", buffer);
     }
 }
 
