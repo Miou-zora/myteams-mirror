@@ -51,6 +51,12 @@ void check_before_create_thread(server_t *server, instance_t *instance,
     char **args, team_t *team);
 void check_before_reply(server_t *server, instance_t *instance,
     char **args, team_t *team);
+thread_t *check_thread(channel_t *channel, instance_t *current_instance,
+    char *thread_uuid);
+channel_t *check_channel(team_t *team, instance_t *current_instance,
+    char *channel_uuid);
+team_t *check_team(server_t *server, instance_t *current_instance,
+    char *team_uuid, user_t *user);
 
 typedef struct command {
     const char *name;
