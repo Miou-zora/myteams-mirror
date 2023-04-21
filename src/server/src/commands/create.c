@@ -39,11 +39,11 @@ static bool create_team_or_channel(instance_t *instance, char **args,
         create_team(server, instance, args);
         return (true);
     }
-    if (is_user_subscibe(instance, server))
+    uuid_unparse(instance->team_uuid, team_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    if (team && is_user_subscibe(instance, server))
         return (true);
     if (uuid_is_null(instance->channel_uuid)) {
-        uuid_unparse(instance->team_uuid, team_uuid);
-        team = get_team_by_uuid(&server->teams, team_uuid);
         create_channel(server, instance, args, team);
         return (true);
     }
