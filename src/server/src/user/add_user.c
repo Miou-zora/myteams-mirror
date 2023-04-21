@@ -19,6 +19,7 @@ static user_t *new_user(const char *username)
     uuid_generate(user->uuid);
     strcpy(user->username, username);
     LIST_INIT(&user->teams_registered_head);
+    LIST_INIT(&user->conversations);
     return user;
 }
 
