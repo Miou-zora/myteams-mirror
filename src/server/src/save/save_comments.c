@@ -43,4 +43,3 @@ void save_comments(server_t *server, instance_t *instance)
     }
     fclose(file);
 }
-

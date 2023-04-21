@@ -33,7 +33,6 @@ static void analyse_thread(thread_t *thread, char **args)
         comment_tmp = get_comment_by_uuid(&thread->comments_head, uuid);
         comment_tmp->timestamp = time;
     }
-
 }
 
 static int check_args(server_t *server, char **args)

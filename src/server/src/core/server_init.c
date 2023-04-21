@@ -60,9 +60,8 @@ server_t *server_init(char *port)
     serv->users = init_list_of_users();
     serv->teams = init_list_of_teams();
     serv->is_running = true;
-    if (load_users(serv) == 84 || load_teams(serv) == 84
-    || load_channels(serv) == 84 || load_threads(serv) == 84
-    || load_comments(serv) == 84)
+    if (load_users(serv) == 84 || load_teams(serv) == 84 || load_channels(serv)
+     == 84 || load_threads(serv) == 84 || load_comments(serv) == 84)
         return (NULL);
     return (serv);
 }
