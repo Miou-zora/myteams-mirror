@@ -7,6 +7,7 @@
 
 #include "commands.h"
 #include "lib.h"
+#include "save.h"
 
 static void unsubscribe(server_t *server, instance_t *current_instance,
     team_t *team)
@@ -20,8 +21,10 @@ static void unsubscribe(server_t *server, instance_t *current_instance,
     if (del_user_from_team(&server->teams, &server->users, uuid_team,
         uuid_user) == 0) {
         sprintf(buffer, "%s %s", uuid_team, uuid_user);
-        add_output(&current_instance->output, "SU13", buffer);
+        send_message_every_users(server, "SU13", buffer);
         server_event_user_unsubscribed(uuid_team, uuid_user);
+        save_users(server);
+        save_team(server);
     }
 
 }
