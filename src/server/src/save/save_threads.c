@@ -19,7 +19,7 @@ static void write_in_file(FILE *file, channel_t *channel)
         fprintf(file, "%s ", tmp);
         fprintf(file, "\"%s\" ", thread->title);
         fprintf(file, "\"%s\" ", thread->message);
-        fprintf(file, "%s", ctime(&thread->timestamp));
+        fprintf(file, "\"%s\"", ctime(&thread->timestamp));
     }
 }
 
