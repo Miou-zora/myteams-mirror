@@ -27,7 +27,7 @@ char **args, channel_t *channel)
     uuid_unparse(instance->user_uuid, user_uuid);
     timestamp = ctime(&thread->timestamp);
     server_event_thread_created(cha, thread_uuid, user_uuid, args[0], args[1]);
-    sprintf(buffer, "%s %s %s \"%s\" \"%s\"", thread_uuid, user_uuid,
+    sprintf(buffer, "%s %s \"%s\" \"%s\" \"%s\"", thread_uuid, user_uuid,
     timestamp, args[0], args[1]);
     uuid_unparse(instance->team_uuid, team_uuid);
     team = get_team_by_uuid(&server->teams, team_uuid);

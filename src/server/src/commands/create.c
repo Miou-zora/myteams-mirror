@@ -39,7 +39,7 @@ static bool create_team_or_channel(instance_t *instance, char **args,
         create_team(server, instance, args);
         return (true);
     }
-    if (!is_user_subscibe(instance, server))
+    if (is_user_subscibe(instance, server))
         return (true);
     if (uuid_is_null(instance->channel_uuid)) {
         uuid_unparse(instance->team_uuid, team_uuid);

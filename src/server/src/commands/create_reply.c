@@ -26,7 +26,7 @@ static void send_reply_code(instance_t *instance, thread_t *thread,
     instance->user_uuid);
     server_event_reply_created(uuid_thread, user_uuid, args[0]);
     timestamp = ctime(&comment->timestamp);
-    sprintf(buffer, "%s %s %s \"%s\"", uuid_thread, user_uuid,
+    sprintf(buffer, "%s %s \"%s\" \"%s\"", uuid_thread, user_uuid,
     timestamp, args[0]);
     uuid_unparse(instance->team_uuid, team_uuid);
     team = get_team_by_uuid(&server->teams, team_uuid);
