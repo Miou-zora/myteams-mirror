@@ -8,6 +8,31 @@
 #include "server.h"
 #include "data_core.h"
 #include "lib.h"
+#include "save.h"
+
+static void send_reply_team(server_t *server, instance_t *instance,
+    char **args, channel_t *channel)
+{
+    thread_t *thread;
+    char team_uuid[37];
+    char cha[37];
+    char thread_uuid[37];
+    char user_uuid[37];
+    char buffer[1019];
+    char *timestamp;
+    team_t *team;
+
+    uuid_unparse(instance->channel_uuid, cha);
+    thread = get_thread_by_name(&channel->threads_head, args[0]);
+    uuid_unparse(thread->uuid, thread_uuid);
+    uuid_unparse(instance->user_uuid, user_uuid);
+    timestamp = ctime(&thread->timestamp);
+    uuid_unparse(instance->team_uuid, team_uuid);
+    team = get_team_by_uuid(&server->teams, team_uuid);
+    sprintf(buffer, "%s %s \"%s\" \"%s\"", thread_uuid, user_uuid,
+    timestamp, args[1]);
+    send_message_to_team(server, "SU10", buffer, team);
+}
 
 static void send_data(server_t *server, instance_t *instance,
 char **args, channel_t *channel)
@@ -51,6 +76,8 @@ static void create_thread(server_t *server, instance_t *instance,
         return;
     }
     send_data(server, instance, args, channel);
+    send_reply_team(server, instance, args, channel);
+    save_threads(server);
 }
 
 void check_before_create_thread(server_t *server, instance_t *instance,
