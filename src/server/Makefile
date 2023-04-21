@@ -120,12 +120,14 @@ COMMENT			:=	$(addprefix $(COMMENT_FOLDER)/, $(COMMENT))
 SAVE_FOLDER		=	save
 SAVE			=	save_users.c					\
 					save_teams.c					\
+					save_channels.c					\
 
 SAVE			:=	$(addprefix $(SAVE_FOLDER)/, $(SAVE))
 
 LOAD_FOLDER		=	load
 LOAD			=	load_users.c					\
 					load_teams.c					\
+					load_channels.c					\
 
 LOAD			:=	$(addprefix $(LOAD_FOLDER)/, $(LOAD))
 

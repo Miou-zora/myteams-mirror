@@ -8,6 +8,7 @@
 #include "server.h"
 #include "data_core.h"
 #include "lib.h"
+#include "save.h"
 
 static bool check_args(char **args, instance_t *instance, team_t *team)
 {
@@ -51,4 +52,5 @@ void create_channel(server_t *server, instance_t *instance,
     server_event_channel_created(uuid_team, uuid_channel, args[0]);
     sprintf(buffer, "%s \"%s\" \"%s\"", uuid_channel, args[0], args[1]);
     send_message_to_team(server, "SU08", buffer, team);
+    save_channels(server);
 }

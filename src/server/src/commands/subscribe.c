@@ -7,6 +7,7 @@
 
 #include "commands.h"
 #include "lib.h"
+#include "save.h"
 
 bool is_user_subscribed(user_t *user, team_t *team)
 {
@@ -37,6 +38,8 @@ void subscribe_to_team(server_t *server, instance_t *current_instance,
         send_message_to_team(server, "SU11", buffer,
             get_team_by_uuid(&server->teams, team_uuid));
         server_event_user_subscribed(team_uuid, uuid_user);
+        save_users(server);
+        save_team(server);
     }
 }
 

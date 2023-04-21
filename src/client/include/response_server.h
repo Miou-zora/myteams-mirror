@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define _XOPEN_SOURCE
+
 #include <stddef.h>
 #include <string.h>
 #include <stdio.h>

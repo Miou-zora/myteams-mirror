@@ -11,3 +11,4 @@
 
 int load_users(server_t *server);
 int load_teams(server_t *server);
+int load_channels(server_t *server);
