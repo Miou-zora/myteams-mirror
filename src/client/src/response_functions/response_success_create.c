@@ -30,7 +30,6 @@ void success_create_thread(char **args)
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL
     || args[4] == NULL || args[5] == NULL)
         return;
-    printf("args[3] = %s\n", args[3]);
     strptime(args[3], "%a %b %d %H:%M:%S %Y", &tm);
     time = mktime(&tm);
     client_print_thread_created(args[1], args[2], time, args[4], args[5]);
@@ -44,7 +43,6 @@ void success_create_reply(char **args)
     if (args[1] == NULL || args[2] == NULL || args[3] == NULL
     || args[4] == NULL)
         return;
-    printf("args[3] = %s\n", args[3]);
     strptime(args[3], "%a %b %d %H:%M:%S %Y", &tm);
     time = mktime(&tm);
     client_print_reply_created(args[1], args[2], time, args[4]);
