@@ -19,7 +19,6 @@ void save_team(server_t *server)
         file = fopen("teams", "w");
     printf("Saving teams...\n");
     LIST_FOREACH(team, &server->teams, next_team) {
-        printf("Saving team %s\n", team->name);
         uuid_unparse(team->uuid, tmp);
         fprintf(file, "%s ", tmp);
         fprintf(file, "\"%s\" ", team->name);
