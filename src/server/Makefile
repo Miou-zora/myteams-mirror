@@ -21,7 +21,11 @@ COMMANDS 		=	help.c			\
 					list.c			\
 					info.c			\
 					quit.c			\
-					commands.c
+					commands.c		\
+					create_team.c	\
+					create_channel.c	\
+					create_thread.c		\
+					create_reply.c		\
 
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 
@@ -40,6 +44,7 @@ RESPONSE_FOLDER =	response
 RESPONSE 		=	add_output.c 				\
 					pop_output.c				\
 					send_message_every_users.c 	\
+					send_message_to_team.c 		\
 
 RESPONSE 		:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
@@ -72,6 +77,7 @@ TEAM			=	init_list_of_teams.c			\
 					del_user_from_team.c			\
 					get_team_by_name.c				\
 					add_channel_to_team.c			\
+					get_team_by_uuid.c				\
 
 TEAM			:=	$(addprefix $(TEAM_FOLDER)/, $(TEAM))
 
@@ -84,6 +90,7 @@ CHANNEL			=	init_list_of_channels.c			\
 					get_channel_by_name.c			\
 					add_thread_to_channel.c			\
 					del_thread_from_channel.c		\
+					get_channel_by_uuid.c			\
 
 CHANNEL			:=	$(addprefix $(CHANNEL_FOLDER)/, $(CHANNEL))
 

@@ -21,10 +21,11 @@ static comment_t *new_comment(const char *comment_content,
     strncpy(comment->body, comment_content, MAX_BODY_LENGTH);
     uuid_copy(comment->author_uuid, author_uuid);
     uuid_generate(comment->uuid);
+    comment->timestamp = time(NULL);
     return comment;
 }
 
-int add_comment(struct comment_head *head, const char *comment_content,
+comment_t *add_comment(struct comment_head *head, const char *comment_content,
     uuid_t author_uuid)
 {
     comment_t *comment;
@@ -33,10 +34,10 @@ int add_comment(struct comment_head *head, const char *comment_content,
         strlen(comment_content) > MAX_BODY_LENGTH ||
         strlen(comment_content) == 0 || author_uuid == NULL ||
         uuid_is_null(author_uuid))
-        return -1;
+        return NULL;
     comment = new_comment(comment_content, author_uuid);
     if (comment == NULL)
-        return -1;
+        return NULL;
     LIST_INSERT_HEAD(head, comment, next_comment);
-    return 0;
+    return comment;
 }

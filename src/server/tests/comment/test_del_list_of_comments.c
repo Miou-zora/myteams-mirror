@@ -23,8 +23,7 @@ Test(del_list_of_comments, casual) {
     struct comment_head head = init_list_of_comments();
     uuid_t uuid;
     uuid_generate(uuid);
-    int ret = add_comment(&head, "testcontent", uuid);
-    cr_assert_eq(ret, 0);
+    add_comment(&head, "testcontent", uuid);
     cr_assert_eq(get_size_of_lists(&head), 1);
     del_list_of_comments(&head);
     cr_assert_eq(get_size_of_lists(&head), 0);
@@ -44,12 +43,9 @@ Test(del_list_of_comments, multiple) {
     struct comment_head head = init_list_of_comments();
     uuid_t uuid;
     uuid_generate(uuid);
-    int ret = add_comment(&head, "testcontent", uuid);
-    cr_assert_eq(ret, 0);
-    ret = add_comment(&head, "testcontent2", uuid);
-    cr_assert_eq(ret, 0);
-    ret = add_comment(&head, "testcontent3", uuid);
-    cr_assert_eq(ret, 0);
+    add_comment(&head, "testcontent", uuid);
+    add_comment(&head, "testcontent2", uuid);
+    add_comment(&head, "testcontent3", uuid);
     cr_assert_eq(get_size_of_lists(&head), 3);
     del_list_of_comments(&head);
     cr_assert_eq(get_size_of_lists(&head), 0);
