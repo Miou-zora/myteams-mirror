@@ -193,6 +193,15 @@ user_t *find_user(struct user_head *users, char *username);
  */
 user_t *get_user_by_uuid(struct user_head *users, const char *user_uuid);
 
+/**
+ * @brief Get the user by uuid object
+ *
+ * @param server
+ * @param user_uuid
+ * @return user_t*
+ */
+bool is_user_subscribed(user_t *user, team_t *team);
+
 // * Team functions
 
 /**

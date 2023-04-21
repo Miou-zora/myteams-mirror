@@ -28,6 +28,7 @@ const response_t RESPONSE_LIST[] = {
     {"SU08", success_create_channel},
     {"SU09", success_create_thread},
     {"SU10", success_create_reply},
+    {"SU11", success_subscribe},
     {"SU20", response_initialisation},
     {NULL, NULL}
 };
