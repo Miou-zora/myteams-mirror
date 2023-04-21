@@ -44,6 +44,13 @@ void cmd_create(server_t *server, instance_t *current_instance, char **args);
 void cmd_list(server_t *server, instance_t *current_instance, char **args);
 void cmd_info(server_t *server, instance_t *current_instance, char **args);
 void cmd_quit(server_t *server, instance_t *current_instance, char **args);
+void create_team(server_t *server, instance_t *instance, char **args);
+void create_channel(server_t *server, instance_t *instance,
+    char **args, team_t *team);
+void check_before_create_thread(server_t *server, instance_t *instance,
+    char **args, team_t *team);
+void check_before_reply(server_t *server, instance_t *instance,
+    char **args, team_t *team);
 
 typedef struct command {
     const char *name;

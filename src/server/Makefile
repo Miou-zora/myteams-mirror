@@ -21,7 +21,11 @@ COMMANDS 		=	help.c			\
 					list.c			\
 					info.c			\
 					quit.c			\
-					commands.c
+					commands.c		\
+					create_team.c	\
+					create_channel.c	\
+					create_thread.c		\
+					create_reply.c		\
 
 COMMANDS		:=	$(addprefix $(COMMANDS_FOLDER)/, $(COMMANDS))
 

@@ -23,38 +23,27 @@ void success_create_channel(char **args)
     client_print_channel_created(args[1], args[2], args[3]);
 }
 
-int parse_ctime_string(const char *ctime_str, struct tm *tm) {
-    const char *months[] = {
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    };
-
+int parse_ctime_string(const char *ctime_str, struct tm *tm)
+{
+    const char *months[] = { "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
     char month_str[4];
     int month, day, hour, minute, second, year;
     int res = sscanf(ctime_str, "%*s %3s %d %d:%d:%d %d",
-                     month_str, &day, &hour, &minute, &second, &year);
-
-    if (res != 6) {
+        month_str, &day, &hour, &minute, &second, &year);
+    if (res != 6)
         return -1;
-    }
-
-    for (month = 0; month < 12; ++month) {
-        if (strncmp(months[month], month_str, 3) == 0) {
+    for (month = 0; month < 12; ++month)
+        if (strncmp(months[month], month_str, 3) == 0)
             break;
-        }
-    }
-
-    if (month == 12) {
+    if (month == 12)
         return -1;
-    }
-
     tm->tm_year = year - 1900;
     tm->tm_mon = month;
     tm->tm_mday = day;
     tm->tm_hour = hour;
     tm->tm_min = minute;
     tm->tm_sec = second;
-
     return 0;
 }
 
