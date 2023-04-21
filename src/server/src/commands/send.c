@@ -14,7 +14,7 @@ void find_instance(instance_t *instances[100], uuid_t *uuid_to_find,
     char *buffer)
 {
     for (int i = 0; i < 100; i++) {
-        if (uuid_compare(instances[i]->uuid, *uuid_to_find) == 0)
+        if (uuid_compare(instances[i]->user_uuid, *uuid_to_find) == 0)
             add_output(&instances[i]->output, "SU07", buffer);
     }
 }
@@ -28,7 +28,7 @@ void cmd_send(server_t *server, instance_t *current_instance, char **args)
     uuid_t tmp;
     user_t *userto;
 
-    if (uuid_is_null(current_instance->uuid))
+    if (uuid_is_null(current_instance->user_uuid))
         add_output(&current_instance->output, "EC01",
             "You must be logged in to use this command");
     else if (get_array_size(args) != 2) {
@@ -40,7 +40,7 @@ void cmd_send(server_t *server, instance_t *current_instance, char **args)
     }
     else {
         memset(buffer, 0, 1019);
-        uuid_unparse(current_instance->uuid, uuid);
+        uuid_unparse(current_instance->user_uuid, uuid);
         uuid_parse(args[0], tmp);
         user = get_user_by_uuid(&server->users, uuid);
         userto = get_user_by_uuid(&server->users, uuid);
