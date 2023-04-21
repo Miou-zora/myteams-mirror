@@ -75,7 +75,7 @@ void list_channels(server_t *server, instance_t *current_instance)
         uuid_unparse(channel->uuid, channel_uuid);
         sprintf(buffer, "%s \"%s\" \"%s\"", channel_uuid, channel->name,
             channel->description);
-        add_output(&current_instance->output, "SU14", buffer);
+        add_output(&current_instance->output, "SU17", buffer);
     }
 }
 
