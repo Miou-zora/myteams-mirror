@@ -29,6 +29,7 @@ void success_create_reply(char **args);
 void success_create_thread(char **args);
 void success_create_channel(char **args);
 void success_create_team(char **args);
+void success_subscribe(char **args);
 
 typedef struct response_s {
     const char *code;
