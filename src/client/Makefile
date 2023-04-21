@@ -14,14 +14,17 @@ SRC			=	src/help.c				\
 				src/server_response.c	\
 
 RESPONSE_FOLDER 	=	src/response_functions
-RESPONSE 			=	response_default.c 			\
-						response_login.c 			\
-						response_initialisation.c 	\
-						response_users.c			\
-						response_user_exist.c		\
-						response_user_dont_exist.c	\
-						response_not_connected.c	\
-						response_logout.c			\
+RESPONSE 			=	response_default.c 					\
+						response_login.c 					\
+						response_initialisation.c 			\
+						response_users.c					\
+						response_user_exist.c				\
+						response_user_dont_exist.c			\
+						response_not_connected.c			\
+						response_logout.c					\
+						response_create_already_exist.c		\
+						response_resource_not_exist.c		\
+						response_success_create.c			\
 
 RESPONSE 			:=	$(addprefix $(RESPONSE_FOLDER)/, $(RESPONSE))
 
@@ -39,7 +42,7 @@ NAME		=	../../myteams_cli
 INCLUDE		=	-I./include -I../network_lib/include \
 -I../../libs/myteams -I../lib/include
 
-CFLAGS		=	-Wall -Wextra -Werror $(INCLUDE)
+CFLAGS		=	-Wall -Wextra -Werror -std=gnu11 $(INCLUDE)
 
 TEST_FLAGS	=	-lcriterion --coverage
 
