@@ -8,13 +8,24 @@
 #include "load.h"
 #include "lib.h"
 
+static void load_thread(char **args, channel_t *channel)
+{
+    struct tm tm;
+    time_t time;
+    thread_t *thread = NULL;
+
+    strptime(args[4], "%a %b %d %H:%M:%S %Y", &tm);
+    time = mktime(&tm);
+    add_thread_with_uuid(&channel->threads_head, args[2],
+    args[3], args[1]);
+    thread = get_thread_by_uuid(&channel->threads_head, args[1]);
+    thread->timestamp = time;
+}
+
 static int check_args(server_t *server, char **args)
 {
     channel_t *channel = NULL;
     team_t *team = NULL;
-    thread_t *thread = NULL;
-    struct tm tm;
-    time_t time;
 
     if (args == NULL) {
         printf("Error while loading channels\n");
@@ -23,12 +34,7 @@ static int check_args(server_t *server, char **args)
     LIST_FOREACH(team, &server->teams, next_team) {
         channel = get_channel_by_uuid(&team->channels_head, args[0]);
         if (channel != NULL) {
-            strptime(args[4], "%a %b %d %H:%M:%S %Y", &tm);
-            time = mktime(&tm);
-            add_thread_with_uuid(&channel->threads_head, args[2],
-            args[3], args[1]);
-            thread = get_thread_by_uuid(&channel->threads_head, args[1]);
-            thread->timestamp = time;
+            load_thread(args, channel);
             return (0);
         }
     }

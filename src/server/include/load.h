@@ -7,6 +7,8 @@
 
 #pragma once
 
+#define _GNU_SOURCE
+
 #include "server.h"
 #include <time.h>
 

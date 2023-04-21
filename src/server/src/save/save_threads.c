@@ -18,7 +18,7 @@ static void write_in_file(FILE *file, channel_t *channel)
         uuid_unparse(thread->uuid, tmp);
         fprintf(file, "%s ", tmp);
         fprintf(file, "\"%s\" ", thread->title);
-        fprintf(file, "\"%s\"", thread->message);
+        fprintf(file, "\"%s\" ", thread->message);
         fprintf(file, "%s", ctime(&thread->timestamp));
     }
 }
