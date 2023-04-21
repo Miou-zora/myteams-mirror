@@ -8,7 +8,8 @@
 #include "commands.h"
 #include "lib.h"
 
-void subscribe_to_team(server_t *server, instance_t *current_instance, char *team_uuid)
+void subscribe_to_team(server_t *server, instance_t *current_instance,
+    char *team_uuid)
 {
     char uuid_user[37];
     int ret = 0;
